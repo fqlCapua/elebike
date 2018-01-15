@@ -295,13 +295,15 @@ a:link {
     color: #0b3a58;
 }
 
-.loginbm a {
+.footer div {
+    text-align: center;
+    line-height: 30px;
     font-weight: bold;
-    color: #0b3a58;
+    color: #fff;
 }
 
-.loginbm a:hover {
-    color: #fff;
+.footer div a {
+    color: #BABABA;
 }
 
 
