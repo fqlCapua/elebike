@@ -1,16 +1,83 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>信息管理系统界面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>欢迎登录智能电摩后台管理系统</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+
 </head>
-<frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
-  <frame src="top.html" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
-  <frameset cols="187,*" frameborder="no" border="0" framespacing="0">
-    <frame src="left.html" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
-    <frame src="" name="rightFrame" id="rightFrame" title="rightFrame" />
-  </frameset>
-</frameset>
-<noframes><body>
-</body></noframes>
+
+<body>
+
+
+
+    <div class="logintop">
+
+        <ul>
+            <li class="header_tit"><a href="#">智能电摩</a></li>
+            <li class="android_code qrCode">
+                <dl>
+                    <dt></dt>
+                    <dd>
+                        <a href="http://www.8gps8.cn">Android</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="ios_code qrCode">
+                <dl>
+                    <dt></dt>
+                    <dd>
+                        <a href="http://www.8gps8.cn">IOS</a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+
+
+    </div>
+    <div class="login_contaner">
+        <ul class="login_box">
+            <li class="login_title">智能电车登录系统</li>
+            <li class="login_username">
+                <select class=" username_select" name="" id="">
+                        <option name="admin">管理员:</option>
+                        <option name="user">用户:</option>
+                        <option name="repairman">维修人员:</option>
+                        <option value="dealer">经销商:</option>
+                        <option name="producer">生产厂家:</option>
+                </select>
+                <input name="" type="text" class="loginuser form-control" />
+            </li>
+            <li class="login_pwdbox">
+                <label for="">密码:</label>
+                <input name="" type="text" class="loginpwd" /></li>
+            </li>
+            <li class="loginbox_sub">
+                <button class="loginbtn">登录</button>
+            </li>
+            <li class="loginbox_some">
+
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">记住密码</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#">忘记密码？</a>
+                </div>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="loginbm">版权所有 2013 <a href="http://www.8gps8.cn">www.8gps8.cn</a> </div>
+
+
+</body>
+
 </html>
