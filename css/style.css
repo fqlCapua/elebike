@@ -164,7 +164,7 @@ a:link {
 
 .logintop ul .android_code dt {
     height: 72px;
-    background: url(../images/home/test.png) no-repeat 0 0;
+    background: url(../images/home/eleBikeAndroidCode.png) no-repeat 0 0;
     width: 72px;
     background-size: 100%;
 }
@@ -175,9 +175,9 @@ a:link {
 
 .logintop ul .ios_code dt {
     height: 72px;
-    background: url(../images/home/test.png) no-repeat 0 0;
-    background-size: 100%;
+    background: url(../images/home/IphoneApp.png) no-repeat 0 0;
     width: 72px;
+    background-size: 100%;
 }
 
 .login_contaner {
@@ -215,6 +215,18 @@ a:link {
     font-size: 14px;
     border: none;
     width: 75px;
+}
+
+.login_username label {
+    display: inline-block;
+    padding-left: 3px;
+    color: #497CE0;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    border: none;
+    width: 75px;
+    font-weight: normal;
 }
 
 .username_select option {
