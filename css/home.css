@@ -1,0 +1,282 @@
+body {
+    background-color: #EEF3FA;
+   
+}
+
+
+/*
+ *首页第一部分
+ *user:Capufa
+ *date:2018/01/29
+   */
+
+.banner1 {
+    background: url(../images/home/home_1.png) no-repeat 0 0;
+    height: 400px;
+    position: relative;
+}
+
+.banner1 .title {
+    width: 40%;
+    position: absolute;
+    bottom: 150px;
+    left: 15%;
+}
+
+.banner1 .title div {
+    color: #fff;
+    font-size: 45px;
+    letter-spacing: 2px;
+    line-height: 60px;
+    font-weight: bold;
+}
+
+.banner1 .right {
+    background-color: #fff;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    width: 220px;
+    height: 220px;
+    position: absolute;
+    right: 150px;
+    bottom: 120px;
+    text-align: center;
+}
+
+.banner1 .right img {
+    width: 100px;
+    margin-top: 30px;
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+}
+
+.banner2 .line span {
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 30px;
+}
+
+.banner2 .line span a {
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.banner2 {
+    padding: 20px 0;
+    height: 450px;
+    background: url(../images/home/home_2.png) no-repeat 0 0;
+    background-size: 100%;
+}
+
+.banner2 section {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.banner2 .lock2 {
+    background: #4A4A4A url(../images/home/lock2.png) no-repeat 70px 30px;
+    background-size: 50% 85%;
+    width: 28%;
+    height: 350px;
+    padding: 20px;
+}
+
+.banner2 .des {
+    padding: 70px 0 0 50px;
+    width: 40%;
+}
+
+.devide_line {
+    height: 120px;
+    line-height: 120px;
+    width: 75%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.devide_line img,
+.devide_line span {
+    display: inline-block;
+}
+
+.devide_line img {
+    width: 37%;
+}
+
+.devide_line span {
+    padding: 0 10px;
+    text-align: center;
+    font-size:28px;
+}
+
+#mainBody {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.banner3 {
+    background-color: #F2F2F2;
+    border: 1px solid red;
+}
+
+.banner3 .iconb {
+    width: 100%;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.banner3 .iconBox {
+    padding: 0 40px;
+    width: 20%;
+    height: 190px;
+}
+
+.banner3 .iconBox:nth-child(2n) {
+    background-color: #F2F2F2;
+}
+
+.banner3 .iconBox:nth-child(2n-1) {
+    background-color: #fff;
+}
+
+.banner3 .iconBox dd {
+    text-align: center;
+    height: 150px;
+}
+
+.banner3 .iconBox dd img {
+    margin: 10% auto;
+    height: 70%;
+}
+
+.banner3 .iconBox dt {
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+    font-weight: 400;
+}
+
+.banner4 {
+    border: 1px solid green;
+    background-color: #fff;
+}
+.banner4 dl{
+     height:300px;
+}
+.banner4 dl:nth-child(2n) dt{
+   text-align: right;
+}
+.banner4 dl:nth-child(3) dt .b4_des{
+    padding-left: 10px;
+   
+}
+.banner4 dl:nth-child(4) dt .b4_des{
+   padding-left: 10px;
+   
+}
+.banner4 dl:nth-child(5) dt .b4_des{
+   padding-left: 10px;
+   
+   
+}
+.banner4 dl:nth-child(7) dt .b4_des{
+   padding-left: 10px;
+   
+}
+.banner4 dl:nth-child(8) dt .b4_des{
+     padding-left: 10px;
+   
+}
+.banner4 dl:nth-child(9) dt .b4_des{
+    padding-left: 10px;
+   
+}
+.banner4 dd {
+    width:100%;
+    height: 55px;
+    margin-top: 40px;
+    line-height: 55px;
+    color: #fff;
+    text-indent: 10px;
+    font-size:26px;
+    letter-spacing:1px;
+   
+}
+
+.banner4 dt {
+    margin-top:20px;
+   
+    vertical-align: top;
+}
+
+.banner4 dt div {
+   
+    display: inline-block;
+  
+}
+
+.banner4 dt .b4_img {
+   text-align: center;
+    width:23%;
+}
+
+.banner4 dt .b4_img img {
+   width: 100%;
+    margin:0 auto;
+}
+
+.banner4 dt .b4_des {
+    font-size: 17px;
+    color: #757575;
+    font-weight:500;
+    letter-spacing: 1px;
+    padding-left: 50px;
+    width:76%;
+}
+.banner5{
+
+    border: 1px solid red;
+}
+.banner5 .b5_tit{
+    width:20%;
+    font-size: 14px;
+    color: #6475FC;
+    margin:0 auto;
+    letter-spacing:2px;
+    margin-bottom:50px;
+}
+.banner5 .b5_line{
+     height:120px;
+     border:1px solid blue;
+}
+.banner5 .b5_mid>div{
+     display: inline-block;
+    
+
+}
+.banner5 .b5_top,.banner5 .b5_bottom{
+    
+
+}
+.banner5 .b5_m_l{
+    width:45%;
+}
+.banner5 .b5_m_r{
+    width:54.3%;
+}
+.line_box{
+    border:1px solid red;
+    vertical-align: top;
+}
+.line_box dd ,.line_box dt{
+    display: inline-block;
+}
