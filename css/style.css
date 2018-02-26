@@ -216,12 +216,14 @@ body {
 }
 
 .logintop ul {
-    width: 80%;
-    margin-left: 20%;
+   
+    
+    margin:0 auto;
 }
 
 .logintop ul li {
-    float: left;
+    
+  
 }
 
 .logintop ul li a:hover {
@@ -229,7 +231,7 @@ body {
 }
 
 .header_tit {
-    width: 70%;
+    width: 100%;
     text-align: center;
 }
 
@@ -245,10 +247,13 @@ a:link {
 }
 
 .qrCode {
-    margin-top: 20px;
+ margin-top: 20px;
 }
-
+.qrCode dt{
+ margin:0 aut;
+}
 .qrCode dd {
+
     text-align: center;
     color: #fff;
     padding: 6px 0;
