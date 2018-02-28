@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="article" id="articlelink" content="/technology/javascript/20120823-gauge-justgage-js/" />
+
+        <title>控制与状态</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <style>
+        	 .chart{
+          width:200px;
+          height:180px;
+         display: inline-block;
+         margin: 1em;
+         border: 1px soild #202020;
+         box-shadow: 0px 0px 15px #101010;
+         margin-top: 120px;
+         border-radius: 8px;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">共享电车用户</a></li>
+                <li><a href="#">控制与状态</a></li>
+            </ul>
+        </div>
+        <div class="rightinfo">
+            <div class="formbody">
+                <div class="formtitle"><span>电车控制</span></div>
+                <div class="toolsli">
+                    <ul class="toollist">
+                        <li><a href="#">
+                        	<img src="../images/i01.png" /></a>
+                            <h2>布防</h2>
+                        </li>
+                        <li><a href="#">
+                        	<img src="../images/i02.png" /></a>
+                            <h2>闪灯</h2>
+                        </li>
+                        <li><a href="#">
+                        	<img src="../images/i09.png" /></a>
+                            <h2>警报</h2>
+                        </li>
+                        <li><a href="#">
+                        	<img src="../images/i04.png" /></a>
+                            <h2>解除</h2>
+                        </li>
+                        <li><a href="#">
+                        	<img src="../images/i05.png" /></a>
+                            <h2>锁车</h2>
+                        </li>
+                    </ul>
+                    <span class="tooladd"><img src="../images/add.png" title="添加" /></span>
+                </div>
+                <div class="formtitle"><span>电车数据</span></div>
+                <div class="toolsli">
+                   <!--  <ul class="toollist">
+                        <li><a href="#"><img src="../images/i06.png" /></a>
+                            <h2>费用汇总</h2></li>
+                        <li><a href="#"><img src="../images/i07.png" /></a>
+                            <h2>合同利润</h2></li>
+                        <li><a href="#"><img src="../images/i08.png" /></a>
+                            <h2>收支明细</h2></li>
+                        <li><a href="#"><img src="../images/i06.png" /></a>
+                            <h2>通知公告</h2></li>
+                    </ul> -->
+                    <ul class="toollist">
+            <script src="js/chart/raphael.2.1.0.min.js"></script>
+        <script src="js/chart/justgage.1.0.1.min.js"></script>
+        <script type="text/javascript">
+       var g1,g2;
+
+    window.onload = function () {
+      var g1 = new JustGage({
+        id: "g1",
+        value:getRandomInt(0, 10),
+        min: 0,
+        max:50,
+        title: "电压",
+        label: "V",//下方文字  
+        gaugeWidthScale:0.9,//轨道宽度
+        showInnerShadow:true,
+        levelColors: [
+          // "#222222",
+          // "#555555",
+          // "#CCCCCC"
+          "#066CAD"
+        ]
+      });
+      // var g2 = new JustGage({
+      //   id: "g2",
+      //   value:getRandomInt(0, 10),
+      //   min: 0,
+      //   max:100,
+      //   title: "电量",
+      //   label: "%",//下方文字  
+      //   gaugeWidthScale:0.9,//轨道宽度
+      //   showInnerShadow:true,
+      //   levelColors: [
+      //     // "#222222",
+      //     // "#555555",
+      //     // "#CCCCCC"
+      //     "#7CE0F7"
+      //   ]
+      // });
+
+      setInterval(function () {
+      	 // g2.refresh(getRandomInt(40, 50));
+          g1.refresh(getRandomInt(60, 100));
+      }, 800);
+    };
+        $('.tablelist tbody tr:odd').addClass('odd');
+        </script>
+                        <li>
+                        	
+                            <div id="g1" class="chart"></div>
+                            <div id="g2" class="chart"></div>
+                        </li>
+                        
+                    </ul>
+                    <!-- <span class="tooladd"><img src="../images/add.png" title="添加" /></span> -->
+                </div>
+            </div>
+            <div class="pagin">
+                <div class="message">共<i class="blue">1256</i>条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页</div>
+                <ul class="paginList">
+                    <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
+                    <li class="paginItem"><a href="javascript:;">1</a></li>
+                    <li class="paginItem current"><a href="javascript:;">2</a></li>
+                    <li class="paginItem"><a href="javascript:;">3</a></li>
+                    <li class="paginItem"><a href="javascript:;">4</a></li>
+                    <li class="paginItem"><a href="javascript:;">5</a></li>
+                    <li class="paginItem more"><a href="javascript:;">...</a></li>
+                    <li class="paginItem"><a href="javascript:;">10</a></li>
+                    <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
+                </ul>
+            </div>
+            <div class="tip">
+                <div class="tiptop"><span>提示信息</span><a></a></div>
+                <div class="tipinfo">
+                    <span><img src="../../images/ticon.png" /></span>
+                    <div class="tipright">
+                        <p>是否确认对信息的修改 ？</p>
+                        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                    </div>
+                </div>
+                <div class="tipbtn">
+                    <input name="" type="button" class="sure" value="确定" />&nbsp;
+                    <input name="" type="button" class="cancel" value="取消" />
+                </div>
+            </div>
+        </div>
+        
+    </body>
+
+</html>
