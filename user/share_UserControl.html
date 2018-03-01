@@ -2,23 +2,61 @@
 <html>
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-          <meta name="article" id="articlelink" content="/technology/javascript/20120823-gauge-justgage-js/" />
-
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>控制与状态</title>
-        <link href="../css/style.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../js/jquery.js"></script>
+        <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <script src="../js/chart/raphael.2.1.0.min.js"></script>
+        <script src="../js/chart/justgage.1.0.1.min.js"></script>
         <style>
-        	 .chart{
-          width:200px;
-          height:180px;
-         display: inline-block;
-         margin: 1em;
-         border: 1px soild #202020;
-         box-shadow: 0px 0px 15px #101010;
-         margin-top: 120px;
-         border-radius: 8px;
+        #g1,
+        #g2 {
+            width: 300px;
+            height: 220px;
+            display: inline-block;
+            margin: 30px 0 30px 50px;
+            border: 1px soild #202020;
+            box-shadow: 0px 0px 15px #101010;
+            border-radius: 8px;
         }
+        #g3 {
+            border: 1px soild red;
+            width:500px;
+            height: 220px;
+            display: inline-block;
+            margin: 30px 0 30px 50px;
+        }
+        .dleft {
+           display: inline-block;
+        	height:40px;
+            margin:12px;
+            width:40px;
+            margin-top: 15px;
+            background:none;
+        }
+        .dright{
+        	margin-left:60px;
+        	fonts-size:20px;
+        	padding: 5px 15px;
+        	float: none;
+        }
+    
+         #g3 li{
+         	
+         	clear: both;
+         }
+   /*     .dleft1 {
+            background: url(../images/g01.png) no-repeat 0 0;
+        }
+        .dleft2 {
+            background: url(../images/g02.png) no-repeat 0 0;
+        }
+        .dleft3 {
+            background: url(../images/g03.png) no-repeat 0 0;
+        }*/
         </style>
     </head>
 
@@ -38,126 +76,120 @@
                     <ul class="toollist">
                         <li><a href="#">
                         	<img src="../images/i01.png" /></a>
-                            <h2>布防</h2>
+                            <div>布防</div>
                         </li>
                         <li><a href="#">
                         	<img src="../images/i02.png" /></a>
-                            <h2>闪灯</h2>
+                            <div>闪灯</div>
                         </li>
                         <li><a href="#">
                         	<img src="../images/i09.png" /></a>
-                            <h2>警报</h2>
+                            <div>警报</div>
                         </li>
                         <li><a href="#">
                         	<img src="../images/i04.png" /></a>
-                            <h2>解除</h2>
+                            <div>解除</div>
                         </li>
                         <li><a href="#">
                         	<img src="../images/i05.png" /></a>
-                            <h2>锁车</h2>
+                            <div>锁车</div>
                         </li>
                     </ul>
-                    <span class="tooladd"><img src="../images/add.png" title="添加" /></span>
+                    <!--   <span class="tooladd"><img src="../images/add.png" title="添加" /></span> -->
                 </div>
                 <div class="formtitle"><span>电车数据</span></div>
-                <div class="toolsli">
-                   <!--  <ul class="toollist">
-                        <li><a href="#"><img src="../images/i06.png" /></a>
-                            <h2>费用汇总</h2></li>
-                        <li><a href="#"><img src="../images/i07.png" /></a>
-                            <h2>合同利润</h2></li>
-                        <li><a href="#"><img src="../images/i08.png" /></a>
-                            <h2>收支明细</h2></li>
-                        <li><a href="#"><img src="../images/i06.png" /></a>
-                            <h2>通知公告</h2></li>
-                    </ul> -->
-                    <ul class="toollist">
-            <script src="js/chart/raphael.2.1.0.min.js"></script>
-        <script src="js/chart/justgage.1.0.1.min.js"></script>
-        <script type="text/javascript">
-       var g1,g2;
+                <div class="toollist">
+                    <script type="text/javascript">
+                    var g1, g2;
+                    window.onload = function() {
+                        var g1 = new JustGage({
+                            id: "g1",
+                            value: getRandomInt(0, 10),
+                            min: 0,
+                            max: 50,
+                            title: "电压",
+                            label: "V(伏特)", //下方文字  
+                            gaugeWidthScale: 1, //轨道宽度
+                            showInnerShadow: true,
+                            levelColors: [
+                                // "#222222",
+                                // "#555555",
+                                // "#CCCCCC"
+                                "#066CAD"
+                            ]
+                        });
+                        var g2 = new JustGage({
+                            id: "g2",
+                            value: getRandomInt(0, 10),
+                            min: 0,
+                            max: 100,
+                            title: "电量",
+                            label: "%", //下方文字  
+                            gaugeWidthScale: 0.9, //轨道宽度
+                            showInnerShadow: true,
+                            levelColors: [
+                                // "#222222",
+                                // "#555555",
+                                // "#CCCCCC"
+                                "#7CE0F7"
+                            ]
+                        });
 
-    window.onload = function () {
-      var g1 = new JustGage({
-        id: "g1",
-        value:getRandomInt(0, 10),
-        min: 0,
-        max:50,
-        title: "电压",
-        label: "V",//下方文字  
-        gaugeWidthScale:0.9,//轨道宽度
-        showInnerShadow:true,
-        levelColors: [
-          // "#222222",
-          // "#555555",
-          // "#CCCCCC"
-          "#066CAD"
-        ]
-      });
-      // var g2 = new JustGage({
-      //   id: "g2",
-      //   value:getRandomInt(0, 10),
-      //   min: 0,
-      //   max:100,
-      //   title: "电量",
-      //   label: "%",//下方文字  
-      //   gaugeWidthScale:0.9,//轨道宽度
-      //   showInnerShadow:true,
-      //   levelColors: [
-      //     // "#222222",
-      //     // "#555555",
-      //     // "#CCCCCC"
-      //     "#7CE0F7"
-      //   ]
-      // });
+                        setInterval(function() {
 
-      setInterval(function () {
-      	 // g2.refresh(getRandomInt(40, 50));
-          g1.refresh(getRandomInt(60, 100));
-      }, 800);
-    };
-        $('.tablelist tbody tr:odd').addClass('odd');
-        </script>
+                            g2.refresh(getRandomInt(90, 99));
+                            g1.refresh(getRandomInt(47, 48));
+                        }, 1000);
+                    };
+                    $('.tablelist tbody tr:odd').addClass('odd');
+                    </script>
+                </div>
+            </div>
+            <div style="clear: both;">
+                <div id="g1" class="chart"></div>
+                <div id="g2" class="chart"></div>
+                <div id="g3" style="border:none;vertical-align: top;" class="chart">
+                    <ul>
                         <li>
-                        	
-                            <div id="g1" class="chart"></div>
-                            <div id="g2" class="chart"></div>
+                            <div class="dleft"><img src="../images/g01.png" alt=""></div>
+                            <div class="dright">
+                                <div>续航里程</div>
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                                        <span class="sr-only">30% 完成（信息）</span>
+                                    </div>
+                                </div>
+                                <p>标准续航里程50公里</p>
+                            </div>
                         </li>
-                        
+                        <li>
+                            <div class="dleft"><img src="../images/g02.png" alt=""></div>
+                            <div class="dright">
+                                <div>电量状态</div>
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                                        <span class="sr-only">30% 完成（信息）</span>
+                                    </div>
+                                </div>
+                                <p>在低于15%时请及时充电</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dleft"><img src="../images/g03.png" alt=""></div>
+                            <div class="dright">
+                                <div>运行状态</div>
+                               <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                                        <span class="sr-only">30% 完成（信息）</span>
+                                    </div>
+                                </div>
+                                <p class="" style="color: #fff;">布防/</p>
+                            </div>
+                        </li>
                     </ul>
-                    <!-- <span class="tooladd"><img src="../images/add.png" title="添加" /></span> -->
-                </div>
-            </div>
-            <div class="pagin">
-                <div class="message">共<i class="blue">1256</i>条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页</div>
-                <ul class="paginList">
-                    <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
-                    <li class="paginItem"><a href="javascript:;">1</a></li>
-                    <li class="paginItem current"><a href="javascript:;">2</a></li>
-                    <li class="paginItem"><a href="javascript:;">3</a></li>
-                    <li class="paginItem"><a href="javascript:;">4</a></li>
-                    <li class="paginItem"><a href="javascript:;">5</a></li>
-                    <li class="paginItem more"><a href="javascript:;">...</a></li>
-                    <li class="paginItem"><a href="javascript:;">10</a></li>
-                    <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
-                </ul>
-            </div>
-            <div class="tip">
-                <div class="tiptop"><span>提示信息</span><a></a></div>
-                <div class="tipinfo">
-                    <span><img src="../../images/ticon.png" /></span>
-                    <div class="tipright">
-                        <p>是否确认对信息的修改 ？</p>
-                        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-                    </div>
-                </div>
-                <div class="tipbtn">
-                    <input name="" type="button" class="sure" value="确定" />&nbsp;
-                    <input name="" type="button" class="cancel" value="取消" />
                 </div>
             </div>
         </div>
-        
     </body>
 
 </html>
