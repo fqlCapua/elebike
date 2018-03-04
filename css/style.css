@@ -1,7 +1,10 @@
 ﻿@charset "utf-8";
-
+ li a,td a{
+    color: #000;
+ }
 /***
  * Capufa
+ * date：2018/3/4
  * http://www.8gps8.cn
  * e-mail:13523450460@sina.cn
  */
@@ -667,7 +670,9 @@ a:link {
 .menuson li.active a {
     color: #fff;
 }
-
+.menuson li a{
+    color:#000;
+}
 .title {
     cursor: pointer;
 }
@@ -1615,4 +1620,10 @@ a:link {
     cursor: pointer;
     border-radius: 3px;
     behavior: url(js/pie.htc);
+}
+     .placeul li a {
+            color:#000;
+           }
+.allBicycle option{
+    color: #000;
 }

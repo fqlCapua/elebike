@@ -1,10 +1,346 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	维保
-</body>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>维保车辆信息</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/select.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
+        <script type="text/javascript" src="../js/select-ui.min.js"></script>
+        <script type="text/javascript" src="../editor/kindeditor.js"></script>
+          <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script type="text/javascript">
+        // KE.show({
+        //     id: 'content7',
+        //     cssPath: '././index.css'
+        // });
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function(e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+        });
+        </script>
+    </head>
+
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">系统设置</a></li>
+                <li style="border: 1px solid red"><a href="#">选择车辆</a>
+                </li>
+            </ul>
+           
+        </div>
+        <div class="formbody">
+            <div id="usual1" class="usual">
+                <div class="itab">
+                    <ul>
+                        <li><a href="#tab1" class="selected">车辆基本信息</a></li>
+                        <li><a href="#tab2">维保记录</a></li>
+                        <li><a href="#tab3">附近维修站点</a></li>
+                    </ul>
+                </div>
+                <!-- tab1 start -->
+                <div id="tab1" class="tabson">
+                    <div class="formtext">Hi，<b>admin</b></div>
+                    <ul class="forminfo">
+                        <li>
+                            <label>电动车ID:</label>
+                            <label for="">2312456</label>
+                        </li>
+                        <li>
+                            <label>IMEI:</label>
+                            <label>321321414</label>
+                        </li>
+                        <li>
+                            <label>SIM(CCID):</label>
+                            <label for="">24488456</label>
+                        </li>
+                        <li>
+                            <label>品牌:</label>
+                            <label for="">艾玛电动车</label>
+                        </li>
+                        <li>
+                            <label>型号:</label>
+                            <label for="">智能电动车</label>
+                        </li>
+                        <li>
+                            <label>代理商:</label>
+                            <label for="">汇丰</label>
+                        </li>
+                        <li>
+                            <label>入网日期:</label>
+                            <label for="">2018-1-10</label>
+                        </li>
+                        <li>
+                            <label>代理商:</label>
+                            <label for="">2018-2-10</label>
+                        </li>
+                        <li>
+                            <label>保修期:</label>
+                            <label for="">180天</label>
+                        </li>
+                    </ul>
+                </div>
+                <!-- tab1 stop-->
+                <!-- tab2 start -->
+                <div id="tab2" class="tabson">
+                    <ul class="seachform">
+                        <li>
+                            <label>维保记录</label>
+                            <input name="" type="text" class="scinput" />
+                        </li>
+                        <li>
+                            <label>指派</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>重点客户</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>客户状态</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>&nbsp;</label>
+                            <input name="" type="button" class="scbtn" value="查询" />
+                        </li>
+                    </ul>
+                    <table class="tablelist">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input name="" type="checkbox" value="" checked="checked" />
+                                </th>
+                                <th>编号<i class="sort"><img src="../images/px.gif" /></i></th>
+                                <th>标题</th>
+                                <th>用户</th>
+                                <th>籍贯</th>
+                                <th>发布时间</th>
+                                <th>是否审核</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130908</td>
+                                <td>王金平幕僚：马英九声明字字见血 人活着没意思</td>
+                                <td>admin</td>
+                                <td>江苏南京</td>
+                                <td>2013-09-09 15:05</td>
+                                <td>已审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink"> 删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130907</td>
+                                <td>温州19名小学生中毒流鼻血续：周边部分企业关停</td>
+                                <td>uimaker</td>
+                                <td>山东济南</td>
+                                <td>2013-09-08 14:02</td>
+                                <td>未审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130906</td>
+                                <td>社科院:电子商务促进了农村经济结构和社会转型</td>
+                                <td>user</td>
+                                <td>江苏无锡</td>
+                                <td>2013-09-07 13:16</td>
+                                <td>未审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130905</td>
+                                <td>江西&quot;局长违规建豪宅&quot;：局长检讨</td>
+                                <td>admin</td>
+                                <td>北京市</td>
+                                <td>2013-09-06 10:36</td>
+                                <td>已审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130907</td>
+                                <td>温州19名小学生中毒流鼻血续：周边部分企业关停</td>
+                                <td>uimaker</td>
+                                <td>山东济南</td>
+                                <td>2013-09-08 14:02</td>
+                                <td>未审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- tab2 stop-->
+                <!-- tab3 start -->
+                <div id="tab3" class="tabson">
+                    <ul class="seachform">
+                        <li>
+                            <label>综合查询</label>
+                            <input name="" type="text" class="scinput" />
+                        </li>
+                        <li>
+                            <label>指派</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>重点客户</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>客户状态</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>&nbsp;</label>
+                            <input name="" type="button" class="scbtn" value="查询" />
+                        </li>
+                    </ul>
+                    <table class="tablelist">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input name="" type="checkbox" value="" checked="checked" />
+                                </th>
+                                <th>编号<i class="sort"><img src="../images/px.gif" /></i></th>
+                                <th>标题</th>
+                                <th>用户</th>
+                                <th>籍贯</th>
+                                <th>发布时间</th>
+                                <th>是否审核</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130908</td>
+                                <td>王金平幕僚：马英九声明字字见血 人活着没意思</td>
+                                <td>admin</td>
+                                <td>江苏南京</td>
+                                <td>2013-09-09 15:05</td>
+                                <td>已审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink"> 删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130907</td>
+                                <td>温州19名小学生中毒流鼻血续：周边部分企业关停</td>
+                                <td>uimaker</td>
+                                <td>山东济南</td>
+                                <td>2013-09-08 14:02</td>
+                                <td>未审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130906</td>
+                                <td>社科院:电子商务促进了农村经济结构和社会转型</td>
+                                <td>user</td>
+                                <td>江苏无锡</td>
+                                <td>2013-09-07 13:16</td>
+                                <td>未审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130905</td>
+                                <td>江西&quot;局长违规建豪宅&quot;：局长检讨</td>
+                                <td>admin</td>
+                                <td>北京市</td>
+                                <td>2013-09-06 10:36</td>
+                                <td>已审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130907</td>
+                                <td>温州19名小学生中毒流鼻血续：周边部分企业关停</td>
+                                <td>uimaker</td>
+                                <td>山东济南</td>
+                                <td>2013-09-08 14:02</td>
+                                <td>未审核</td>
+                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- tab3 stop-->
+            </div>
+            <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+            </script>
+            <script type="text/javascript">
+            $('.tablelist tbody tr:odd').addClass('odd');
+            </script>
+        </div>
+    </body>
+
 </html>
