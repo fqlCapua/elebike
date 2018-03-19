@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+        <title>
+            登录
+        </title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/layer.js"></script>
+        <script type="text/javascript" src="js/md5.js"></script>
+<!--  
+  *user:13523450460@sina.cn
+  *date:2017/12
+   
+ -->
+        <style type="text/css">
+        body {
+            font-family: "微软雅黑";
+            /* set background tensile */
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #content {
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 420px;
+            border: 1px solid #BABABA;
+            border-radius: 6px;
+            padding:40px;
+          
+            margin:140px auto 300px auto;
+            display: block;
+        }
+
+
+
+        .login_header {
+            color: #337AB7;
+            font-size: 30px;
+            line-height: 45px;
+            letter-spacing: 1px;
+            text-align: center;
+            width: 90%;
+            padding-bottom: 20px
+        }
+        .login_box label,
+        .login_box input {
+            display: inline-block;
+            font-size: 14px;
+        }
+        .login_button_box {
+            text-align: center;
+        }
+        .login_button_box button {
+            width: 60%;
+            margin: 0 auto;
+        }
+        .login_box {
+            width: 90%;
+            margin-bottom: 20px;
+        }
+        .logon-box {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .logon-box a {
+            margin: 30px;
+            color: #4a4744;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .logon-box a:hover {
+            color: #ff7d0a;
+        }
+
+        .logon-box a:active {
+            color: #ee7204;
+        }
+        .tips {
+            font-size: 12px;
+            color: #E06464;
+
+            text-align: center;
+        }
+        </style>
+    </head>
+
+    <body  >
+        <div id="content">
+            <div class="login_header text-center">
+                登录
+            </div>
+            <form  novalidate   ng-controller="adCtr">
+                <div class="login_box">
+                    <label for="" class="col-md-3">帐号:</label>
+                    <input name="username" ng-model="username" class="form-control col-md-8" placeholder="请输入帐号" type="text" required />
+                   
+                </div>
+                <div class="login_box ">
+                    <label for="" class="col-md-3">密码:</label>
+                    <input name="userpwd" ng-minlength="6" ng-maxlength="18" ng-model="userpwd" required class="form-control col-md-8" placeholder="请输入密码" type="password" />
+                   
+                </div>
+              
+                <div class="login_button_box">
+                    <button  onclick="window.location.href='main.html#/admin'"  class="btn btn-primary">
+                        登录
+                    </button>
+                </div>
+              
+            </form>
+        </div>
+    </body>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/routerMain.js"></script>
+    <script type="text/javascript" src="js/adminlogin.js"></script>
+    <script type="text/javascript">
+    $(".logon-box .reg").click(function(event) {
+
+        
+    });
+    </script>
+
+</html>
