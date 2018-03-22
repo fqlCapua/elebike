@@ -45,6 +45,7 @@ function check_phone(Phone) {
 
     return flag;
 }
+
 function set_session(sval) {
     var ss = window.sessionStorage;
     var val = "zcxvbas%j%d%s%a%o%p%w%q%o%p%1%3%1%31%4%1%4%4%4%1&" + sval;
@@ -69,7 +70,7 @@ function Send_code() {
         var timeStamp = Date.parse(new Date) / 1000;
         var md_token = hex_md5("my58_" + hex_md5("my58_" + timeStamp));
         $.ajax({
-                url: 'http://www.8gps8.cn:8012/bikePublic/api/user/getCode',
+                url: 'http://www.8gps8.cn:8011/bikePublic/api/user/getCode',
                 type: 'POST',
                 async: false,
                 data: {
@@ -105,11 +106,11 @@ function Send_code() {
 
     return Code;
 }
-  /*
-     *user:13523450460@sina.cn
-     *date:2018/3/20
-     *admin:Capua
-     */
+/*
+ *user:13523450460@sina.cn
+ *date:2018/3/20
+ *admin:Capua
+ */
 //检查验证码
 function check_vCode() {
     var flag;
@@ -120,7 +121,7 @@ function check_vCode() {
         // var pclocker = get_session();
         //  console.log(pclocker)
         // if (phoneLocker == pclocker) {
-          flag = true;
+        flag = true;
 
         // } else {
         //     layer.tips("验证码错误", ".vCode", {
@@ -142,7 +143,7 @@ function check_vCode() {
 
 //验证码
 
-var count =60;
+var count = 60;
 var curCount;
 
 function Noclick() {
@@ -150,7 +151,7 @@ function Noclick() {
     if (check_phone(phone)) {
         var serviceCode = Send_code() //获取验证码函数
         //set_session(serviceCode);
-        curCount=count;
+        curCount = count;
         $(".getCode").attr("disabled", true);
         $(".getCode").val(curCount + "s后重新发送");
         timer1 = window.setInterval("remainTime()", 1000);
@@ -174,47 +175,134 @@ function remainTime() {
     }
 
 }
-   function  subAdminForm(){
-      var phone=$(".phone").val();
-      var vCode=$(".vCode").val();
-            $.ajax({
-             url: "http://www.8gps8.cn:8012/bikePublic/api/user/userLogin",
-             type: "POST",
-             data: {
-                  time:time_token()[0],
-                  token:time_token()[1],
-                  phone:phone,
-                  code:vCode,
-                  auth:1
-             },
-            })
-            .done(function(res) {
-               if(res.ret==0){
-                 layer.msg("登录成功");
-                 var ss=window.sessionStorage;
-                 var JSONStr=JSON.stringify(res.data);
-                   ss.setItem("io",JSONStr);
-                
-               }else{
-                 layer.msg(res.msg)
-               }
-            })
-            .fail(function() {
-             console.log("error");
-            })
-            .always(function() {
 
-            });
- 
-}
-  
-    $(".adminLogin").click(function() {
-      console.log(111)
-      var phone=$(".phone").val();
-      var vCode=$(".vCode").val();
-       if(check_phone(phone)&&check_vCode()){
-          subAdminForm();
-       }else{
+function userInfoSession(userid) {
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("id", userid);
 
-       }
+    var settings = {
+        "async": false,
+        "crossDomain": true,
+        "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+       
+        var res=JSON.parse(res);
+        var userInfo=res.data;
+         var ss=window.sessionStorage;
+        ss.setItem("io",JSON.stringify(userInfo));
+     
     });
+}
+
+function subAdminForm() {
+    var phone = $(".phone").val();
+    var vCode = $(".vCode").val();
+    var form = new FormData();
+    form.append("time",time_token()[0]);
+    form.append("token",time_token()[0]);
+    form.append("phone", phone);
+    form.append("code",vCode);
+    form.append("auth", "1");
+
+    var settings = {
+        "async":false,
+        "crossDomain": true,
+        "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userLogin",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+      var res=JSON.parse(res);
+        if (res.ret == 0) {
+            layer.msg("登陆成功");
+            var userid=res.data.user_id;
+            userInfoSession(userid);
+            window.location.href="main.html#/admin";
+        } else {
+            layer.msg("登陆失败");
+        }
+    });
+    // $.ajax({
+    //  url: "http://www.8gps8.cn:8011/bikePublic/api/user/userLogin",
+    //  type: "POST",
+    //  data: {
+    //       time:time_token()[0],
+    //       token:time_token()[1],
+    //       phone:phone,
+    //       code:vCode,
+    //       auth:1
+    //  },
+    // })
+    // .done(function(res) {
+    //    if(res.ret==0){
+    //      layer.msg("登录成功");
+    //       console.log("成功")
+    //      var ss=window.sessionStorage;
+    //      var JSONStr=JSON.stringify(res.data);
+    //        ss.setItem("io",JSONStr);
+
+    //    }else{
+    //      layer.msg(res.msg)
+    //    }
+    // })
+    // .fail(function(err) {
+    //   console.log(err);
+    // })
+    // .always(function() {
+
+    // });
+
+    // $.ajax({
+    //   type:"POST",
+    //   url:"http://www.8gps8.cn:8011/bikePublic/api/user/userLogin",
+    //   async:false,
+    //   data:{
+    //       time:time_token()[0],
+    //       token:time_token()[1],
+    //       phone:phone,
+    //       code:vCode,
+    //       auth:1
+    //   },
+    //   successs:function(res){
+    //     layer.msg("登录成功");
+    //      if(res.ret==0){
+
+    //       console.log("成功")
+    //       var ss=window.sessionStorage;
+    //       var JSONStr=JSON.stringify(res.data);
+    //        ss.setItem("io",JSONStr);
+    //        window.location.href="main.html#/admin";
+    //      }else{
+    //        layer.msg("登录失败");
+    //      }
+    //   },
+    //   error:function(err){
+    //     console.log(err);
+    //   }
+    // })
+
+}
+
+$(".adminLogin").click(function() {
+
+    var phone = $(".phone").val();
+    var vCode = $(".vCode").val();
+    if (check_phone(phone) && check_vCode()) {
+        subAdminForm();
+    } else {
+
+    }
+});

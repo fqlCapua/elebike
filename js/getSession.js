@@ -3,11 +3,14 @@
  	   var userInfos=[];
  	if(ss.getItem('io')) {
       var jsonTxt=JSON.parse(ss.getItem('io'));
-		var userid=jsonTxt.user_id;
-		var userphone=jsonTxt.user_phone;
-		userInfos.push(userid);
+		var name=jsonTxt.name;
+		var userphone=jsonTxt.phone;
+		var user_id=jsonTxt.id;
+
+		userInfos.push(name);
 		userInfos.push(userphone);
-		console.log(userid);
+        userInfos.push(user_id);
+		
 		return userInfos;
   } else {
      layer.msg('请先登录');
