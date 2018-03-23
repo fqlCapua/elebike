@@ -1,7 +1,7 @@
 /*
  *user:Capua
  *email:13523450460@sina.cn
- *content:登录部分
+ *content:用户登录部分
  */
 
 
@@ -29,7 +29,7 @@ function check_phone(Phone) {
             flag = true;
         } else {
             flag = false;
-            layer.tips("格式错误", ".phone", {
+            layer.tips("格式错误", ".loginPhone", {
                 tips: [1, "#4082D4"],
                 tipsMore: true
             });
@@ -37,7 +37,7 @@ function check_phone(Phone) {
     } else {
 
         flag = false;
-        layer.tips("不能为空", ".phone", {
+        layer.tips("不能为空", ".loginPhone", {
             tips: [1, "#4082D4"],
             tipsMore: true
         });
@@ -63,20 +63,20 @@ function get_session() {
     return code;
 }
 
-function Send_code() {
+function Send_code(obj) {
     var Code;
-    var phone = $(".phone").val();
-    if (phone != "") {
+    var phone=$(obj).val();
+    if (phone!="") {
         var timeStamp = Date.parse(new Date) / 1000;
         var md_token = hex_md5("my58_" + hex_md5("my58_" + timeStamp));
         $.ajax({
-                url: 'http://www.8gps8.cn:8011/bikePublic/api/user/getCode',
-                type: 'POST',
-                async: false,
-                data: {
-                    time: time_token()[0],
-                    token: time_token()[1],
-                    phone: phone
+                url:'http://www.8gps8.cn:8011/bikePublic/api/user/getCode',
+                type:'POST',
+                async:false,
+                data:{
+                    time:time_token()[0],
+                    token:time_token()[1],
+                    phone:phone
                 },
             })
             .done(function(res) {
@@ -98,7 +98,7 @@ function Send_code() {
 
             });
     } else {
-        layer.tips("不能为空", ".phone", {
+        layer.tips("不能为空", obj, {
             tips: [1, "#4082D4"],
             tipsMore: true
         });
@@ -112,27 +112,13 @@ function Send_code() {
  *admin:Capua
  */
 //检查验证码
-function check_vCode() {
+function check_vCode(obj) {
     var flag;
-    if ($(".vCode").val() != "") {
-        // var phoneCode = $(".vCode").val();
-        // var phoneLocker = lock_string(phoneCode);
-        // console.log("手机加密后:" + phoneLocker);
-        // var pclocker = get_session();
-        //  console.log(pclocker)
-        // if (phoneLocker == pclocker) {
+    if ($(obj).val()!= "") {
         flag = true;
-
-        // } else {
-        //     layer.tips("验证码错误", ".vCode", {
-        //         tips: [1, "#4082D4"],
-        //         tipsMore: true
-        //     });
-        //     flag = false;
-        // }
     } else {
         flag = false;
-        layer.tips("不能为空", ".vCode", {
+        layer.tips("不能为空", obj, {
             tips: [1, "#4082D4"],
             tipsMore: true
         });
@@ -145,15 +131,38 @@ function check_vCode() {
 
 var count = 60;
 var curCount;
+// function remainTime() {
+//     if (curCount == 0) {
+//         clearInterval(timer1);
+//         $(".getRegCode1").val("免费获取验证码");
+//         $(".getRegCode1").removeAttr('disabled');
 
+//     } else {
+//         curCount--;
+//         $(".getRegCode1").val(curCount + "s后重新发送");
+//     }
+
+// }
+function remainRegTime() {
+    if (curCount == 0) {
+        clearInterval(timer1);
+        $(".getRegCode").val("免费获取验证码");
+        $(".getRegCode").removeAttr('disabled');
+
+    } else {
+        curCount--;
+        $(".getRegCode").val(curCount + "s后重新发送");
+    }
+
+}
 function Noclick() {
-    var phone = $(".phone").val();
+    var phone = $(".loginPhone").val();
     if (check_phone(phone)) {
-        var serviceCode = Send_code() //获取验证码函数
+        var serviceCode = Send_code(".loginPhone") //获取验证码函数
         //set_session(serviceCode);
         curCount = count;
-        $(".getCode").attr("disabled", true);
-        $(".getCode").val(curCount + "s后重新发送");
+        $(".getRegCode1").attr("disabled", true);
+        $(".getRegCode1").val(curCount + "s后重新发送");
         timer1 = window.setInterval("remainTime()", 1000);
     } else {
 
@@ -162,19 +171,22 @@ function Noclick() {
 
 }
 
-
-function remainTime() {
-    if (curCount == 0) {
-        clearInterval(timer1);
-        $(".getCode").val("免费获取验证码");
-        $(".getCode").removeAttr('disabled');
-
+function NoRegclick() {
+    var phone = $(".regPhone").val();
+    if (check_phone(phone)) {
+        var serviceCode = Send_code(".regPhone") //获取验证码函数
+        //set_session(serviceCode);
+        curCount = count;
+        $(".getRegCode").attr("disabled", true);
+        $(".getRegCode").val(curCount + "s后重新发送");
+        timer1 = window.setInterval("remainRegTime()", 1000);
     } else {
-        curCount--;
-        $(".getCode").val(curCount + "s后重新发送");
+
     }
 
+
 }
+
 
 function userInfoSession(userid) {
     var form = new FormData();
@@ -202,10 +214,47 @@ function userInfoSession(userid) {
      
     });
 }
+function subRegForm(phone,code) {
+   
+    var name=$(".truename").val();
+    var id=$(".identfy").val();
+    var form = new FormData();
+    form.append("time",time_token()[0]);
+    form.append("token",time_token()[0]);
+    form.append("phone", phone);
+     form.append("truename", name);
+    form.append("id",id);
+     form.append("code",vCode);
+    form.append("auth", "0");
 
-function subAdminForm() {
-    var phone = $(".phone").val();
-    var vCode = $(".vCode").val();
+    var settings = {
+        "async":false,
+        "crossDomain": true,
+        "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userRegister",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+      var res=JSON.parse(res);
+        if (res.ret == 0) {
+            layer.msg("注册成功");
+            var userid=res.data.user_id;
+            userInfoSession(userid);
+            window.location.href="main.html#/user";
+        } else {
+            layer.msg("注册失败");
+        }
+    });
+
+
+}
+
+function subLoginForm(phone,code) {
+
     var form = new FormData();
     form.append("time",time_token()[0]);
     form.append("token",time_token()[0]);
@@ -230,7 +279,7 @@ function subAdminForm() {
             layer.msg("登录成功");
             var userid=res.data.user_id;
             userInfoSession(userid);
-            window.location.href="main.html#/admin";
+            window.location.href="main.html#/user";
         } else {
             layer.msg("登录失败");
         }
@@ -239,12 +288,23 @@ function subAdminForm() {
 
 }
 
-$(".adminLogin").click(function() {
 
-    var phone = $(".phone").val();
-    var vCode = $(".vCode").val();
-    if (check_phone(phone) && check_vCode()) {
-        subAdminForm();
+//登录
+$(".userloginBtn").click(function() {
+   var phone = $(".loginPhone").val();
+    var vCode = $(".loginCode").val();
+    if (check_phone(phone) && check_vCode(".loginCode")) {
+        subLoginForm(phone,vCode);
+    } else {
+
+    }
+});
+//注册
+$(".regBtn").click(function() {
+   var phone = $(".regPhone").val();
+    var vCode = $(".regCode").val();
+    if (check_phone(phone) && check_vCode(".regCode")) {
+        subRegForm(phone,vCode);
     } else {
 
     }
