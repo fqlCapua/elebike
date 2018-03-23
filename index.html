@@ -454,22 +454,22 @@
                                 <div class="input-group">
                                     <input type="text" placeholder="请输入手机号" class="regPhone form-control">
                                     <div class="input-group-addon ">
-                                        <input type="button" class="form-control getRegCode" value="获取验证码" />
+                                        <input type="button" class="form-control getRegCode" value="获取验证码" onclick="NoRegclick()" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" style="width:100px;" type="text" placeholder="验证码">
+                                <input class="form-control regCode" style="width:100px;" type="text" placeholder="验证码">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="真实姓名">
+                                <input class="form-control truename" type="text" placeholder="真实姓名">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="身份证号">
+                                <input class="form-control identfy" type="text" placeholder="身份证号">
                             </div>
                         </div>
                         <div class="modal-footer " style=" text-align:center;">
-                            <button type="button" class="btn btn-info">注册</button>
+                            <button type="button" class="btn btn-info regBtn">注册</button>
                         </div>
                     </div>
                 </div>
@@ -507,16 +507,16 @@
                                 <div class="input-group">
                                     <input type="text" class="loginPhone form-control" placeholder="请输入手机号">
                                     <div class="input-group-addon ">
-                                        <input type="button" class="form-control getRegCode1" value="获取验证码" />
+                                        <input type="button" class="form-control getRegCode1" value="获取验证码" onclick="Noclick()" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" style="width:100px;" type="text" placeholder="验证码">
+                                <input class="form-control loginCode" style="width:100px;" type="text" placeholder="验证码">
                             </div>
                         </div>
                         <div class="modal-footer" style=" text-align:center;">
-                            <button onclick="window.location.href='main.html#/user'" type="button" class="btn btn-info">登录</button>
+                            <button type="button" class="btn btn-info userloginBtn">登录</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -529,12 +529,11 @@
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/layer.js"></script>
     <script src="js/iframe.js"></script>
-
-
-
     <script type="text/javascript" src="js/router.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="js/person/index.js"></script>
+    <script type="text/javascript" src="js/person/userlogin.js"></script>
     <script type="text/javascript">
     $(".loadQrCode").click(function(event) {
         $(".Qrcode").toggle();
