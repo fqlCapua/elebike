@@ -422,16 +422,7 @@
             </article>
         </main>
         <iframe id="footer" src="footer.html" scrolling="no" height="150" width="100%" frameborder="0"></iframe>
-        <form name="regForm">
-            <div class="modal  fade" id="Reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">智能电摩注册</h4>
-                        </div>
-                        <div class="modal-body">
-                            <style>
+             <style>
                             .input-group {
                                 margin-bottom: 20px;
                             }
@@ -442,19 +433,45 @@
                                 line-height: 32px;
                                 border: 1px solid #CCCCCC；
                             }
-                            .getRegCode {
+                            .getLogin {
                                 border: none;
                                 background-color: #EEEEEE;
                                 width: 100%;
                                 height: 32px;
                             }
                             .modal-footer {}
+                               .input-group {
+                                margin-bottom: 20px;
+                            }
+                            .input-group-addon {
+                                background: none;
+                                padding: 0;
+                                height: 32px;
+                                line-height: 32px;
+                                border: 1px solid #CCCCCC；
+                            }
+                            .getReg{
+                                border: none;
+                                background-color: #EEEEEE;
+                                width: 100%;
+                                height: 32px;
+                            }
                             </style>
+        
+            <div class="modal  fade" id="Reg">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">智能电摩注册</h4>
+                        </div>
+                        <div class="modal-body">
+
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" placeholder="请输入手机号" class="regPhone form-control">
                                     <div class="input-group-addon ">
-                                        <input type="button" class="form-control getRegCode" value="获取验证码" onclick="NoRegclick()" />
+                                        <input type="button" class="form-control getReg" value="获取验证码"  onclick="NoRegclick()" />
                                     </div>
                                 </div>
                             </div>
@@ -474,9 +491,9 @@
                     </div>
                 </div>
             </div>
-        </form>
+
         <!-- 登录 -->
-        <form name="regForm">
+    
             <div class="modal  fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -485,29 +502,11 @@
                             <h4 class="modal-title" id="myModalLabel">智能电摩登录</h4>
                         </div>
                         <div class="modal-body">
-                            <style>
-                            .input-group {
-                                margin-bottom: 20px;
-                            }
-                            .input-group-addon {
-                                background: none;
-                                padding: 0;
-                                height: 32px;
-                                line-height: 32px;
-                                border: 1px solid #CCCCCC；
-                            }
-                            .getRegCode1 {
-                                border: none;
-                                background-color: #EEEEEE;
-                                width: 100%;
-                                height: 32px;
-                            }
-                            </style>
                             <div class="form-group">
                                 <div class="input-group">
                                     <input type="text" class="loginPhone form-control" placeholder="请输入手机号">
                                     <div class="input-group-addon ">
-                                        <input type="button" class="form-control getRegCode1" value="获取验证码" onclick="Noclick()" />
+                                        <input type="button" class="form-control getLogin" value="获取验证码" onclick="NoLoginclick()" />
                                     </div>
                                 </div>
                             </div>
@@ -516,14 +515,14 @@
                             </div>
                         </div>
                         <div class="modal-footer" style=" text-align:center;">
-                            <button type="button" class="btn btn-info userloginBtn">登录</button>
+                            <button type="button" class="btn btn-info loginBtn">登录</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
                 </div>
                 <!-- /.modal -->
             </div>
-        </form>
+    
         <br />
     </body>
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
@@ -531,9 +530,11 @@
     <script src="js/iframe.js"></script>
     <script type="text/javascript" src="js/router.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <script type="text/javascript" src="js/person/userReg.js"></script>
+    <script type="text/javascript" src="js/person/userLogin.js"></script>
 
-    <script type="text/javascript" src="js/person/index.js"></script>
-    <script type="text/javascript" src="js/person/userlogin.js"></script>
+
+ 
     <script type="text/javascript">
     $(".loadQrCode").click(function(event) {
         $(".Qrcode").toggle();
