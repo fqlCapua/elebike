@@ -1,4 +1,4 @@
-/*
+﻿/*
  *user:Capua
  *email:13523450460@sina.cn
  *content:用户登录部分
@@ -10,6 +10,11 @@ function lock_string(str) {
     newLocker = hex_md5(str);
     return newLocker;
 }
+
+
+
+
+
 
 function time_token() {
     var timestamp, md_token, timeArr = [];
