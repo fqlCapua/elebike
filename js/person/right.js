@@ -52,51 +52,48 @@ $.ajax(settings).done(function (res) {
 });
 }
 
-function userInfoSession(){
+// function userInfoSession(){
+//    var form = new FormData();
+//     form.append("time", time_token()[0]);
+//     form.append("token", time_token()[1]);
+//     form.append("id",getSession[2]);
+
+//     var settings = {
+//         "async": false,
+//         "crossDomain": true,
+//         "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
+//         "method": "POST",
+//         "processData": false,
+//         "contentType": false,
+//         "mimeType": "multipart/form-data",
+//         "data": form
+//     }
+
+//     $.ajax(settings).done(function(res) {
+//        var res=JSON.parse(res);
+//        console(res);
+//        if(res.ret==0){
+//         var  userInfo=res.data;
+//          var ss=window.sessionStorage;
+//          if(ss.getItem("io")){
+//            ss.removeItem("io");
+//           }
+//          ss.setItem("io",JSON.stringify(userInfo));
+//        }else{
+//          requestStatus(res.ret);
+//        }  
+//     });
+
+
+// }
+
+// function refreshInfo(){
+//  userInfoSession();
   
-    var form = new FormData();
-    form.append("time", time_token()[0]);
-    form.append("token", time_token()[1]);
-    form.append("id",getSession[2]);
 
-    var settings = {
-        "async": false,
-        "crossDomain": true,
-        "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
-        "method": "POST",
-        "processData": false,
-        "contentType": false,
-        "mimeType": "multipart/form-data",
-        "data": form
-    }
+// }
 
-    $.ajax(settings).done(function(res) {
-       var res=JSON.parse(res);
-       console(res.data.vehicles);
-       if(res.ret==0){
-        var  userInfo=res.data;
-         var ss=window.sessionStorage;
-         if(ss.getItem("io")){
-           ss.removeItem("io");
-          }
-         ss.setItem("io",JSON.stringify(userInfo));
-       }else{
-         requestStatus(res.ret);
-       }  
-    });
-
-
-}
-
-function refreshInfo(){
- userInfoSession();
-  
-
-}
-
-$(function(){
-  refreshInfo();
-})
+ 
 //绑定手机号
 $(".bindPhone").click(function() {
     var user_id = getSession()[2];
@@ -107,7 +104,7 @@ $(".bindPhone").click(function() {
        
         console.log(user_id+"-"+bike_id+"-"+userPhone+"-"+actionStatus);
         setUser(user_id,bike_id,userPhone,"0");
-        userInfoSession();
+       
         window.location.reload();
     });
 
@@ -124,7 +121,7 @@ $(".releasePhone").click(function() {
         btn:["是","否"]
       },function(){
          setUser(user_id,bike_id,phone,"1");
-         userInfoSession();
+ 
          
       } ,function(){
         
@@ -143,7 +140,7 @@ $(".releasePhone").click(function() {
   layer.prompt({ title:'请输入电车编号', formType:0 }, function(num, index){
         layer.close(index);
         setUser(user_id,num,phone,"0");
-        userInfoSession();        
+           
     });
   });
     
