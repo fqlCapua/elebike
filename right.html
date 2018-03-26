@@ -3,33 +3,25 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>用户电车绑定</title>
+        <link rel="shortcut icon" href="images/home/moto.png" type="image/x-icon">
+        <title>电车管理</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-           <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/layer.js"></script>
         <script type="text/javascript" src="js/md5.js"></script>
         <script type="text/javascript" src="js/getSession.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            $(".click").click(function() {
-                $(".tip").fadeIn(200);
-            });
-
-            $(".tiptop a").click(function() {
-                $(".tip").fadeOut(200);
-            });
-
-            $(".sure").click(function() {
-                $(".tip").fadeOut(100);
-            });
-
-            $(".cancel").click(function() {
-                $(".tip").fadeOut(100);
-            });
-
-        });
-        </script>
+        <style type="text/css">
+            
+        .isbind a{
+                color:blue;
+                cursor: pointer;
+            }
+           .isbind a:hover{
+            color: red;
+            text-decoration: none;
+           }
+        </style>
     </head>
 
     <body>
@@ -38,65 +30,50 @@
             <ul class="placeul">
                 <li><a href="#">首页</a></li>
                 <li><a href="#">系统管理员</a></li>
-                <li><a href="#">电车绑定</a></li>
+                <li><a href="#">电车管理</a></li>
             </ul>
         </div>
         <div class="rightinfo">
-            <!--  <div class="tools">
-    
-        <ul class="toolbar">
-        <li class="click"><span><img src="images/t01.png" /></span>添加</li>
-        <li class="click"><span><img src="images/t02.png" /></span>修改</li>
-        <li><span><img src="images/t03.png" /></span>删除</li>
-        <li><span><img src="images/t04.png" /></span>统计</li>
-        </ul>
-        
-        
-        <ul class="toolbar1">
-        <li><span><img src="images/t05.png" /></span>设置</li>
-        </ul>
-    
-    </div> -->
-            <table class="tablelist">
-                <thead>
-                    <tr>
-                        <!-- <th>
-                            <input name="" type="checkbox" value="" checked="checked" />
-                        </th> -->
-                        <th>电车编号<i class="sort"><img src="images/px.gif" /></i></th>
-                        
-                        <th>用户</th>
-                        <th>绑定时间</th>
-                        <th>是否审核</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr bikeid="58210171989">
-                       <!--  <td>
-                            <input name="" type="checkbox" value="" />
-                        </td> -->
-                        <td>58210171989</td>
-                        <td>admin</td>
-                        <td>2018-03-21 10:36</td>
-                        <td class="text-warning">已审核</td>
-                        <td><a href="#" name="1" class="tablelink bindPhone">绑定手机号</a>
-                            <!-- <a name="0" href="#" class="tablelink">删除</a> -->
-                        </td>
-                    </tr>
-                   
-                </tbody>
-            </table>
-            <div class="tip" style="display: none;">
-                <div class="tiptop"><span>提示信息</span><a></a></div>
-                
-               
+            <div class="tools">
+                <ul class="toolbar">
+                    <li class="addbtn"><span><img src="images/t01.png" /></span>添加</li>
+                    <li><span><img src="images/t02.png" /></span>修改</li>
+                    <li><span><img src="images/t03.png" /></span>删除</li>
+                    <li><span><img src="images/t04.png" /></span>统计</li>
+                </ul>
+                <ul class="toolbar1">
+                    <li><span><img src="images/t05.png" /></span>设置</li>
+                </ul>
             </div>
+        </div>
+        <table class="tablelist">
+            <thead>
+                <tr>
+                    <th>电车编号<i class="sort"><img src="images/px.gif" /></i></th>
+                    <th>用户名称</th>
+                    <th>绑定号</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="bikelist">
+                <tr bikeid="58210171989">
+                    <td>58210171989</td>
+                    <td>admin</td>
+                    <td class="phone">15201768391</td>
+                    <td class="isbind">
+                        <a class="bindPhone">绑定</a>
+                        <a class="releasePhone">解绑</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         </div>
         <script type="text/javascript" src="js/person/right.js"></script>
         <script type="text/javascript">
-           $('.tablelist tbody tr:odd').addClass('odd');
+        $('.tablelist tbody tr:odd').addClass('odd');
+     
+       
         </script>
     </body>
-
+     
 </html>

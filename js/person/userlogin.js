@@ -72,7 +72,7 @@ function Send_code1(obj) {
                     Code = res.data.code;
 
                 } else {
-                    layer.msg(res.msg);
+                    requestStatus(res.ret);
                 }
 
 
@@ -139,7 +139,7 @@ function userInfoSession(userid) {
     form.append("id", userid);
 
     var settings = {
-        "async": false,
+        "async":false,
         "crossDomain": true,
         "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
         "method": "POST",
@@ -150,11 +150,16 @@ function userInfoSession(userid) {
     }
 
     $.ajax(settings).done(function(res) {
-        console.log(res);
+     
         var res=JSON.parse(res);
-        var userInfo=res.data;
-         var ss=window.sessionStorage;
-        ss.setItem("io",JSON.stringify(userInfo));
+         if(res.ret==0){
+              var userInfo=res.data;
+            var ss=window.sessionStorage;
+            ss.setItem("io",JSON.stringify(userInfo));
+         }else{
+            requestStatus(res.ret);
+         }
+        
      
     });
 }

@@ -435,11 +435,15 @@ a:link {
 }
 
 .topright {
-    height: 88px;
-    background: url(../images/topright.jpg) no-repeat right;
-    float: right;
+    widows:200px;
+    height:88px;
+    background:url(../images/topright.jpg) no-repeat right;
+    float:right;
 }
+.topright li{
 
+    display:inline-block;
+}
 .nav {
     float: left;
 }
@@ -493,11 +497,11 @@ a:link {
 .topright ul {
     padding-top: 15px;
     float: right;
-    padding-right: 12px;
+    padding-right:12px;
 }
 
 .topright ul li {
-    float: left;
+   display: inline-block;
     padding-left: 9px;
     padding-right: 9px;
     background: url(../images/line.gif) no-repeat right;
@@ -680,12 +684,9 @@ a:link {
 
 /*right.html*/
 
-.place {
-    height: 40px;
-    background: url(../images/righttop.gif) repeat-x;
-}
 
 .place span {
+    margin:0;
     line-height: 40px;
     font-weight: bold;
     float: left;
