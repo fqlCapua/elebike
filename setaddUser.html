@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>无标题文档</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/select.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
+        <script type="text/javascript" src="js/select-ui.min.js"></script>
+        <script type="text/javascript" src="editor/kindeditor.js"></script>
+        <script type="text/javascript">
+        KE.show({
+            id: 'content7',
+            cssPath: './index.css'
+        });
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function(e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+        });
+        </script>
+    </head>
+
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">系统管理员</a></li>
+                <li><a href="#">设置用户类型</a></li>
+            </ul>
+        </div>
+        <div class="formbody">
+            <div id="usual1" class="usual">
+                <style>
+                    .forminfo li{
+                        height:60px;
+                        
+                    }
+                </style>
+                <div id="tab1" class="tabson">
+                    <div style="height:30px;"></div>
+                    <ul class="forminfo">
+                       <li>
+                            <label>添加者ID:<b> </b></label>
+                            <div class="vocation">
+                                <select class="select1">
+                                    <option>雅迪电动车</option>
+                                    <option>山地电动车</option>
+                                    <option>电动车1</option>
+                                    <option>电动车2</option>
+                                    <option>电动车3</option>
+                                    <option>电动车4</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>添加者身份:<b> </b></label>
+                            <div class="vocation">
+                                <select class="select1">
+                                    <option>厂家</option>
+                                    <option>经销商</option>
+                                    
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>用户手机号<b>: </b></label>
+                            <input name="" type="text" class="dfinput"  />
+                        </li>
+                       <li>
+                            <label>用户真实姓名<b>: </b></label>
+                            <input name="" type="text" class="dfinput"   />
+                        </li>
+                       <li>
+                            <label>用户身份证号<b>: </b></label>
+                            <input name="" type="text" class="dfinput" />
+                        </li>
+                        <li>
+                            <label>用户身份<b>: </b></label>
+                             <div class="vocation">
+                                <select class="select1">
+                                    <option>经销商</option>
+                                    <option>普通用户</option>
+                                    
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>&nbsp;</label>
+                            <input name="" type="button" class="btn" value="添加" />
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+            </script>
+            <script type="text/javascript">
+            $('.tablelist tbody tr:odd').addClass('odd');
+            </script>
+        </div>
+    </body>
+
+</html>
