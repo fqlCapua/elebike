@@ -57,7 +57,7 @@ function Send_code1(obj) {
         var timeStamp = Date.parse(new Date) / 1000;
         var md_token = hex_md5(timeStamp);
         $.ajax({
-                url: 'http://www.8gps8.cn:8011/bikePublic/api/user/getCode',
+                url: 'https://www.8gps8.cn:8011/bikePublic/api/user/getCode',
                 type: 'POST',
                 async: false,
                 data: {
@@ -141,7 +141,7 @@ function userInfoSession(userid) {
     var settings = {
         "async":false,
         "crossDomain": true,
-        "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -177,7 +177,7 @@ function subLoginForm(phone,code) {
     var settings = {
         "async":false,
         "crossDomain": true,
-        "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userLogin",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/user/userLogin",
         "method": "POST",
         "processData": false,
         "contentType": false,

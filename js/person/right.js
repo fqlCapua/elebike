@@ -29,7 +29,7 @@ form.append("action", actionStatus);
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://www.8gps8.cn:8011/bikePublic/api/site/addUserBike",
+  "url": "https://www.8gps8.cn:8011/bikePublic/api/site/addUserBike",
   "method": "POST",
   "processData": false,
   "contentType": false,
@@ -61,7 +61,7 @@ $.ajax(settings).done(function (res) {
 //     var settings = {
 //         "async": false,
 //         "crossDomain": true,
-//         "url": "http://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
+//         "url": "https://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
 //         "method": "POST",
 //         "processData": false,
 //         "contentType": false,

@@ -59,7 +59,7 @@ function Send_code(){
     if (phone != "") {
         
         $.ajax({
-                url: 'http://www.8gps8.cn/bikePublic/api/user',
+                url: 'https://www.8gps8.cn/bikePublic/api/user',
                 type: 'POST',
                 async: false,
                 data: {
