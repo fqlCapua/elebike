@@ -1,7 +1,5 @@
-﻿ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,9 +7,12 @@
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link href="css/select.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/jquery.js"></script>
+             <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
         <script type="text/javascript" src="js/select-ui.min.js"></script>
         <script type="text/javascript" src="editor/kindeditor.js"></script>
+        <script type="text/javascript" src="js/getSession.js"></script>
+        <script type="text/javascript" src="js/com.js"></script>
         <script type="text/javascript">
         KE.show({
             id: 'content7',
@@ -43,6 +44,7 @@
             </ul>
         </div>
         <div class="formbody">
+            <div style="clear: both;"></div>
             <div id="usual1" class="usual">
                 <div class="itab">
                     <ul>
@@ -51,73 +53,63 @@
                     </ul>
                 </div>
                 <div id="tab1" class="tabson">
-                  
-                    <ul class="forminfo">
-                        <li>
-                            <label>电车ID<b>:*</b></label>
-                            <input name="" type="text" class="dfinput"   />
-                        </li>
-                         <li>
-                            <label>Host<b>:</b></label>
-                            <input name="" type="text"  class="dfinput"  />
-                        </li>
-                        <li>
-                            <label>品牌:</label>
-                            <div class="vocation">
-                                <select class="select1">
-                                    <option>雅迪电动车</option>
-                                    <option>山地电动车</option>
-                                    <option>电动车1</option>
-                                    <option>电动车2</option>
-                                    <option>电动车3</option>
-                                    <option>电动车4</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li>
-                            <label>版本:<b>*</b></label>
-                            <div class="vocation">
-                                <select class="select1">
-                                    <option>3000-5000</option>
-                                    <option>5000-8000</option>
-                                    <option>8000-10000</option>
-                                    <option>10000-15000</option>
-                                </select>
-                            </div>
-                        </li>
-                         <li>
-                            <label>电压<b>:</b></label>
-                            <input name="" type="text"   class="dfinput"   />
-                        </li>
-                         <li>
-                            <label>电量<b>:</b></label>
-                            <input name="" type="text"   class="dfinput"   />
-                        </li>
-                         <li>
-                            <label>生产日期<b>:</b></label>
-                            <input name="" type="text"   class="dfinput"  />
-                        </li>
-                         <li>
-                            <label>出售日期<b>:</b></label>
-                            <input name="" type="text" class="dfinput"  />
-                        </li>
-                        <li>
-                            <label>maintenance<b>*</b></label>
-                           <div class="vocation">
-                                <select class="select1">
-                                    <option>3000-5000</option>
-                                    <option>5000-8000</option>
-                                    <option>8000-10000</option>
-                                    <option>10000-15000</option>
-                                </select>
-                            </div>
-                        </li>
-                        
-                        <li>
-                            <label>&nbsp;</label>
-                            <input name="" type="button" class="btn" value="添加" />
-                        </li>
-                    </ul>
+                    <form class="addbikeForm">
+                        <ul class="forminfo">
+                            <li>
+                                <label>电车ID<b>:*</b></label>
+                                <input name="id" type="text" class="dfinput ad_id" />
+                            </li>
+                            <li>
+                                <label>Host<b>:</b></label>
+                                <input name="Host" type="text" class="dfinput ad_host" value="25438976" />
+                            </li>
+                            <li>
+                                <label>品牌:</label>
+                                <div class="vocation">
+                                    <select name="brand" class="select1 ad_brand">
+                                        <option>雅迪电动车</option>
+                                        <option>山地电动车</option>
+                                        <option>森马电动车</option>
+                                        <option>惠普电动车</option>
+                                        <option>联想电动车</option>
+                                        <option>沙盘电动车</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <label>版本: </label>
+                                <input name="version" type="text" class="dfinput ad_version" value="1.0" />
+                            </li>
+                            <li>
+                                <label>delegater:</label>
+                                <input name="delegater" type="text" class="dfinput ad_delegater" value="45V" />
+                            </li>
+                            <li>
+                                <label>investor:</label>
+                                <input name="investor" type="text" class="dfinput ad_investor" value="45V" />
+                            </li>
+                            <li>
+                                <label>power:</label>
+                                <input name="power" type="text" class="dfinput add_power" value="90%" />
+                            </li>
+                            <li>
+                                <label>inNetDate:</label>
+                                <input name="inNetDate" type="text" class="dfinput ad_inNetDate" value="2017-12-10" />
+                            </li>
+                            <li>
+                                <label>saleDate:</label>
+                                <input name="saleDate" type="text" class="dfinput ad_saleDate" value="2018-1-30" />
+                            </li>
+                            <li>
+                                <label>maintenance:</label>
+                                <input name="maintenance" type="text" class="dfinput ad_maintenance" value="365" />
+                            </li>
+                            <li>
+                                <label>&nbsp;</label>
+                                <input type="button" class="btn ad_btn" value="添加" />
+                            </li>
+                        </ul>
+                    </form>
                 </div>
                 <!-- <div id="tab2" class="tabson">
                     <ul class="seachform">
@@ -237,13 +229,12 @@
                     </table>
                 </div> -->
             </div>
-            <script type="text/javascript">
-            $("#usual1 ul").idTabs();
-            </script>
-            <script type="text/javascript">
-            $('.tablelist tbody tr:odd').addClass('odd');
-            </script>
+          
         </div>
     </body>
-
+    <script type="text/javascript" src="js/person/adminSet.js"></script>
+  <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+            $('.tablelist tbody tr:odd').addClass('odd');
+ </script>
 </html>

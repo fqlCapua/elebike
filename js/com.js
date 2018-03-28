@@ -1,4 +1,4 @@
-var ReqUrl = "http://47.104.94.216/api/public/";
+ 
 
 function lock_string(str) {
     var newLocker;

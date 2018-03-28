@@ -14,8 +14,48 @@ function time_token() {
     return timeArr;
 }
 
+function check_phone(obj) {
+    var Phone=$(obj).val();
+    var flag;
+    var reg = /^1[34578]\d{9}$/;
+    if (Phone != "") {
+       if (reg.test(Phone)) {
+            flag = true;
+        } else {
+            flag = false;
+            layer.tips("格式错误", obj, {
+                tips: [1, "#4082D4"],
+                tipsMore: true
+            });
+        }
+    } else {
 
+        flag = false;
+        layer.tips("不能为空", obj, {
+            tips: [1, "#4082D4"],
+            tipsMore: true
+        });
+    }
 
+    return flag;
+}
+function check_code(obj) {
+    var code=$(obj).val();
+    var flag;
+    
+    if (code != "") {
+       
+    } else {
+
+        flag = false;
+        layer.tips("不能为空", obj, {
+            tips: [1, "#4082D4"],
+            tipsMore: true
+        });
+    }
+
+    return flag;
+}
 //绑定删除操作
 function setUser(user_id,bike_id,userPhone,actionStatus) {
 var form = new FormData();
@@ -52,97 +92,45 @@ $.ajax(settings).done(function (res) {
 });
 }
 
-// function userInfoSession(){
-//    var form = new FormData();
-//     form.append("time", time_token()[0]);
-//     form.append("token", time_token()[1]);
-//     form.append("id",getSession[2]);
 
-//     var settings = {
-//         "async": false,
-//         "crossDomain": true,
-//         "url": "https://www.8gps8.cn:8011/bikePublic/api/user/userInfo",
-//         "method": "POST",
-//         "processData": false,
-//         "contentType": false,
-//         "mimeType": "multipart/form-data",
-//         "data": form
-//     }
-
-//     $.ajax(settings).done(function(res) {
-//        var res=JSON.parse(res);
-//        console(res);
-//        if(res.ret==0){
-//         var  userInfo=res.data;
-//          var ss=window.sessionStorage;
-//          if(ss.getItem("io")){
-//            ss.removeItem("io");
-//           }
-//          ss.setItem("io",JSON.stringify(userInfo));
-//        }else{
-//          requestStatus(res.ret);
-//        }  
-//     });
-
-
-// }
-
-// function refreshInfo(){
-//  userInfoSession();
-  
-
-// }
-
- 
 //绑定手机号
-$(".bindPhone").click(function() {
+$(".addbtn").click(function() {
     var user_id = getSession()[2];
-    var actionStatus=$(this).attr("name");
-    var bike_id=$(this).parent().parent().attr("bikeid");
-    layer.prompt({ title: '请输入绑定手机号:', formType:0 }, function(userPhone, index) {
-        layer.close(index);
+    var simno=$(".addsimno").val();
+    var phone=$(".addphone").val();
+    if(check_code("addsimno")&&check_phone("addphone")){
+       setUser(user_id,simno,phone,"0");
+    }
+   
+
+    // layer.prompt({ title: '请输入绑定手机号:', formType:0 }, function(userPhone, index) {
+    //     layer.close(index);
        
-        console.log(user_id+"-"+bike_id+"-"+userPhone+"-"+actionStatus);
-        setUser(user_id,bike_id,userPhone,"0");
+    //     console.log(user_id+"-"+bike_id+"-"+userPhone+"-"+actionStatus);
+      
        
-        window.location.reload();
-    });
+    //     window.location.reload();
+    // });
 
 });
 
 //解除绑定
-$(".releasePhone").click(function() {
+$(".delbtn").click(function() {
     var user_id = getSession()[2];
-    var actionStatus=$(this).attr("name");
-    var bike_id=$(this).parent().parent().attr("bikeid");
-    var phone=getSession()[1];
-    if(phone!=""){
-      layer.confirm("你确定要解除绑定么?",{
+    var simno=$(".delsimno").val();
+    var phone=$(".delphone").val();
+    if(check_code("addsimno")&&check_phone("addphone")){
+       layer.confirm("你确定要解除绑定么?",{
         btn:["是","否"]
       },function(){
-         setUser(user_id,bike_id,phone,"1");
- 
-         
+          setUser(user_id,simno,phone,"1");   
       } ,function(){
         
-    })
-    }else{
-      layer.msg("这个车辆没有绑定用户");
+    })  
     }
-    
-
 });
 
-//管理员增加车辆
- $(".addbtn").click(function(){
-  var user_id=getSession()[2];
-  var phone=getSession()[1];
-  layer.prompt({ title:'请输入电车编号', formType:0 }, function(num, index){
-        layer.close(index);
-        setUser(user_id,num,phone,"0");
-           
-    });
-  });
+
     
 
 
