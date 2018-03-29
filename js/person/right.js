@@ -42,12 +42,10 @@ function check_phone(obj) {
 function check_code(obj) {
     var code=$(obj).val();
     var flag;
-    
-    if (code != "") {
+    if (code!= "") {
        
     } else {
-
-        flag = false;
+      flag = false;
         layer.tips("不能为空", obj, {
             tips: [1, "#4082D4"],
             tipsMore: true
@@ -59,8 +57,8 @@ function check_code(obj) {
 //绑定删除操作
 function setUser(user_id,bike_id,userPhone,actionStatus) {
 var form = new FormData();
-form.append("time", "time_token()[0]");
-form.append("token", "time_token()[1]");
+form.append("time", time_token()[0]);
+form.append("token", time_token()[1]);
 form.append("user_id", user_id);
 form.append("simno", bike_id);
 form.append("user_phone", userPhone);
@@ -95,22 +93,18 @@ $.ajax(settings).done(function (res) {
 
 //绑定手机号
 $(".addbtn").click(function() {
+    console.log(111);
     var user_id = getSession()[2];
     var simno=$(".addsimno").val();
     var phone=$(".addphone").val();
-    if(check_code("addsimno")&&check_phone("addphone")){
-       setUser(user_id,simno,phone,"0");
-    }
+    console.log(user_id+simno+phone);
    
-
-    // layer.prompt({ title: '请输入绑定手机号:', formType:0 }, function(userPhone, index) {
-    //     layer.close(index);
-       
-    //     console.log(user_id+"-"+bike_id+"-"+userPhone+"-"+actionStatus);
-      
-       
-    //     window.location.reload();
-    // });
+    if(simno!="" && phone!=""){
+          console.log(1222);
+      // setUser(user_id,simno,phone,"0");
+    }else{
+       layer.msg("请完善信息！");
+    }
 
 });
 
@@ -119,7 +113,7 @@ $(".delbtn").click(function() {
     var user_id = getSession()[2];
     var simno=$(".delsimno").val();
     var phone=$(".delphone").val();
-    if(check_code("addsimno")&&check_phone("addphone")){
+    if(check_code(".addsimno") && check_phone(".addphone")){
        layer.confirm("你确定要解除绑定么?",{
         btn:["是","否"]
       },function(){
