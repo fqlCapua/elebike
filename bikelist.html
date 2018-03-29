@@ -1,21 +1,25 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="images/home/moto.png" type="image/x-icon">
         <title>无标题文档</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link href="css/select.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/jquery.js"></script>
-             <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
         <script type="text/javascript" src="js/select-ui.min.js"></script>
-        <script type="text/javascript" src="editor/kindeditor.js"></script>
         <script type="text/javascript" src="js/md5.js"></script>
         <script type="text/javascript" src="js/getSession.js"></script>
         <script type="text/javascript" src="js/com.js"></script>
         <script type="text/javascript" src="js/layer.js"></script>
        
+      <style>
+         .bikeList_cont td a{
+            color: blue;
+          }
+      </style>
         <script type="text/javascript">
         $(document).ready(function(e) {
             $(".select1").uedSelect({
@@ -36,8 +40,8 @@
             <span>位置：</span>
             <ul class="placeul">
                 <li><a href="#">首页</a></li>
-                <li><a href="#">系统设置</a></li>
-                <li><a href="#">添加车辆</a></li>
+                <li><a href="#">管理员用户</a></li>
+                <li><a href="#">车辆列表</a></li>
             </ul>
         </div>
         <div class="formbody">
@@ -45,70 +49,12 @@
             <div id="usual1" class="usual">
                 <div class="itab">
                     <ul>
-                        <li><a href="#tab1" class="selected">单个添加</a></li>
-                        <!-- <li><a href="#tab2">批量添加</a></li>  -->
+                        <li><a href="#tab2" class="selected">车辆列表</a></li>
+                       
                     </ul>
                 </div>
-                <div id="tab1" class="tabson">
-                    <form class="addbikeForm">
-                        <ul class="forminfo">
-                            <li>
-                                <label>电车ID<b>:*</b></label>
-                                <input name="id" type="text" class="dfinput ad_id" />
-                            </li>
-                            <li>
-                                <label>Host<b>:</b></label>
-                                <input name="host" type="text" class="dfinput ad_host" value="25438976" />
-                            </li>
-                            <li>
-                                <label>品牌:</label>
-                                <div class="vocation">
-                                    <select name="brand" class="select1 ad_brand">
-                                        <option>雅迪电动车</option>
-                                        <option>山地电动车</option>
-                                        <option>森马电动车</option>
-                                        <option>惠普电动车</option>
-                                        <option>联想电动车</option>
-                                        <option>沙盘电动车</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li>
-                                <label>版本: </label>
-                                <input name="version" type="text" class="dfinput ad_version" value="1.0" />
-                            </li>
-                            <li>
-                                <label>delegater:</label>
-                                <input name="delegater" type="text" class="dfinput ad_delegater" value="45V" />
-                            </li>
-                            <li>
-                                <label>investor:</label>
-                                <input name="investor" type="text" class="dfinput ad_investor" value="45V" />
-                            </li>
-                            <li>
-                                <label>power:</label>
-                                <input name="power" type="text" class="dfinput add_power" value="90%" />
-                            </li>
-                            <li>
-                                <label>inNetDate:</label>
-                                <input name="inNetDate" type="text" class="dfinput ad_inNetDate" value="2017-12-10" />
-                            </li>
-                            <li>
-                                <label>saleDate:</label>
-                                <input name="saleDate" type="text" class="dfinput ad_saleDate" value="2018-1-30" />
-                            </li>
-                            <li>
-                                <label>maintenance:</label>
-                                <input name="maintenance" type="text" class="dfinput ad_maintenance" value="365" />
-                            </li>
-                            <li>
-                                <label>&nbsp;</label>
-                                <input type="button" class="btn ad_btn" value="添加" />
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-                <!-- <div id="tab2" class="tabson">
+              
+                <div id="tab2" class="tabson">
                     <ul class="seachform">
                         <li>
                             <label>综合查询</label>
@@ -152,34 +98,37 @@
                                 <th>
                                     <input name="" type="checkbox" value="" checked="checked" />
                                 </th>
-                                <th>编号<i class="sort"><img src="images/px.gif" /></i></th>
-                                <th>标题</th>
-                                <th>用户</th>
-                                <th>籍贯</th>
-                                <th>发布时间</th>
+                                <th>车辆编号<i class="sort"><img src="images/px.gif" /></i></th>
+                                <th>车辆品牌</th>
+                                <th>户主</th>
+                                <th>生厂日期</th>
+                                <th>出售日期</th>
                                 <th>是否审核</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bikeList_cont">
                             <tr>
                                 <td>
                                     <input name="" type="checkbox" value="" />
                                 </td>
                                 <td>20130908</td>
-                                <td>王金平幕僚：马英九声明字字见血 人活着没意思</td>
+                                <td>蓝洞</td>
                                 <td>admin</td>
                                 <td>江苏南京</td>
                                 <td>2013-09-09 15:05</td>
                                 <td>已审核</td>
-                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink"> 删除</a></td>
+                                <td>
+                                    <a href="#" class="tablelink">查看</a> 
+                                    <a href="#" class="tablelink"> 删除</a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
                                     <input name="" type="checkbox" value="" />
                                 </td>
                                 <td>20130907</td>
-                                <td>温州19名小学生中毒流鼻血续：周边部分企业关停</td>
+                                <td>雅迪</td>
                                 <td>uimaker</td>
                                 <td>山东济南</td>
                                 <td>2013-09-08 14:02</td>
@@ -191,7 +140,7 @@
                                     <input name="" type="checkbox" value="" />
                                 </td>
                                 <td>20130906</td>
-                                <td>社科院:电子商务促进了农村经济结构和社会转型</td>
+                                <td>神麽</td>
                                 <td>user</td>
                                 <td>江苏无锡</td>
                                 <td>2013-09-07 13:16</td>
@@ -203,7 +152,7 @@
                                     <input name="" type="checkbox" value="" />
                                 </td>
                                 <td>20130905</td>
-                                <td>江西&quot;局长违规建豪宅&quot;：局长检讨</td>
+                                <td>大阳</td>
                                 <td>admin</td>
                                 <td>北京市</td>
                                 <td>2013-09-06 10:36</td>
@@ -215,7 +164,7 @@
                                     <input name="" type="checkbox" value="" />
                                 </td>
                                 <td>20130907</td>
-                                <td>温州19名小学生中毒流鼻血续：周边部分企业关停</td>
+                                <td>蹦蹦</td>
                                 <td>uimaker</td>
                                 <td>山东济南</td>
                                 <td>2013-09-08 14:02</td>
@@ -224,14 +173,15 @@
                             </tr>
                         </tbody>
                     </table>
-                </div> -->
+                </div>
             </div>
-          
+            <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+            </script>
+            <script type="text/javascript">
+            $('.tablelist tbody tr:odd').addClass('odd');
+            </script>
         </div>
     </body>
-    <script type="text/javascript" src="js/person/adminSet.js"></script>
-  <script type="text/javascript">
-            $("#usual1 ul").idTabs();
-            $('.tablelist tbody tr:odd').addClass('odd');
- </script>
+
 </html>

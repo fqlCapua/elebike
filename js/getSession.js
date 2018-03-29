@@ -43,10 +43,12 @@
  		case 7:
  		layer.msg("没有权限");
  		break;
- 		default:
+ 		case 8:
  		layer.msg("无信息");
  		break;
-
+    default:
+    layer.msg("未知错误");
+    break;
  	}
  	
  }

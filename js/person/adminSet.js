@@ -22,6 +22,10 @@ function check_code(obj) {
  *part:设置用户类型
  */
 function setType(a,b,c,d) {
+
+ var index = layer.load(1, {
+                  shade: [0.1, '#000']
+                });
     var form = new FormData();
     form.append("time",time_token()[0]);
     form.append("token",time_token()[1]);
@@ -42,23 +46,33 @@ function setType(a,b,c,d) {
     }
 
     $.ajax(settings).done(function(res) {
-           if(res.ret == 0){
+      var res=JSON.parse(res);
+         
+           if(res.ret==0){
                     layer.msg("设置成功");
-                   
-
-                } else {
+            }else{
                     requestStatus(res.ret);
                 }
-    });
+    })
+    .fail(function() {
+  console.log("error");
+})
+.always(function() {
+  layer.close(index);
+});
 }
 $(".usertypeBtn").click(function() {
     var manager_id = getSession()[2];
     var user_id=$(".type_userid").val();
     var owner_id=$(".type_ownerid").children('option:selected').attr("name");
     var user_type=$(".type_type").children('option:selected').attr("name");
+   
    //console.log(manager_id+"-"+owner_id+"-"+user_id+"-"+user_type);
-    if(check_code(".type_userid")){
-       setType(manager_id,user_id,owner_id,user_type);
+    if(user_id!=""){
+ 
+        setType(manager_id,user_id,owner_id,user_type);
+    }else{
+        layer.msg("完善信息");
     }
 });
 
@@ -72,6 +86,9 @@ $(".usertypeBtn").click(function() {
  */
 
 function addBike(a,b) {
+     var index = layer.load(1, {
+                  shade: [0.1, '#000']
+                });
     var form = new FormData();
     form.append("time",time_token()[0]);
     form.append("token",time_token()[1]);
@@ -81,7 +98,7 @@ function addBike(a,b) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/setUserType",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/addBike",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -90,18 +107,24 @@ function addBike(a,b) {
     }
 
     $.ajax(settings).done(function(res) {
+        var res=JSON.parse(res);
            if (res.ret == 0){
                     layer.msg("添加车辆成功");
-                    Code = res.data.code;
-
-                } else {
+            } else {
                     requestStatus(res.ret);
                 }
-    });
+    })
+.fail(function() {
+  console.log("error");
+})
+  .always(function() {
+  layer.close(index);
+  });
 }
 
 
 $(".ad_btn").click(function(){
+ 
 	var Info= $(".addbikeForm").serializeArray();
 	 var user_id=getSession()[2];
 	var Inf="[{";
@@ -110,8 +133,12 @@ $(".ad_btn").click(function(){
 	      Inf+=one;
          });
      var Infos=(Inf.substring(Inf,Inf.split("").length)+"}]").split(",}]")[0]+"}]";
-    if(check_code(".ad_id")){
-    	addBike(user_id,Infos);
+     
+    if($(".ad_id").val()!=""){
+       
+    	 addBike(user_id,Infos);
+    }else{
+
     }
 
 
@@ -124,6 +151,9 @@ $(".ad_btn").click(function(){
  */
 
  function addUser() {
+     var index = layer.load(1, {
+                  shade: [0.1, '#000']
+                });
  	var user_id=getSession()[2];
  	var user_type=$(".user_addusertype").children("option:selected").attr("name");
  	var phone=$(".user_userPhone").val();
@@ -153,6 +183,7 @@ $(".ad_btn").click(function(){
     }
 
     $.ajax(settings).done(function(res) {
+        var res=JSON.parse(res);
            if (res.ret == 0){
                     layer.msg("设置成功");
                     Code = res.data.code;
@@ -160,7 +191,12 @@ $(".ad_btn").click(function(){
                 } else {
                     requestStatus(res.ret);
                 }
-    });
+    }).fail(function() {
+  console.log("error");
+})
+.always(function() {
+  layer.close(index);
+});
 }
 
 
