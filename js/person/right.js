@@ -1,3 +1,4 @@
+
 function lock_string(str) {
     var newLocker;
     newLocker = hex_md5(str);

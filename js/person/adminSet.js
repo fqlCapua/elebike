@@ -117,7 +117,7 @@ function addBike(a,b) {
 .fail(function() {
   console.log("error");
 })
-  .always(function() {
+.always(function() {
   layer.close(index);
   });
 }
