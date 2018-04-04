@@ -45,7 +45,7 @@ function setType(a,b,c,d) {
         "data": form
     }
 
-    $.ajax(settings).done(function(res) {
+    $.ajax(settings).done(function(res) {layer.close(index);
       var res=JSON.parse(res);
          
            if(res.ret==0){
@@ -88,7 +88,7 @@ $(".usertypeBtn").click(function() {
 function addBike(a,b) {
      var index = layer.load(1, {
                   shade: [0.1, '#000']
-                });
+     });
     var form = new FormData();
     form.append("time",time_token()[0]);
     form.append("token",time_token()[1]);
@@ -104,10 +104,13 @@ function addBike(a,b) {
         "contentType": false,
         "mimeType": "multipart/form-data",
         "data": form
-    }
+    } 
 
     $.ajax(settings).done(function(res) {
-        var res=JSON.parse(res);
+        layer.close(index);
+
+          var res=JSON.parse(res);
+              //  console.log(res)
            if (res.ret == 0){
                     layer.msg("添加车辆成功");
             } else {
@@ -123,6 +126,8 @@ function addBike(a,b) {
 }
 
 
+
+
 $(".ad_btn").click(function(){
  
 	var Info= $(".addbikeForm").serializeArray();
@@ -135,7 +140,7 @@ $(".ad_btn").click(function(){
      var Infos=(Inf.substring(Inf,Inf.split("").length)+"}]").split(",}]")[0]+"}]";
      
     if($(".ad_id").val()!=""){
-       
+       // console.log(Infos);
     	 addBike(user_id,Infos);
     }else{
 
@@ -182,7 +187,7 @@ $(".ad_btn").click(function(){
         "data": form
     }
 
-    $.ajax(settings).done(function(res) {
+    $.ajax(settings).done(function(res) {layer.close(index);
         var res=JSON.parse(res);
            if (res.ret == 0){
                     layer.msg("设置成功");

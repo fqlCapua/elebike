@@ -40,4 +40,4 @@ function checklogin(){
     }
 }
 
-window.setInterval("checklogin()",2000);
+ window.setInterval("checklogin()",2000);

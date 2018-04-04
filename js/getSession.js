@@ -11,14 +11,14 @@
 		    userInfos.push(userphone);
         userInfos.push(user_id);
         userInfos.push(bikeArr);
-		    return userInfos;
+		     return userInfos;
   } else {
-     layer.msg('请先登录');
-
+      layer.msg('请先登录');
+    
   }
- 	   
+ 	 // return  userInfos=['admin','13523450460','9',''];
  };
-
+ 
 
  function requestStatus(status){
  	switch(status){
