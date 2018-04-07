@@ -18,6 +18,8 @@
  -->
         <style type="text/css">
  body{
+    font-family: "微软雅黑";
+
     height:100%;
     background-color:#0C9FEC;
  }
@@ -27,7 +29,7 @@
             width: 420px;
             border: 1px solid #BABABA;
             border-radius:6px;
-            padding: 60px;
+            padding:40px 60px 60px 60px;
             margin: 0 auto 300px auto;
             display: block;
         }
@@ -37,7 +39,7 @@
         .login_header {
             color: #337AB7;
             font-size: 30px;
-            line-height: 45px;
+            line-height:40px;
             letter-spacing: 1px;
             text-align: center;
             width: 100%;
@@ -84,16 +86,25 @@
 
             text-align: center;
         }
+        .otherLogin label{
+            margin-bottom:10px;
+            font-weight: normal;
+            font-size:13px;
+        }
+        .otherLogin label a{
+            cursor: pointer;
+            text-decoration: none;
+        }
         </style>
     </head>
 
     <body>
-        <h1 class=" text-center" style="color:#fff;line-height:200px;">智能电动摩托管理平台</h1>
+        <h1 class=" text-center" style="color:#fff;line-height:100px;">智能电动摩托管理平台</h1>
         <div id="content">
             <div class="login_header text-center">
                 登录
             </div>
-            <form>
+            <form class="vCodeBox">
                 <style>
                 .input-group {
                     margin-bottom: 20px;
@@ -117,7 +128,7 @@
                 </style>
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="phone form-control" placeholder="请输入手机号" />
+                        <input type="text" class="phone1 form-control" placeholder="请输入手机号" />
                         <div class="input-group-addon CodeBtn ">
                             <input type="button" class="form-control getCode" value="获取验证码" onclick="Noclick()" />
                         </div>
@@ -126,8 +137,99 @@
                 <div class="form-group">
                     <input class="form-control vCode" style="width:100px;" type="text" placeholder="验证码">
                 </div>
+                
+                <div class="form-group otherLogin">
+                    <label class="forgotBtn col-md-6 text-left"><a>忘记/更改密码？</a></label>
+                    <label class="pwdLogin col-md-6 text-right"><a>密码登录</a></label>
+                </div>
                 <div class="text-center">
-                    <button style="width:80%;" type="button" class="btn btn-info adminLogin">登录</button>
+                    <button style="width:80%;" type="button" class="btn btn-info adminLogin1">登录</button>
+                </div>
+            </form>
+            <form class="pwdBox">
+                <style>
+                .input-group {
+                    margin-bottom: 20px;
+                }
+                .input-group-addon {
+                    background: none;
+                    padding: 0;
+                    height: 32px;
+                    line-height: 32px;
+                    border: 1px solid #CCCCCC；
+                }
+                .getCode {
+                    border: none;
+                    background-color: #EEEEEE;
+                    width: 100%;
+                    height: 32px;
+                }
+                .form-group {
+                    width: 100%;
+                }
+                </style>
+               
+                
+                 <div class="form-group">
+                    <input class="form-control phone2"  type="text" placeholder="请输入手机号">
+                </div>
+                <div class="form-group">
+                    <input class="form-control userpwd"  type="text" placeholder="输入密码">
+                </div>
+                <div class="form-group otherLogin">
+                    <label class="forgotBtn col-md-6 text-left"><a>忘记/更改密码？</a></label>
+                    <label class="vCodeLogin col-md-6 text-right"><a>验证码登录</a></label>
+                </div>
+                <div class="text-center">
+                    <button style="width:80%;" type="button" class="btn btn-info adminLogin2">登录</button>
+                </div>
+            </form>
+             <form class="changePwdBox">
+                <style>
+                .input-group {
+                    margin-bottom: 20px;
+                }
+                .input-group-addon {
+                    background: none;
+                    padding: 0;
+                    height: 32px;
+                    line-height: 32px;
+                    border: 1px solid #CCCCCC；
+                }
+                .getCode {
+                    border: none;
+                    background-color: #EEEEEE;
+                    width: 100%;
+                    height: 32px;
+                }
+                .form-group {
+                    width: 100%;
+                }
+                </style>
+               
+                 <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="phone3 form-control" placeholder="请输入手机号" />
+                        <div class="input-group-addon CodeBtn">
+                            <input type="button" class="form-control getCode" value="获取验证码" onclick="Noclick1()" />
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <input class="form-control  pwd_vCode"  type="text" style="width:100px;"placeholder="验证码">
+                </div>
+                <div class="form-group">
+                    <input class="form-control  pwd1"  type="text" placeholder="输入密码">
+                </div>
+                 <div class="form-group">
+                    <input class="form-control pwd2"  type="text" placeholder="再次输入密码">
+                </div>
+                <div class="form-group otherLogin">
+                     
+                    <label class="goLogin col-md-12 text-right"><a>立即去登录</a></label>
+                </div>
+                <div class="text-center">
+                    <button style="width:80%;" type="button" class="btn btn-info setPwd">提交</button>
                 </div>
             </form>
         </div>
