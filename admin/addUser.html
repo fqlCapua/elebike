@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title> </title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/select.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
+        <script type="text/javascript" src="../js/select-ui.min.js"></script>
+        <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/getSession.js"></script>
+        <script type="text/javascript" src="../js/com.js"></script>
+        <script type="text/javascript" src="../js/layer.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+        });
+        </script>
+        <style>
+        .bikeList_cont td a {
+            color: blue;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">系统管理员</a></li>
+                <li><a href="#">设置分销商/添加用户</a></li>
+            </ul>
+        </div>
+        <div class="formbody">
+            <div id="usual1" class="usual">
+                <style>
+                .forminfo li {
+                    height: 60px;
+                }
+                </style>
+                <div id="tab1" class="tabson">
+                    <div style="height:30px;"></div>
+                    <ul class="forminfo">
+                        <li>
+                            <label>你的身份:<b>*</b></label>
+                            <input type="text" class="dfinput chsh_uphone" />
+                        </li>
+                        <li>
+                            <label>手机号:<b>*</b></label>
+                            <input type="text" class="dfinput chsh_uphone" placeholder="被添加的手机号" />
+                        </li>
+                         <li>
+                            <label>真实姓名:<b>*</b></label>
+                            <input type="text" class="dfinput chsh_uname" placeholder="用户名称" />
+                        </li>
+                         <li>
+                            <label>身份证:<b>*</b></label>
+                            <input type="text" class="dfinput chsh_uid" placeholder="用户身份证" />
+                        </li>
+                        <li>
+                            <label>用户身份:<b>*</b></label>
+                            <div class="vocation">
+                                <select class="select1 chsh_utype">
+                                    <option name="2">经销商</option>
+                                    <option name="3">普通用户</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>&nbsp;</label>
+                            <input name="" type="button" class="usertypeBtn btn" value="提交" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../js/angular.js"></script>
+    <script type="text/javascript" src="../js/person/adminSet.js"></script>
+    <script type="text/javascript">
+    $("#usual1 ul").idTabs();
+
+    $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+</html>

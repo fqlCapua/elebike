@@ -1,0 +1,155 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title> </title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/select.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+             <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
+        <script type="text/javascript" src="../js/select-ui.min.js"></script>
+ 
+       <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/getSession.js"></script>
+        <script type="text/javascript" src="../js/com.js"></script>
+        <script type="text/javascript" src="../js/layer.js"></script>
+      
+        <script type="text/javascript">
+        $(document).ready(function(e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+        });
+        </script>
+        <style>
+         .bikeList_cont td a{
+            color: blue;
+          }
+      </style>
+    </head>
+
+    <body ng-app="chshApp">
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">系统管理员</a></li>
+                <li><a href="#">投资商收益信息报表</a></li>
+            </ul>
+        </div>
+           <div class="formbody">
+            <div style="clear: both;"></div>
+            <div id="usual1" class="usual">
+                <div class="itab">
+                    <ul>
+                        <li><a href="#tab2" class="selected">车辆列表</a></li>
+                       
+                    </ul>
+                </div>
+              
+                <div id="tab2" class="tabson">
+                    <ul class="seachform">
+                        <li>
+                            <label>综合查询</label>
+                            <input name="" type="text" class="scinput" />
+                        </li>
+                        <li>
+                            <label>指派</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>重点客户</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>客户状态</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>&nbsp;</label>
+                            <input name="" type="button" class="scbtn" value="查询" />
+                        </li>
+                    </ul>
+                    <table class="tablelist" ng-controller="chshCtr">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input name="" type="checkbox" value="" checked="checked" />
+                                </th>
+                                <th>投资商ID<i class="sort"><img src="../images/px.gif" /></i></th>
+                                <th>名称</th>
+                               
+                                <th>电话</th>
+                                <th>投资电动车数目</th>
+                                <th>开户行</th>
+                                <th>银行账号</th>
+                                <th>微信账号</th>
+                                <th>支付宝账号</th>
+                                <th>分成模式</th>
+                                <th>分成标准</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bikeList_cont">
+                            <tr>
+                                <td>
+                                    <input name="" type="checkbox" value="" />
+                                </td>
+                                <td>20130908</td>
+                                <td>爱玛电动车</td>
+                                <td>13523450460</td>
+                                <td>500</td>
+                                <td>中国建设银行</td>
+                                <td>4123336589456789456</td>
+                                <td>Capua</td>
+                                <td>13523450460</td>
+                                <td>模式1</td>
+                                <td>标准1</td>
+                                <td>
+                                    <a href="#" class="tablelink">车辆详情</a> 
+                                </td>
+                            </tr>
+                             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+            </script>
+            <script type="text/javascript">
+            $('.tablelist tbody tr:odd').addClass('odd');
+            </script>
+        </div>
+    </body>
+    <script type="text/javascript" src="../js/angular.js"></script>
+   <script type="text/javascript" src="../js/person/adminSet.js"></script>
+            <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+           
+            $('.tablelist tbody tr:odd').addClass('odd');
+            </script>
+</html>
