@@ -4,10 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="shortcut icon" href="images/home/moto.png" type="image/x-icon">
-        <title>无标题文档</title>
+        <title></title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link href="css/select.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="js/jquery.js"></script>
+          <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+       
+                <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
         <script type="text/javascript" src="js/select-ui.min.js"></script>
         <script type="text/javascript" src="js/md5.js"></script>
@@ -44,7 +46,7 @@
                 <li><a href="#">车辆列表</a></li>
             </ul>
         </div>
-        <div class="formbody">
+        <div class="formbody" >
             <div style="clear: both;"></div>
             <div id="usual1" class="usual">
                 <div class="itab">
@@ -57,19 +59,11 @@
                 <div id="tab2" class="tabson">
                     <ul class="seachform">
                         <li>
-                            <label>综合查询</label>
+                            <label>车辆id查询</label>
                             <input name="" type="text" class="scinput" />
                         </li>
-                        <li>
-                            <label>指派</label>
-                            <div class="vocation">
-                                <select class="select3">
-                                    <option>全部</option>
-                                    <option>其他</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li>
+                        
+                      <!--   <li>
                             <label>重点客户</label>
                             <div class="vocation">
                                 <select class="select3">
@@ -86,102 +80,63 @@
                                     <option>其他</option>
                                 </select>
                             </div>
-                        </li>
+                        </li> -->
                         <li>
                             <label>&nbsp;</label>
                             <input name="" type="button" class="scbtn" value="查询" />
                         </li>
                     </ul>
-                    <table class="tablelist">
+                    <table class="tablelist" >
                         <thead>
                             <tr>
-                                <th>
-                                    <input name="" type="checkbox" value="" checked="checked" />
-                                </th>
+                                
                                 <th>车辆编号<i class="sort"><img src="images/px.gif" /></i></th>
-                                <th>车辆品牌</th>
-                                <th>户主</th>
-                                <th>生厂日期</th>
-                                <th>出售日期</th>
-                                <th>是否审核</th>
-                                <th>操作</th>
+                                <th>是否被绑定</th>
+                                <th>查看</th>
+                               <!--  <th>绑定/解绑</th> -->
                             </tr>
                         </thead>
-                        <tbody class="bikeList_cont">
+                        <tbody class="bikeList_cont"  >
                             <tr>
+                                <td class="bike_id">58210171989</td>
+                                <td>已绑定</td>
                                 <td>
-                                    <input name="" type="checkbox" value="" />
+                                    <a href="#" class="tablelink bike_detail">详情</a> 
                                 </td>
-                                <td>20130908</td>
-                                <td>蓝洞</td>
-                                <td>admin</td>
-                                <td>江苏南京</td>
-                                <td>2013-09-09 15:05</td>
-                                <td>已审核</td>
-                                <td>
-                                    <a href="#" class="tablelink">查看</a> 
-                                    <a href="#" class="tablelink"> 删除</a>
-                                </td>
+                               <!--  <td>
+                                    <a href="#" class="tablelink">解绑</a>
+                                    <a href="#" class="tablelink">绑定</a>
+                                </td> -->
                             </tr>
-                            <tr>
-                                <td>
-                                    <input name="" type="checkbox" value="" />
-                                </td>
-                                <td>20130907</td>
-                                <td>雅迪</td>
-                                <td>uimaker</td>
-                                <td>山东济南</td>
-                                <td>2013-09-08 14:02</td>
-                                <td>未审核</td>
-                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input name="" type="checkbox" value="" />
-                                </td>
-                                <td>20130906</td>
-                                <td>神麽</td>
-                                <td>user</td>
-                                <td>江苏无锡</td>
-                                <td>2013-09-07 13:16</td>
-                                <td>未审核</td>
-                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input name="" type="checkbox" value="" />
-                                </td>
-                                <td>20130905</td>
-                                <td>大阳</td>
-                                <td>admin</td>
-                                <td>北京市</td>
-                                <td>2013-09-06 10:36</td>
-                                <td>已审核</td>
-                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input name="" type="checkbox" value="" />
-                                </td>
-                                <td>20130907</td>
-                                <td>蹦蹦</td>
-                                <td>uimaker</td>
-                                <td>山东济南</td>
-                                <td>2013-09-08 14:02</td>
-                                <td>未审核</td>
-                                <td><a href="#" class="tablelink">查看</a> <a href="#" class="tablelink">删除</a></td>
-                            </tr>
+                          
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            <div></div>
             <script type="text/javascript">
-            $("#usual1 ul").idTabs();
+                   $("#usual1 ul").idTabs();
             </script>
             <script type="text/javascript">
-            $('.tablelist tbody tr:odd').addClass('odd');
+                   $('.tablelist tbody tr:odd').addClass('odd');
             </script>
         </div>
     </body>
+
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/person/adminSet.js"></script>
+<script type="text/javascript">
+    
+    $(function(){
+       getBikelist();
+    })
+
+    $(".bike_detail").click(function(){
+        var bikeid=$(this).parent().siblings(".bike_id").html();
+        console.log(bikeid)
+        getBikeDetail(bikeid);
+    });
+</script>
 
 </html>

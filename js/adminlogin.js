@@ -194,7 +194,7 @@ function remainTime() {
 
 }
 
-function userInfoSession(userid) {
+function userInfoSession(userid,auth) {
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
@@ -216,12 +216,13 @@ function userInfoSession(userid) {
         var res=JSON.parse(res);
         var userInfo=res.data;
          var ss=window.sessionStorage;
+         userInfo.auth=auth;
         ss.setItem("io",JSON.stringify(userInfo));
      
     });
 }
 
-function subAdminForm() {
+function subAdminForm(auth) {
     var phone1 = $(".phone1").val();
     var phone2 = $(".phone2").val();
     if(phone1!=""){
@@ -237,7 +238,7 @@ function subAdminForm() {
     form.append("phone", phone);
     form.append("code",vCode);
     form.append("password",pwd);
-    form.append("auth", "1");
+    form.append("auth", auth);
 
     var settings = {
         "async":false,
@@ -256,7 +257,7 @@ function subAdminForm() {
         if (res.ret == 0) {
             layer.msg("登录成功");
             var userid=res.data.user_id;
-            userInfoSession(userid);
+            userInfoSession(userid,auth);
             window.location.href="main.html#/admin";
         } else {
             layer.msg("登录失败");
@@ -270,8 +271,9 @@ $(".adminLogin1").click(function() {
 
     var phone = $(".phone1").val();
     var vCode = $(".vCode").val();
+     var auth=$(".auth_type").children('option:selected').attr("auth");
     if(check_phone(".phone1")) {
-        subAdminForm();
+        subAdminForm(auth);
     } else {
 
     }
@@ -279,9 +281,9 @@ $(".adminLogin1").click(function() {
 $(".adminLogin2").click(function() {
 
     var phone = $(".phone2").val();
-    
+    var auth=$(".auth_type").children('option:selected').attr("auth");
     if(check_phone(".phone2")) {
-        subAdminForm();
+        subAdminForm(auth);
     } else {
 
     }

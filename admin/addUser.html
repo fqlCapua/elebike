@@ -55,24 +55,29 @@
                     <ul class="forminfo">
                         <li>
                             <label>你的身份:<b>*</b></label>
-                            <input type="text" class="dfinput chsh_uphone" />
+                            <div class="vocation">
+                                <select class="select1 ct_type">
+                                    <option name="2">厂家 </option>
+                                    <option name="3">经销商</option>
+                                </select>
+                            </div>
                         </li>
                         <li>
                             <label>手机号:<b>*</b></label>
-                            <input type="text" class="dfinput chsh_uphone" placeholder="被添加的手机号" />
+                            <input type="text" class="dfinput ct_phone" placeholder="被添加的手机号" />
                         </li>
                          <li>
                             <label>真实姓名:<b>*</b></label>
-                            <input type="text" class="dfinput chsh_uname" placeholder="用户名称" />
+                            <input type="text" class="dfinput ct_uname" placeholder="用户名称" />
                         </li>
                          <li>
                             <label>身份证:<b>*</b></label>
-                            <input type="text" class="dfinput chsh_uid" placeholder="用户身份证" />
+                            <input type="text" class="dfinput ct_uid" placeholder="用户身份证" />
                         </li>
                         <li>
                             <label>用户身份:<b>*</b></label>
                             <div class="vocation">
-                                <select class="select1 chsh_utype">
+                                <select class="select1 ct_utype">
                                     <option name="2">经销商</option>
                                     <option name="3">普通用户</option>
                                 </select>
@@ -80,7 +85,7 @@
                         </li>
                         <li>
                             <label>&nbsp;</label>
-                            <input name="" type="button" class="usertypeBtn btn" value="提交" />
+                            <input name="" type="button" class="ct_submit btn" value="提交" />
                         </li>
                     </ul>
                 </div>

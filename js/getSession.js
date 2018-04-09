@@ -6,11 +6,13 @@
 		var name=jsonTxt.name;
 		var userphone=jsonTxt.phone;
 		var user_id=jsonTxt.id;
+    var auth=jsonTxt.auth;
         var bikeArr=(jsonTxt.vehicles).split(",");
 		    userInfos.push(name);
 		    userInfos.push(userphone);
         userInfos.push(user_id);
         userInfos.push(bikeArr);
+        userInfos.push(auth);
 		     return userInfos;
   } else {
       layer.msg('请先登录');

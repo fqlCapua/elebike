@@ -38,13 +38,15 @@
 
         .login_header {
             color: #337AB7;
-            font-size: 30px;
+            font-size:20px;
             line-height:40px;
             letter-spacing: 1px;
             text-align: center;
             width: 100%;
             padding-bottom: 20px
         }
+        .login_header select{
+            padding:10px 20px;
         .login_box label,
         .login_box input {
             display: inline-block;
@@ -102,7 +104,10 @@
         <h1 class=" text-center" style="color:#fff;line-height:100px;">智能电动摩托管理平台</h1>
         <div id="content">
             <div class="login_header text-center">
-                登录
+                <select class="auth_type" style="border: none;background-color: #F3FAFE">
+                    <option auth="1">管理员登录</option>
+                    <option auth="6">经销商登录</option>
+                </select>
             </div>
             <form class="vCodeBox">
                 <style>
