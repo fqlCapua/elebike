@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>无标题文档</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/select.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
+        <script type="text/javascript" src="../js/select-ui.min.js"></script>
+        <script type="text/javascript" src="../editor/kindeditor.js"></script>
+        <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/getSession.js"></script>
+        <script type="text/javascript" src="../js/com.js"></script>
+        <script type="text/javascript" src="../js/layer.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+        });
+        </script>
+    </head>
+
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">系统设置</a></li>
+                <li><a href="#">添加身份</a></li>
+            </ul>
+        </div>
+        <div class="formbody">
+            <div style="clear: both;"></div>
+            <div id="usual1" class="usual">
+                <div class="itab">
+                    <ul>
+                        <li><a href="#tab1" class="selected">添加经销商</a></li>
+                        <li><a href="#tab2">添加厂商</a></li>
+                        <li><a href="#tab3">添加维修站</a></li>
+                        <li><a href="#tab4">添加投资商</a></li>
+                    </ul>
+                </div>
+                <div id="tab1" class="tabson">
+                    <form class="addDelegaterForm">
+                        <ul class="forminfo">
+                            <li>
+                                <label>代理商名称<b>:*</b></label>
+                                <input name="name" type="text" class="dfinput Delegater_name" />
+                            </li>
+                            <li>
+                                <label>品牌<b>:</b></label>
+                                <input name="brand" type="text" class="dfinput brand" value="" />
+                            </li>
+                            <li>
+                                <label>地址<b>:</b></label>
+                                <input name="addr" type="text" class="dfinput addr" value=" " />
+                            </li>
+                            <li>
+                                <label>电话<b>:</b></label>
+                                <input name="phone" type="text" class="dfinput phone" value=""/>
+                            </li>
+                            <li>
+                                <label>负责人<b>:</b></label>
+                                <input name="officer" type="text" class="dfinput officer" value=" " />
+                            </li>
+                             <li>
+                                <label>维保站列表<b>:</b></label>
+                                <input name="fixstations" type="text" class="dfinput fixstations" value="1" />
+                            </li>
+                             <li>
+                                <label>投资商列表<b>:</b></label>
+                                <input name="investors" type="text" class="dfinput Delegater_host" value="1" />
+                            </li>
+                             <li>
+                                <label>开户银行<b>:</b></label>
+                                <input name="bank" type="text" class="dfinput Delegater_host" value="6622848978945678977" />
+                            </li>
+                            <li>
+                                <label> </label>
+                                <input type="button" class="btn btn-info Delegater_btn" value="提交" />
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+              
+                <div id="tab2" class="tabson">
+                   <form class="addFirmForm">
+                        <ul class="forminfo">
+                            <li>
+                                <label>厂商名称<b>:*</b></label>
+                                <input name="name" type="text" class="dfinput addfirm_name" />
+                            </li>
+                            <li>
+                                <label>品牌<b>:</b></label>
+                                <input name="brand" type="text" class="dfinput brand" value="" />
+                            </li>
+                            <li>
+                                <label>地址<b>:</b></label>
+                                <input name="addr" type="text" class="dfinput addr" value=" " />
+                            </li>
+                            <li>
+                                <label>电话<b>:</b></label>
+                                <input name="phone" type="text" class="dfinput " value=""/>
+                            </li>
+                            <li>
+                                <label>负责人<b>:</b></label>
+                                <input name="officer" type="text" class="dfinput " value=" " />
+                            </li>
+                             <li>
+                                <label>维保站列表<b>:</b></label>
+                                <input name="fixstations" type="text" class="dfinput " value="1" />
+                            </li>
+                             <li>
+                                <label>经销商列表<b>:</b></label>
+                                <input name="delegaters" type="text" class="dfinput " value="1" />
+                            </li>
+                             <li>
+                                <label>车辆型号列表<b>:</b></label>
+                                <input name="vehiclenos" type="text" class="dfinput " value="1" />
+                            </li>
+                            
+                            <li>
+                                <label> </label>
+                                <input type="button" class="btn btn-info  Firm_btn" value="提交" />
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                 <div id="tab3" class="tabson">
+                  <form class="addFixstationForm">
+                        <ul class="forminfo">
+                            <li>
+                                <label>名称<b>:*</b></label>
+                                <input name="name" type="text" class="dfinput addFixstation_name" />
+                            </li>
+                            
+                            <li>
+                                <label>地址<b>:</b></label>
+                                <input name="addr" type="text" class="dfinput addr" value=" " />
+                            </li>
+                            <li>
+                                <label>卫星定位地址<b>:</b></label>
+                                <input name="addr2" type="text" class="dfinput" value="113.6671419919,34.8059930507"/>
+                            </li>
+                            
+                            <li>
+                                <label>授权品牌列表<b>:</b></label>
+                                <input name="grants" type="text" class="dfinput " value=" 艾玛,雅迪" />
+                            </li>
+                             <li>
+                               
+                                <label>负责人<b>:</b></label>
+                                <input name="officer" type="text" class="dfinput " value=" " />
+                            </li>
+                             <li>
+                                <label>电话<b>:</b></label>
+                                <input name="phone" type="text" class="dfinput " value="" />
+                            </li>
+                             <li>
+                                <label>经营范围:<b>:</b></label>
+                                <input name="operate" type="text" class="dfinput " value="" />
+                            </li>
+                            <li>
+                                <label> </label>
+                                <input type="button" class="btn btn-info  Fixstation_btn" value="提交" />
+                            </li>
+                        </ul>
+                    </form>
+                    
+                </div>
+                 <div id="tab4" class="tabson">
+                   <form class="addInvestorForm">
+                        <ul class="forminfo">
+                            <li>
+                                <label>名称<b>:*</b></label>
+                                <input name="name" type="text" class="dfinput addInvestor_name" />
+                            </li>
+                            
+                            <li>
+                                <label>地址<b>:</b></label>
+                                <input name="addr" type="text" class="dfinput addr" value=" " />
+                            </li>
+                             <li>
+                                <label>电话<b>:</b></label>
+                                <input name="phone" type="text" class="dfinput " value="" />
+                            </li>
+                              <li>
+                               
+                                <label>负责人<b>:</b></label>
+                                <input name="officer" type="text" class="dfinput " value=" " />
+                            </li>
+                            <li>
+                                <label>充电桩列表<b>:</b></label>
+                                <input name="elecs" type="text" class="dfinput" value="1"/>
+                            </li>
+                            
+                            <li>
+                                <label>银行账户<b>:</b></label>
+                                <input name="bank" type="text" class="dfinput " value="622202898789989882" />
+                            </li>
+                           
+                            
+                             <li>
+                                <label>分成模式:<b>:</b></label>
+                                <input name="splitmode" type="text" class="dfinput " value="1" />
+                            </li>
+                            <li>
+                                <label> </label>
+                                <input type="button" class="btn btn-info Investor_btn" value="提交" />
+                            </li>
+                        </ul>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../js/person/adminSet.js"></script>
+    <script type="text/javascript">
+    $('input[id=lefile]').change(function() {
+        $('.fileval').val($(this).val());
+    });
+    </script>
+    <script type="text/javascript">
+    $("#usual1 ul").idTabs();
+    $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+
+</html>

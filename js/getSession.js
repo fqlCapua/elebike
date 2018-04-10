@@ -31,7 +31,7 @@
  		layer.msg("接口token错误");
  		break;
  		case 3:
- 		layer.msg("手机号已存在");
+ 		layer.msg("已存在");
  		break;
  		case 4:
  		layer.msg("验证码有误");

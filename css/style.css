@@ -780,7 +780,7 @@ a:link {
 .tablelist td {
     line-height: 35px;
     text-indent: 11px;
-    border-right: dotted 1px #c7c7c7;
+    border: dotted 1px #c7c7c7;
 }
 
 .tablelink {
@@ -790,8 +790,14 @@ a:link {
 .tablelist tbody tr.odd {
     background: #f5f8fa;
 }
-
-.tablelist tbody tr:hover {
+.tablelist tbody ul{
+    margin: 0;
+    padding: 0;
+}
+.tablelist tbody ul li{
+    cursor: pointer;
+}
+.tablelist tbody li:hover {
     background: #e5ebee;
 }
 

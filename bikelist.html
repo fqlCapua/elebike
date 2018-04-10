@@ -21,6 +21,7 @@
          .bikeList_cont td a{
             color: blue;
           }
+     
       </style>
         <script type="text/javascript">
         $(document).ready(function(e) {
@@ -90,25 +91,15 @@
                         <thead>
                             <tr>
                                 
-                                <th>车辆编号<i class="sort"><img src="images/px.gif" /></i></th>
-                                <th>是否被绑定</th>
-                                <th>查看</th>
-                               <!--  <th>绑定/解绑</th> -->
+                                <th>所有者ID<i class="sort"><img src="images/px.gif" /></i></th>
+                                <th>车辆列表</th>
+                               
+                                 <th>查看</th>
                             </tr>
                         </thead>
+                       
                         <tbody class="bikeList_cont"  >
-                            <tr>
-                                <td class="bike_id">58210171989</td>
-                                <td>已绑定</td>
-                                <td>
-                                    <a href="#" class="tablelink bike_detail">详情</a> 
-                                </td>
-                               <!--  <td>
-                                    <a href="#" class="tablelink">解绑</a>
-                                    <a href="#" class="tablelink">绑定</a>
-                                </td> -->
-                            </tr>
-                          
+                             
                         </tbody>
                     </table>
                 </div>
@@ -132,11 +123,7 @@
        getBikelist();
     })
 
-    $(".bike_detail").click(function(){
-        var bikeid=$(this).parent().siblings(".bike_id").html();
-        console.log(bikeid)
-        getBikeDetail(bikeid);
-    });
+  
 </script>
 
 </html>
