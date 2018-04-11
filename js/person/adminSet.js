@@ -1,3 +1,14 @@
+function timestampToTime(timestamp) {
+    var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    Y = date.getFullYear() + '-';
+    M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    D = date.getDate() + ' ';
+    h = date.getHours() + ':';
+    m = date.getMinutes() + ':';
+    s = date.getSeconds();
+    return Y + M + D + h + m + s;
+}
+
 function check_code(obj) {
     var code = $(obj).val();
     var flag;
@@ -12,6 +23,7 @@ function check_code(obj) {
             tipsMore: true
         });
     }
+
 
     return flag;
 }
@@ -216,23 +228,25 @@ $(".ct_submit").click(function() {
 
 //车辆列表
 
-function returnBikeStr(JSON){
-   var str="<td class='bike_id'><ul class='bike_idul'>";
-   $.each(JSON,function(index, el) {
-       str+="<li>"+el.vehicle_id+"</li>";
-   });
-   str+="</ul></td>";
-   return str;
+function returnBikeStr(JSON) {
+    var str = "<td class='bike_id'><ul class='bike_idul'>";
+    $.each(JSON, function(index, el) {
+        str += "<li>" + el.vehicle_id + "</li>";
+    });
+    str += "</ul></td>";
+    return str;
 }
-function returnBikeBtn(JSON){
-   var str="<td><ul>";
-   $.each(JSON,function(index, el) {
-       str+="<li class='text-primary bike_detailBtn'>详情 </li>";
-   });
-   str+="</ul></td>";
-   
-   return str;
+
+function returnBikeBtn(JSON) {
+    var str = "<td><ul>";
+    $.each(JSON, function(index, el) {
+        str += "<li class='text-primary bike_detailBtn'>详情 </li>";
+    });
+    str += "</ul></td>";
+
+    return str;
 }
+
 function getBikelist() {
 
     var user_id = getSession()[2];
@@ -255,29 +269,29 @@ function getBikelist() {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
- 
+
             if (res.ret == 0) {
-                var  bikelist;
+                var bikelist;
                 if (res.data.length == 0) {
                     layer.msg("数据为空");
                 } else {
-                   
-                    if(getSession()[4]==1){
-                
-                          bikelist=res.data;
-               
-                        
-                    }else{
-                          bikelist=res.data ;
-                    
+
+                    if (getSession()[4] == 1) {
+
+                        bikelist = res.data;
+
+
+                    } else {
+                        bikelist = res.data;
+
                     }
-                   
-                   $.each(bikelist,function(index, el) {
-                        var tr=$("<tr><td class='bike_user_id'>"+el.user_id+"</td>"+returnBikeStr(el.bike_ids)+returnBikeBtn(el.bike_ids)+"</tr>");
+
+                    $.each(bikelist, function(index, el) {
+                        var tr = $("<tr><td class='bike_user_id'>" + el.user_id + "</td>" + returnBikeStr(el.bike_ids) + returnBikeBtn(el.bike_ids) + "</tr>");
                         $(".bikeList_cont").append(tr);
                     });
-                    
-                   
+
+
                 }
 
 
@@ -294,38 +308,38 @@ function getBikelist() {
 
 //车辆详情
 function getBikeDetail(bikeid) {
-     
+
 
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
-    form.append("vehicle_id",bikeid);
+    form.append("vehicle_id", bikeid);
 
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url":"https://www.8gps8.cn:8011/bikePublic/api/bike/bikeDetail",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/bike/bikeDetail",
         "method": "POST",
         "processData": false,
         "contentType": false,
         "mimeType": "multipart/form-data",
         "data": form
     };
- 
+
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
-    
+
             if (res.ret == 0) {
-                var bikeInfo=res.data;
-                 var cont="<ul   style='padding:30px 20px;letter-spacing:1px;color:blue;'><li>电车ID:"+bikeInfo.vehicle_id+"</li><li>电车电量:"+bikeInfo.battery+";</li><li>电车电压:"+bikeInfo.voltage+";</li><li>电车寿命:"+bikeInfo.remain+";</li><li>车辆状态:(1开,0关)"+bikeInfo.lock_status+";</li><li>累计骑行公里数:"+(bikeInfo.distance).toFixed(2)+";</li><li>预计需要支付的金额:"+bikeInfo.cost+";</li><li>满电续航里程:"+bikeInfo.full_power_distance+";</li></ul>";
-             layer.open({
+                var bikeInfo = res.data;
+                var cont = "<ul   style='padding:30px 20px;letter-spacing:1px;color:blue;'><li>电车ID:" + bikeInfo.vehicle_id + "</li><li>电车电量:" + bikeInfo.battery + ";</li><li>电车电压:" + bikeInfo.voltage + ";</li><li>电车寿命:" + bikeInfo.remain + ";</li><li>车辆状态:(1开,0关)" + bikeInfo.lock_status + ";</li><li>累计骑行公里数:" + (bikeInfo.distance).toFixed(2) + ";</li><li>预计需要支付的金额:" + bikeInfo.cost + ";</li><li>满电续航里程:" + bikeInfo.full_power_distance + ";</li></ul>";
+                layer.open({
                     type: 1,
-                    title:'车辆实时详情',
+                    title: '车辆实时详情',
                     skin: 'layui-layer-rim', //加上边框
                     area: ['420px', '440px'], //宽高
-                    content:cont
+                    content: cont
                 });
-             } else {
+            } else {
                 requestStatus(res.ret);
             }
         }).fail(function() {
@@ -335,15 +349,26 @@ function getBikeDetail(bikeid) {
 
         });
 };
-  $(".bikeList_cont").on('click','.bike_detailBtn',function(){
-          var index=$(this).index();
-        
-         var bikeid=$(this).parent().parent().siblings(".bike_id").children().children().eq(index).html();
-        
-         getBikeDetail(bikeid);
+$(".bikeList_cont").on('click', '.bike_detailBtn', function() {
+    var index = $(this).index();
+
+    var bikeid = $(this).parent().parent().siblings(".bike_id").children().children().eq(index).html();
+
+    getBikeDetail(bikeid);
 });
 
 //投资商收益报表
+
+function returnBikearrStr(Str) {
+    var JSONstr = JSON.parse(Str);
+    var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>电车ID</th><th>电车品牌:</th><th>充电桩ID:</th><th>充电桩品牌:</th>";
+    $.each(JSONstr, function(index, el) {
+
+        strObj += "</tr><tr><td>" + el.vehicle_id + "</td><td>" + el.bike_brand + "</td><td> " + el.pile_id + "</td><td>" + el.pile_position + "</td></tr>";
+    });
+    strObj += "</table>";
+    return strObj;
+}
 
 function investorReportList() {
     var user_id = getSession()[2];
@@ -366,14 +391,14 @@ function investorReportList() {
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
 
-  
+
             if (res.ret == 0) {
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");
                 } else {
-                    var investorList=res.data;
-                    $.each(investorList,function(index, el) {
-                        var investor=$("<tr><td>"+el.id+"</td><td> "+el.name+"</td><td> "+el.addr+"</td><td> "+el.phone+"</td><td> "+el.bank +"</td><td> "+el.account  +"</td><td> "+el.wechat +"</td><td> "+el.alipay +"</td><td> "+el.elecs +"</td><td>"+el.bike_list +"</td><td>"+el.invest_number+"</td><td>"+el.splitmode  +"</td><td>"+el.bonus_ration+"</td></tr>");
+                    var investorList = res.data;
+                    $.each(investorList, function(index, el) {
+                        var investor = $("<tr><td>" + el.investor_id + "</td><td> " + el.investor_name + "</td><td> " + el.investor_address + "</td><td> " + el.phone + "</td><td> " + el.bank_name + "</td><td> " + el.bank_account + "</td><td> " + el.weixin_id + "</td><td> " + el.alipay_id + "</td><td name='" + JSON.stringify(el.bike_list) + "' class='checkBikeInfo'><a href='#' style='color:blue;'>查看列表</a></td><td>" + el.investor_number + "</td><td>" + el.bonus_id + "</td><td>" + el.bonus_ration + "</td></tr>");
                         $(".investor_cont").append(investor);
                     });
                 }
@@ -389,30 +414,53 @@ function investorReportList() {
 
         });
 }
+$(".investor_cont").on('click','.checkBikeInfo', function() {
+    var Bikestr = $(this).attr('name');
+    var Str=returnBikearrStr(Bikestr);
+    layer.open({
+        type: 1,
+        title: '车辆列表',
 
+        skin: 'layui-layer-lan',
+        area: ['80%', '640px'],
+        offset: ['50px', '10%'], //宽高
+        content: Str
+    });
+})
+//经销商销售报表
+function returnAgent_repairStr(Str) {
+    var JSONstr = JSON.parse(Str);
+    var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>维保站ID</th><th>维保站名称</th></tr>";
+    $.each(JSONstr, function(index, el) {
 
-//维保站维修报表
+        strObj += "<tr><td>" + el.repairer_id + "</td><td>" + el.repairer_name + "</td></tr>";
+    });
+    strObj += "</table>";
+    return strObj;
+}
 
+function returnAgent_invetorStr(Str) {
+    var JSONstr = JSON.parse(Str);
+    var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>投资商ID</th><th>投资商名称</th></tr>";
+    $.each(JSONstr, function(index, el) {
 
+        strObj += "<tr><td>" + el.investor_id + "</td><td>" + el.investor_name + "</td></tr>";
+    });
+    strObj += "</table>";
+    return strObj;
+}
 
-
-
-//车辆运行信息报表
-function bikeWorkingReport(){
-     var user_id = getSession()[2];
+function agentReportList() {
+    var user_id = getSession()[2];
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
     form.append("user_id", user_id);
-    form.append("num",100);
-    form.append("page",1);
-    form.append("list_order","bike_id");
-
 
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/bikeWorkingReport",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/agentReport",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -423,14 +471,168 @@ function bikeWorkingReport(){
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
 
-  
+
             if (res.ret == 0) {
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");
                 } else {
-                    var bikeWorkingList=res.data;
-                    $.each(bikeWorkingList,function(index, el) {
-                        var Workingbike=$("<tr><td>"+el.id+"</td><td> "+el.name+"</td><td> "+el.addr+"</td><td> "+el.phone+"</td><td> "+el.bank +"</td><td> "+el.account  +"</td><td> "+el.wechat +"</td><td> "+el.alipay +"</td><td> "+el.elecs +"</td><td>"+el.bike_list +"</td><td>"+el.invest_number+"</td><td>"+el.splitmode  +"</td><td>"+el.bonus_ration+"</td></tr>");
+                    var investorList = res.data;
+                    $.each(investorList, function(index, el) {
+                        var agent = $("<tr><td>" + el.agent_id + "</td><td> " + el.agent_name + "</td><td> " + el.agent_brand + "</td><td> " + el.bank_name + "</td><td> " + el.alipay_id + "</td><td> " + el.weixin_id + "</td><td> " + el.agent_leader + "</td><td>" + el.agent_address + "</td><td>" + el.service_phone + "</td><td>" + el.bank_account + "</td><td name='" + JSON.stringify(el.investor_list) + "' class='investor_list_btn'><a href='#' style='color:blue;'>查看列表</a></td><td name='" + JSON.stringify(el.repairer_list) + "' class='repairer_list_btn'><a href='#' style='color:blue;'>查看列表</a></td></tr>");
+                        $(".agentReport_cont").append(agent);
+                    });
+                }
+
+
+            } else {
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            layer.msg("请求失败");
+        })
+        .always(function() {
+
+        });
+}
+$(".agentReport_cont").on('click', '.repairer_list_btn', function() {
+    var Bikestr = $(this).attr('name');
+    var Str = returnAgent_repairStr(Bikestr);
+    layer.open({
+        type: 1,
+        title: '维保站列表',
+        skin: 'layui-layer-lan',
+        area: ['80%', '640px'],
+
+        offset: ['50px', '10%'], //宽高
+        content: Str
+    });
+})
+
+$(".agentReport_cont").on('click', '.investor_list_btn', function() {
+    var Bikestr = $(this).attr('name');
+    var Str = returnAgent_invetorStr(Bikestr);
+    layer.open({
+        type: 1,
+        title: '投资商列表',
+        skin: 'layui-layer-lan',
+        area: ['80%', '640px'],
+        offset: ['50px', '10%'], //宽高
+        content: Str
+    });
+})
+//维保站维修报表
+
+function returnAgent_repairRecordStr(Str) {
+    var JSONstr = JSON.parse(Str);
+    var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>维修人员ID</th><th>维修人员名称</th><th>电车ID</th><th>维修描述</th><th>维修时间</th></tr>";
+    $.each(JSONstr, function(index, el) {
+
+        strObj += "<tr><td>" + el.worker_id + "</td><td>" + el.worker_name + "</td><td>" + el.vehicle_id + "</td><td>" + el.repair_desc + "</td><td>" + timestampToTime(el.repair_time) + "</td></tr>";
+    });
+    strObj += "</table>";
+    return strObj;
+}
+
+function repairerReportList() {
+    var user_id = getSession()[2];
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("user_id", user_id);
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/repairerReport",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    };
+
+    $.ajax(settings).done(function(res) {
+            var res = JSON.parse(res);
+
+
+            if (res.ret == 0) {
+                if (res.data[0].length == 0) {
+                    layer.msg("数据为空");
+                } else {
+                    var repairerList = res.data;
+                    $.each(repairerList, function(index, el) {
+                        var repairer = $("<tr><td>" + el.repairer_id + "</td><td> " + el.repairer_name + "</td><td> " + el.repairer_address + "</td><td> " + el.repairer_position + "</td><td> " + el.repairer_brand + "</td><td> " + el.repairer_leader + "</td><td> " + el.repairer_phone + "</td><td>" + el.repairer_operate + "</td><td name='" + JSON.stringify(el.repairer_record) + "' class='repairer_record_btn'><a href='#' style='color:blue;'>维修列表</a></td></tr>");
+                        $(".repairer_cont").append(repairer);
+                    });
+                }
+
+
+            } else {
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            layer.msg("请求失败");
+        })
+        .always(function() {
+
+        });
+}
+$(".repairer_cont").on('click', '.repairer_record_btn', function() {
+    var repairer_record = $(this).attr('name');
+    var Str = returnAgent_repairRecordStr(repairer_record);
+    layer.open({
+        type: 1,
+        title: '维保站列表',
+        skin: 'layui-layer-lan',
+        area: ['80%', '640px'],
+        offset: ['50px', '10%'], //宽高
+        content: Str
+    });
+})
+
+
+
+//车辆运行信息报表
+function returnBikearrStr(Str) {
+    var JSONstr = JSON.parse(Str);
+    var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>电车ID</th><th>电车品牌:</th><th>充电桩ID:</th><th>充电桩品牌:</th>";
+    $.each(JSONstr, function(index, el) {
+
+        strObj += "</tr><tr><td>" + el.vehicle_id + "</td><td>" + el.bike_brand + "</td><td> " + el.pile_id + "</td><td>" + el.pile_position + "</td></tr>";
+    });
+    strObj += "</table>";
+    return strObj;
+}
+
+function  List() {
+    var user_id = getSession()[2];
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("user_id", user_id);
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/investorReport",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    };
+
+    $.ajax(settings).done(function(res) {
+            var res = JSON.parse(res);
+
+
+            if (res.ret == 0) {
+                if (res.data[0].length == 0) {
+                    layer.msg("数据为空");
+                } else {
+                    var investorList = res.data;
+                    $.each(investorList, function(index, el) {
+                        var investor = $("<tr><td>" + el.investor_id + "</td><td> " + el.investor_name + "</td><td> " + el.investor_address + "</td><td> " + el.phone + "</td><td> " + el.bank_name + "</td><td> " + el.bank_account + "</td><td> " + el.weixin_id + "</td><td> " + el.alipay_id + "</td><td name='" + JSON.stringify(el.bike_list) + "' class='checkBikeInfo'><a href='#' style='color:blue;'>查看列表</a></td><td>" + el.investor_number + "</td><td>" + el.bonus_id + "</td><td>" + el.bonus_ration + "</td></tr>");
                         $(".investor_cont").append(investor);
                     });
                 }
@@ -450,8 +652,7 @@ function bikeWorkingReport(){
 
 
 
-
- /*
+/*
  *email:13523450460@sina.cn 
  *name:capua
  *date:2018/4/10
@@ -459,7 +660,7 @@ function bikeWorkingReport(){
  */
 
 function addDelegater(a, b) {
-    
+
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
@@ -469,7 +670,7 @@ function addDelegater(a, b) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url":"https://www.8gps8.cn:8011/bikePublic/api/site/addDelegater",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/addDelegater",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -478,12 +679,12 @@ function addDelegater(a, b) {
     }
 
     $.ajax(settings).done(function(res) {
- 
+
             var res = JSON.parse(res);
             if (res.ret == 0) {
-                   layer.msg("添加成功");
-                  $(".addDelegaterForm input[type=text]").val("");
-               
+                layer.msg("添加成功");
+                $(".addDelegaterForm input[type=text]").val("");
+
             } else {
                 requestStatus(res.ret);
             }
@@ -492,7 +693,7 @@ function addDelegater(a, b) {
             console.log("error");
         })
         .always(function() {
-           
+
         });
 }
 
@@ -511,8 +712,8 @@ $(".Delegater_btn").click(function() {
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}").split(",}")[0] + "}";
 
     if ($(".Delegater_name").val() != "") {
-           
-           addDelegater(user_id,Infos);
+
+        addDelegater(user_id, Infos);
     } else {
 
     }
@@ -520,7 +721,7 @@ $(".Delegater_btn").click(function() {
 
 });
 
- /*
+/*
  *email:13523450460@sina.cn 
  *name:capua
  *date:2018/4/10
@@ -528,7 +729,7 @@ $(".Delegater_btn").click(function() {
  */
 
 function addFirm(a, b) {
-    
+
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
@@ -538,7 +739,7 @@ function addFirm(a, b) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url":"https://www.8gps8.cn:8011/bikePublic/api/site/addFirm",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/addFirm",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -547,12 +748,12 @@ function addFirm(a, b) {
     }
 
     $.ajax(settings).done(function(res) {
- 
+
             var res = JSON.parse(res);
             if (res.ret == 0) {
-                   layer.msg("添加成功");
-                  $(".addDelegaterForm input[type=text]").val("");
-               
+                layer.msg("添加成功");
+                $(".addDelegaterForm input[type=text]").val("");
+
             } else {
                 requestStatus(res.ret);
             }
@@ -561,7 +762,7 @@ function addFirm(a, b) {
             console.log("error");
         })
         .always(function() {
-           
+
         });
 }
 
@@ -572,16 +773,16 @@ $(".Firm_btn").click(function() {
 
     var Info = $(".addFirmForm").serializeArray();
     var user_id = getSession()[2];
-    var Inf= "{";
+    var Inf = "{";
     $.each(Info, function(index, el) {
         var one = "\"" + (el.name) + "\":\"" + (el.value) + "\",";
         Inf += one;
     });
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}").split(",}")[0] + "}";
 
-    if ($(".addfirm_name").val()!= "") {
-           
-           addFirm(user_id,Infos);
+    if ($(".addfirm_name").val() != "") {
+
+        addFirm(user_id, Infos);
     } else {
 
     }
@@ -589,7 +790,7 @@ $(".Firm_btn").click(function() {
 
 });
 
- /*
+/*
  *email:13523450460@sina.cn 
  *name:capua
  *date:2018/4/10
@@ -597,7 +798,7 @@ $(".Firm_btn").click(function() {
  */
 
 function addFixstation(a, b) {
-    
+
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
@@ -607,7 +808,7 @@ function addFixstation(a, b) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url":"https://www.8gps8.cn:8011/bikePublic/api/site/addFixstation",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/addFixstation",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -616,12 +817,12 @@ function addFixstation(a, b) {
     }
 
     $.ajax(settings).done(function(res) {
- 
+
             var res = JSON.parse(res);
             if (res.ret == 0) {
-                   layer.msg("添加成功");
-                  $(".addFixstationForm input[type=text]").val("");
-               
+                layer.msg("添加成功");
+                $(".addFixstationForm input[type=text]").val("");
+
             } else {
                 requestStatus(res.ret);
             }
@@ -630,7 +831,7 @@ function addFixstation(a, b) {
             console.log("error");
         })
         .always(function() {
-           
+
         });
 }
 
@@ -641,16 +842,16 @@ $(".Fixstation_btn").click(function() {
 
     var Info = $(".addFixstationForm").serializeArray();
     var user_id = getSession()[2];
-    var Inf= "{";
+    var Inf = "{";
     $.each(Info, function(index, el) {
         var one = "\"" + (el.name) + "\":\"" + (el.value) + "\",";
         Inf += one;
     });
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}").split(",}")[0] + "}";
 
-    if ($(".addFixstation_name").val()!= "") {
-           
-           addFixstation(user_id,Infos);
+    if ($(".addFixstation_name").val() != "") {
+
+        addFixstation(user_id, Infos);
     } else {
 
     }
@@ -659,7 +860,7 @@ $(".Fixstation_btn").click(function() {
 });
 
 
- /*
+/*
  *email:13523450460@sina.cn 
  *name:capua
  *date:2018/4/10
@@ -667,7 +868,7 @@ $(".Fixstation_btn").click(function() {
  */
 
 function addInvestor(a, b) {
-    
+
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
@@ -677,7 +878,7 @@ function addInvestor(a, b) {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url":"https://www.8gps8.cn:8011/bikePublic/api/site/addInvestor",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/addInvestor",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -686,12 +887,12 @@ function addInvestor(a, b) {
     }
 
     $.ajax(settings).done(function(res) {
- 
+
             var res = JSON.parse(res);
             if (res.ret == 0) {
-                   layer.msg("添加成功");
-                  $(".addInvestorForm input[type=text]").val("");
-               
+                layer.msg("添加成功");
+                $(".addInvestorForm input[type=text]").val("");
+
             } else {
                 requestStatus(res.ret);
             }
@@ -700,7 +901,7 @@ function addInvestor(a, b) {
             console.log("error");
         })
         .always(function() {
-           
+
         });
 }
 
@@ -711,19 +912,80 @@ $(".Investor_btn").click(function() {
 
     var Info = $(".addInvestorForm").serializeArray();
     var user_id = getSession()[2];
-    var Inf= "{";
+    var Inf = "{";
     $.each(Info, function(index, el) {
         var one = "\"" + (el.name) + "\":\"" + (el.value) + "\",";
         Inf += one;
     });
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}").split(",}")[0] + "}";
 
-    if ($(".addInvestor_name").val()!= "") {
-           
-           addInvestor(user_id,Infos);
+    if ($(".addInvestor_name").val() != "") {
+
+        addInvestor(user_id, Infos);
     } else {
 
     }
 
 
 });
+
+/*
+*Capua
+*2018/4/11
+*用户列表
+*/
+function nullreturn(str){
+    if(str==null){
+        str="无"; 
+    }else{
+
+    }
+    return str;
+}
+function  userList(num,page) {
+    var user_id = getSession()[2];
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("user_id", user_id);
+    form.append("list_order","id");
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/getUserList",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    };
+
+    $.ajax(settings).done(function(res) {
+            var res = JSON.parse(res);
+
+
+            if (res.ret == 0){
+                if (res.data[0].length == 0) {
+                    layer.msg("数据为空");
+                } else {
+                    var usersList = res.data;
+                    $.each(usersList, function(index, el) {
+                        var investor = $("<tr><td>" + el.id + "</td><td> " + el.name + "</td><td> " + el.money + "</td><td> " + el.vehicles + "</td><td> " + el.auth + "</td><td> " + el.phone + "</td><td> " + el.deposited + "</td><td> " + el.photo + "</td><td>"+el.identity+"</td><td>" +nullreturn(el.owner_id)+"</td></tr>");
+                        $(".users_cont").append(investor);
+                    });
+
+                     $(".tablelist").trigger("update");
+                }
+
+                
+            } else {
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            layer.msg("请求失败");
+        })
+        .always(function() {
+
+        });
+}

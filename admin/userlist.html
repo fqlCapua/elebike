@@ -1,4 +1,4 @@
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
@@ -6,18 +6,17 @@
         <title> </title>
         <link href="../css/style.css" rel="stylesheet" type="text/css" />
         <link href="../css/select.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="../js/jquery.js"></script>
-             <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        
+        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
         <script type="text/javascript" src="../js/select-ui.min.js"></script>
- 
-       <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/md5.js"></script>
         <script type="text/javascript" src="../js/getSession.js"></script>
         <script type="text/javascript" src="../js/com.js"></script>
         <script type="text/javascript" src="../js/layer.js"></script>
-      
+        <script type="text/javascript" src="../js/person/jquery.tablesorter.js"></script>
         <script type="text/javascript">
-        $(document).ready(function(e) {
+        $(function() {
             $(".select1").uedSelect({
                 width: 345
             });
@@ -27,41 +26,36 @@
             $(".select3").uedSelect({
                 width: 100
             });
+              $(".tablelist").tablesorter();
         });
         </script>
+      
         <style>
-         .bikeList_cont td a{
-            color: blue;
-          }
-      </style>
+        table th {
+            cursor: pointer;
+        }
+        </style>
     </head>
 
-    <body  >
+    <body>
         <div class="place">
             <span>位置：</span>
             <ul class="placeul">
                 <li><a href="#">首页</a></li>
                 <li><a href="#">系统管理员</a></li>
-                <li><a href="#">维保站维修报表</a></li>
+                <li><a href="#">用户列表</a></li>
             </ul>
         </div>
-           <div class="formbody">
+
+        <div class="formbody">
             <div style="clear: both;"></div>
             <div id="usual1" class="usual">
-                <div class="itab">
-                    <ul>
-                        <li><a href="#tab2" class="selected">维修列表</a></li>
-                       
-                    </ul>
-                </div>
-              
-                <div id="tab2" class="tabson">
-                    <ul class="seachform">
-                        <li>
-                            <label>综合查询</label>
-                            <input name="" type="text" class="scinput" />
-                        </li>
-                        <!-- <li>
+                <ul class="seachform">
+                    <li>
+                        <label>综合查询</label>
+                        <input name="" type="text" class="scinput" />
+                    </li>
+                    <!-- <li>
                             <label>指派</label>
                             <div class="vocation">
                                 <select class="select3">
@@ -88,32 +82,29 @@
                                 </select>
                             </div>
                         </li> -->
-                        <li>
-                            <label>&nbsp;</label>
-                            <input name="" type="button" class="scbtn" value="查询" />
-                        </li>
-                    </ul>
-                    <table class="tablelist"  >
-                        <thead>
-                            <tr>
-                                
-                                <th>维保站ID<i class="sort"><img src="../images/px.gif" /></i></th>
-                                <th>名称</th>
-                                <th>地址</th>
-                                <th>位置</th>
-                                <th>授权品牌</th>
-                                <th>负责人</th>
-                                <th>电话</th>
-                                <th>经营范围</th>
-                                <th>维修列表</th>
-                                 
-                            </tr>
-                        </thead>
-                        <tbody class="repairer_cont">
-                            
-                        </tbody>
-                    </table>
-                </div>
+                    <li>
+                        <label>&nbsp;</label>
+                        <input name="" type="button" class="scbtn" value="查询" />
+                    </li>
+                </ul>
+                <table class="tablelist">
+                    <thead>
+                        <tr>
+                            <th>ID<i class="sort"><img src="../images/px.gif" /></i></th>
+                            <th>名称</th>
+                            <th>账户余额</th>
+                            <th>拥有车辆</th>
+                            <th>身份</th>
+                            <th>电话</th>
+                            <th>是否交押金(1yes/0No)</th>
+                            <th>头像</th>
+                            <th>身份证号 </th>
+                            <th>公司id</th>
+                        </tr>
+                    </thead>
+                    <tbody class="users_cont">
+                    </tbody>
+                </table>
             </div>
             <script type="text/javascript">
             $("#usual1 ul").idTabs();
@@ -124,13 +115,14 @@
         </div>
     </body>
     <script type="text/javascript" src="../js/angular.js"></script>
-   <script type="text/javascript" src="../js/person/adminSet.js"></script>
-            <script type="text/javascript">
-            $("#usual1 ul").idTabs();
-           
-            $('.tablelist tbody tr:odd').addClass('odd');
-            $(function(){
-                repairerReportList();
-            })
-            </script>
+    <script type="text/javascript" src="../js/person/adminSet.js"></script>
+    <script type="text/javascript">
+    $("#usual1 ul").idTabs();
+
+    $('.tablelist tbody tr:odd').addClass('odd');
+    $(function() {
+        userList(100, 1);
+    })
+    </script>
+
 </html>
