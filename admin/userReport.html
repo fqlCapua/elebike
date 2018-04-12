@@ -1,30 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="shortcut icon" href="images/home/moto.png" type="image/x-icon">
-        <title></title>
+        <title> </title>
         <link href="../css/style.css" rel="stylesheet" type="text/css" />
         <link href="../css/select.css" rel="stylesheet" type="text/css" />
-          <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.js"></script>
+             <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
         <script type="text/javascript" src="../js/select-ui.min.js"></script>
-        <script type="text/javascript" src="../js/md5.js"></script>
+ 
+       <script type="text/javascript" src="../js/md5.js"></script>
         <script type="text/javascript" src="../js/getSession.js"></script>
         <script type="text/javascript" src="../js/com.js"></script>
         <script type="text/javascript" src="../js/layer.js"></script>
-       <script type="text/javascript" src="../js/person/jquery.tablesorter.js"></script>
-      <style>
-         .bikeList_cont td a{
-            color: blue;
-          }
-      </style>
+      <script type="text/javascript" src="../js/person/jquery.tablesorter.js"></script>
         <script type="text/javascript">
-
         $(document).ready(function(e) {
-              $(".tablelist").tablesorter();
             $(".select1").uedSelect({
                 width: 345
             });
@@ -35,37 +28,44 @@
                 width: 100
             });
         });
-      
         </script>
+        <style>
+         .bikeList_cont td a{
+            color: blue;
+          }
+      </style>
     </head>
 
-    <body>
+    <body  >
         <div class="place">
             <span>位置：</span>
             <ul class="placeul">
                 <li><a href="#">首页</a></li>
-                <li><a href="#">管理员用户</a></li>
-                <li><a href="#">车辆运行信息报表</a></li>
+                <li><a href="#">系统管理员</a></li>
+                <li><a href="#">私人电动车用户报表</a></li>
             </ul>
         </div>
-        <div class="formbody" >
+           <div class="formbody">
             <div style="clear: both;"></div>
             <div id="usual1" class="usual">
-                <div class="itab">
-                    <ul>
-                        <li><a href="#tab2" class="selected">信息报表</a></li>
-                       
-                    </ul>
-                </div>
+                
               
-                <div id="tab2" class="tabson">
+              
                     <ul class="seachform">
                         <li>
-                            <label>IMI</label>
+                            <label>综合查询</label>
                             <input name="" type="text" class="scinput" />
                         </li>
-                        
-                      <!--   <li>
+                        <!-- <li>
+                            <label>指派</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
                             <label>重点客户</label>
                             <div class="vocation">
                                 <select class="select3">
@@ -88,42 +88,22 @@
                             <input name="" type="button" class="scbtn" value="查询" />
                         </li>
                     </ul>
-                    <table class="tablelist" >
+                    <table class="tablelist">
                         <thead>
                             <tr>
-                                
-                                <!-- <th>IMEI<i class="sort"><img src="../images/px.gif" /></i></th>
-                                <th>SIM</th>
-                                <th>品牌</th>
-                                <th>型号</th>
-                                <th>经销商名称</th>
-                                <th>投资商名称</th>
-                                <th>充电桩ID</th>
-                                <th>入网日期</th>
-                                <th>销售日期</th>
-                                <th>保修期</th>
-                                <th>保修记录</th>
-                                <th>押金规则</th>
-                                <th>收费规则</th> -->
-                                <th>车辆ID</th>
-                                <th>经销商名称</th>
-                                <th>投资商名称</th>
-                                <th>品牌</th>
-                                <th>入网时间</th>
-                                <th>出售时间</th>
-                                <th>类型</th>
-                                <th>充电桩ID</th>
-                                <th>维修记录</th>
+                                <th>用户ID<i class="sort"><img src="../images/px.gif" /></i></th>
+                                <th>名称</th>
+                                <th>主号</th>
+                                <th>副号1</th>
                                  
-                               <!--  <th>绑定/解绑</th> -->
-                            </tr>
+                                <th>车辆列表</th>
+                             </tr>
                         </thead>
-                        <tbody class="bikeWorkingReport_cont"  >
+                        <tbody class="userReport_cont">
                             
-                           
                         </tbody>
                     </table>
-                </div>
+   
             </div>
             <script type="text/javascript">
             $("#usual1 ul").idTabs();
@@ -133,14 +113,15 @@
             </script>
         </div>
     </body>
-
-<script type="text/javascript" src="../js/angular.js"></script>
-<script type="text/javascript" src="../js/person/adminSet.js"></script>
-<script type="text/javascript">
-    
-    $(function(){
-       bikeWorkingReportList();
-    })
-</script>
-
+    <script type="text/javascript" src="../js/angular.js"></script>
+   <script type="text/javascript" src="../js/person/adminSet.js"></script>
+            <script type="text/javascript">
+            $("#usual1 ul").idTabs();
+           
+            $('.tablelist tbody tr:odd').addClass('odd');
+            $(function(){
+                $(".tablelist").tablesorter();
+                userReportList();
+            })
+            </script>
 </html>

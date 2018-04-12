@@ -593,18 +593,19 @@ $(".repairer_cont").on('click', '.repairer_record_btn', function() {
 
 
 //车辆运行信息报表
-function returnBikearrStr(Str) {
+
+function returnRepairWorkingStr(Str) {
     var JSONstr = JSON.parse(Str);
-    var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>电车ID</th><th>电车品牌:</th><th>充电桩ID:</th><th>充电桩品牌:</th>";
+    var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>维修ID号</th><th>维修人</th><th>维修人ID</th><th>维修时间</th>";
     $.each(JSONstr, function(index, el) {
 
-        strObj += "</tr><tr><td>" + el.vehicle_id + "</td><td>" + el.bike_brand + "</td><td> " + el.pile_id + "</td><td>" + el.pile_position + "</td></tr>";
+        strObj += "</tr><tr><td>" + el.repair_id + "</td><td>" + el.worker_name + "</td><td> " + el.worker_id + "</td><td>" + timestampToTime(el.repair_time) + "</td></tr>";
     });
     strObj += "</table>";
     return strObj;
 }
 
-function  List() {
+function  bikeWorkingReportList() {
     var user_id = getSession()[2];
     var form = new FormData();
     form.append("time", time_token()[0]);
@@ -614,7 +615,83 @@ function  List() {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/investorReport",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/bikeWorkingReport",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    };
+
+    $.ajax(settings).done(function(res) {
+            var res = JSON.parse(res);
+                   if (res.ret == 0) {
+                if (res.data[0].length == 0) {
+                    layer.msg("数据为空");
+                } else {
+                    var bikeWorkingList = res.data;
+                    $.each(bikeWorkingList, function(index, el) {
+                        var bikeWorking = $("<tr><td>" + el.id + "</td><td> " + el.agent_name + "</td><td> " + el.investor_name + "</td><td> " + el.brand + "</td><td> " + el.enter_time + "</td><td> " + el.sale_time + "</td><td> " + el.type + "</td><td> " + el.pile_id + "</td><td name='" + JSON.stringify(el.repaired_record) + "' class='bikeWorkbtn'><a href='#' style='color:blue;'>查看记录</a></td></tr>");
+                        $(".bikeWorkingReport_cont").append(bikeWorking);
+                    });
+                     $(".tablelist").trigger("update");
+                }
+
+
+            } else {
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            layer.msg("请求失败");
+        })
+        .always(function() {
+
+        });
+}
+
+$(".bikeWorkingReport_cont").on('click','.bikeWorkbtn', function() {
+    var repairer_record = $(this).attr('name');
+    var Str = returnRepairWorkingStr(repairer_record);
+    layer.open({
+        type: 1,
+        title: '维保记录',
+        skin: 'layui-layer-lan',
+        area: ['80%', '640px'],
+        offset: ['50px', '10%'], //宽高
+        content: Str
+    });
+})
+
+/*
+ *email:13523450460@sina.cn 
+ *name:capua
+ *date:2018/4/10
+ *part:私人电动车报表
+ */
+
+function returnRide_recordStr(Str) {
+    var JSONstr = JSON.parse(Str);
+   
+    var strObj = "<table style='margin:10px;width:100%;' class='tablelist' border='0'><tr><th>电车ID</th><th>骑行开始时间</th><th>骑行开始时间</th><th>骑行时长(分钟)</th><th>骑行距离(米)</th>";
+    $.each(JSONstr[0], function(index,el) {
+    
+        strObj += "</tr><tr><td>" + el.vehicle_id + "</td><td>" +timestampToTime(el.start_time) + "</td><td> " + timestampToTime(el.end_time)+ "</td><td>" +((el.ride_time - el.start_time)/60).toFixed(2)+ "</td><td>" +el.distance+ "</td></tr>";
+    });
+    strObj += "</table>";
+    return strObj;
+}
+
+function  userReportList() {
+    var user_id = getSession()[2];
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("user_id", user_id);
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/userReport",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -630,14 +707,13 @@ function  List() {
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");
                 } else {
-                    var investorList = res.data;
-                    $.each(investorList, function(index, el) {
-                        var investor = $("<tr><td>" + el.investor_id + "</td><td> " + el.investor_name + "</td><td> " + el.investor_address + "</td><td> " + el.phone + "</td><td> " + el.bank_name + "</td><td> " + el.bank_account + "</td><td> " + el.weixin_id + "</td><td> " + el.alipay_id + "</td><td name='" + JSON.stringify(el.bike_list) + "' class='checkBikeInfo'><a href='#' style='color:blue;'>查看列表</a></td><td>" + el.investor_number + "</td><td>" + el.bonus_id + "</td><td>" + el.bonus_ration + "</td></tr>");
-                        $(".investor_cont").append(investor);
+                    var userList = res.data;
+                    $.each(userList, function(index, el) {
+                        var user = $("<tr><td>" + el.user_id + "</td><td> " + el.user_name + "</td><td> " + el.primary_phone + "</td><td> " + el.vice_phone1 + "</td><td name='" + JSON.stringify(el.ride_record) + "' class='checkRide_record'><a href='#' style='color:blue;'>查看列表</a></td></tr>");
+                        $(".userReport_cont").append(user);
                     });
+                       $(".tablelist").trigger("update");
                 }
-
-
             } else {
                 requestStatus(res.ret);
             }
@@ -650,8 +726,18 @@ function  List() {
 }
 
 
-
-
+$(".userReport_cont").on('click', '.checkRide_record', function() {
+    var str1 = $(this).attr('name');
+    var Str = returnRide_recordStr(str1)
+    layer.open({
+        type: 1,
+        title: '骑行信息',
+        skin: 'layui-layer-lan',
+        area: ['80%', '640px'],
+        offset: ['50px', '10%'], //宽高
+        content: Str
+    });
+})
 /*
  *email:13523450460@sina.cn 
  *name:capua
@@ -989,3 +1075,70 @@ function  userList(num,page) {
 
         });
 }
+
+
+
+/*
+ *email:13523450460@sina.cn
+ *name:capua
+ *date:2018/3/28
+ *part:维保站添加记录
+ */
+
+function addRepairRecord() {
+
+    var station_id = $(".addRepair_adstation_id").val();
+    var user_id = $(".addRepair_user_id").children("option:selected").attr("name");
+    var vehicle_id = $(".addRepair_vehicle_id").val();
+    var worker_id = $(".addRepair_worker_id").val();
+    var repair_desc = $(".addRepair_repair_desc").val();
+    var repair_time=Date.parse(new Date())/1000;
+
+
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("station_id", station_id);
+    form.append("user_id", user_id);
+    form.append("vehicle_id", vehicle_id);
+    form.append("worker_id", worker_id);
+    form.append("repair_desc", repair_desc);
+    form.append("repair_time", repair_time);
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/addRepairRecord",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+            var res = JSON.parse(res);
+            if (res.ret == 0) {
+                layer.msg("添加成功");
+                $("input[type=text]").val("");
+
+            } else {
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+
+        });
+}
+
+
+$(".addRepair_btn").click(function() {
+
+    if (check_code(".addRepair_adstation_id") && check_code(".addRepair_user_id") && check_code(".addRepair_vehicle_id")) {
+       addRepairRecord();
+
+    }
+
+
+});
