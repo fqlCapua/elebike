@@ -288,8 +288,9 @@ $(".adminLogin2").click(function() {
 
     }
 });
-
-$(".pwdBox,.changePwdBox").hide();
+ 
+$(".vCodeBox,.changePwdBox").hide();
+ 
 $(".pwdLogin").click(function(){
     $("input[type=text]").val("");
     $(".vCodeBox").hide();
