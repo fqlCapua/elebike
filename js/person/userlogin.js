@@ -192,9 +192,9 @@ function subLoginForm(phone,code) {
             layer.msg("登录成功");
             var userid=res.data.user_id;
             userInfoSession(userid);
-          //  window.location.href="main.html#/user";
+           window.location.href="main.html#/user";
         } else {
-            layer.msg("登录失败");
+           requestStatus(res.ret);
         }
     });
 
