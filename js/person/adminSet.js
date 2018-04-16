@@ -1,3 +1,46 @@
+function loadAllType(user_id,url,obj){
+     var user_id = getSession()[2];
+    
+
+
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("user_id", user_id);
+    
+    var settings = {
+        "async":false,
+        "crossDomain": true,
+        "url":url,
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+
+            var res = JSON.parse(res);
+            console.log(res);
+            if (res.ret == 0) {
+                var list=res.data;
+                $.each(list,function(index, el) {
+                    var option=$("<option id='"+el.id+"'>"+el.name+"</option>");
+                    $(obj).append(option);
+                });
+            
+          }else{
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+
+        });
+}
+
 function timestampToTime(timestamp) {
     var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
     Y = date.getFullYear() + '-';
