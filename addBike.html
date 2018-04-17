@@ -57,20 +57,47 @@
                                 <label>电车ID<b>:*</b></label>
                                 <input name="id" type="text" class="dfinput ad_id" />
                             </li>
-                            <li>
-                                <label>所属厂商<b>:</b></label>
-                                <input name="host" type="text" class="dfinput ad_host" value="3" />
-                            </li>
+                           
                             <li>
                                 <label>品牌:</label>
                                 <div class="vocation">
-                                    <select name="brand" class="select1 ad_brand">
-                                        <option>雅迪电动车</option>
-                                        <option>山地电动车</option>
-                                        <option>森马电动车</option>
-                                        <option>惠普电动车</option>
-                                        <option>联想电动车</option>
-                                        <option>沙盘电动车</option>
+                                    <select name="brand" class="select1 load_brand ad_brand">
+                                       
+                                    </select>
+                                </div>
+                            </li>
+                             <li>
+                                <label>所属厂商<b>:</b></label>
+                               <div class="vocation">
+                                    <select name="host" class="select1 load_host  host">
+                                         
+                                    </select>
+                                </div>
+                            </li>
+                             <li>
+                                <label>经销商:</label>
+                                 <div class="vocation">
+                                    <select name="dealer" class="select1 load_dealer dealer">
+                                         
+                                    </select>
+                                </div>
+                                <!-- <input name="delegater" type="text" class="dfinput  ad_delegater" value=" " /> -->
+                            </li>
+                               <li>
+                                <label>代理商:</label>
+                                 <div class="vocation">
+                                    <select name="delegater" class="select1 load_delegater delegater">
+                                         
+                                    </select>
+                                </div>
+                                <!-- <input name="delegater" type="text" class="dfinput  ad_delegater" value=" " /> -->
+                            </li>
+                            <li>
+                                <label>投资商:</label>
+                              <!--   <input name="investor" type="text" class="dfinput ad_investor" value=" " /> -->
+                                 <div class="vocation">
+                                    <select  name="investor" class="select1 load_investor ad_investor">
+                                         
                                     </select>
                                 </div>
                             </li>
@@ -78,27 +105,10 @@
                                 <label>版本: </label>
                                 <input name="version" type="text" class="dfinput ad_version" value="am224" />
                             </li>
-                            <li>
-                                <label>经销商:</label>
-                                <!--  <div class="vocation">
-                                    <select name="brand" class="select1 load_Investor ad_brand">
-                                        <option>雅迪电动车</option>
-                                        <option>山地电动车</option>
-                                        <option>森马电动车</option>
-                                        <option>惠普电动车</option>
-                                        <option>联想电动车</option>
-                                        <option>沙盘电动车</option>
-                                    </select>
-                                </div> -->
-                                <input name="delegater" type="text" class="dfinput  ad_delegater" value=" " />
-                            </li>
-                            <li>
-                                <label>投资商:</label>
-                                <input name="investor" type="text" class="dfinput ad_investor" value=" " />
-                            </li>
+                          
                             <li>
                                 <label>充电桩:</label>
-                                <input name="power" type="text" class="dfinput add_power" value=" " />
+                                <input name="power" type="text" class="dfinput add_power" value="" />
                             </li>
                             <li>
                                 <label>入网日期:</label>
@@ -110,17 +120,17 @@
                             </li>
                             <li>
                                 <label>保修期:</label>
-                                <input name="maintenance" type="text" class="dfinput ad_maintenance" value=" " />
+                                <input name="maintenance" type="text" class="dfinput ad_maintenance" value="365" />
                             </li>
                              <li>
-                                <label>满地续航里程:</label>
-                                <input name="full_power_distance" type="text" class="dfinput  " value="100" />
+                                <label>满电续航里程:</label>
+                                <input name="full_power_distance"   type="text" class="dfinput" value="100" />
                             </li>
                              <li>
                                 <label>额定电压:</label>
-                                <input name="s_voltage" type="text" class="dfinput  " value="55.7" />
+                                <input name="s_voltage" type="text" class="dfinput" value="48" />
                             </li>
-
+                            
                             <li>
                                 <label> </label>
                                 <input type="button" class="btn btn-info ad_btn" value="提交" />
@@ -153,10 +163,14 @@
     $('input[id=lefile]').change(function() {
         $('.fileval').val($(this).val());
     });
-    </script>
-    <script type="text/javascript">
+    
     $("#usual1 ul").idTabs();
     $('.tablelist tbody tr:odd').addClass('odd');
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getFirmList",".load_brand")   //添加车辆加载品牌
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getFirmList",".load_host")   //添加车辆加载厂商
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getDealerList",".load_delegater")   //添加车辆加载代理商
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getDealerList",".load_dealer")   //添加车辆加载经销商
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getInvestorList",".load_investor")   //添加车辆加载投资商
     </script>
 
 </html>

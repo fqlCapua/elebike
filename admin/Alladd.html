@@ -77,11 +77,21 @@
                             </li>
                              <li>
                                 <label>维保站列表<b>:</b></label>
-                                <input name="fixstations" type="text" class="dfinput fixstations" value="1" />
+                               <!--  <input name="fixstations" type="text" class="dfinput load_fixstations" value="1" /> -->
+                                 <div class="vocation">
+                                    <select name="fixstations" class="select1  load_fixstations">
+                                         
+                                    </select>
+                                </div>
                             </li>
                              <li>
                                 <label>投资商列表<b>:</b></label>
-                                <input name="investors" type="text" class="dfinput Delegater_host" value="1" />
+                                <!-- <input name="investors" type="text" class="dfinput Delegater_host" value="1" /> -->
+                                <div class="vocation">
+                                    <select name="investors" class="select1  load_investor">
+                                           
+                                    </select>
+                                </div>
                             </li>
                              <li>
                                 <label>开户银行<b>:</b></label>
@@ -104,7 +114,7 @@
                             </li>
                             <li>
                                 <label>品牌<b>:</b></label>
-                                <input name="brand" type="text" class="dfinput brand" value="" />
+                                <input name="brand" type="text" class="dfinput load_brand brand"  />
                             </li>
                             <li>
                                 <label>地址<b>:</b></label>
@@ -120,15 +130,25 @@
                             </li>
                              <li>
                                 <label>维保站列表<b>:</b></label>
-                                <input name="fixstations" type="text" class="dfinput " value="1" />
+                              <!--   <input name="fixstations" type="text" class="dfinput " value="1" /> -->
+                                 <div class="vocation">
+                                    <select name="fixstations" class="select1 load_fixstations ">
+                                         
+                                    </select>
+                                </div>
                             </li>
                              <li>
                                 <label>经销商列表<b>:</b></label>
-                                <input name="delegaters" type="text" class="dfinput " value="1" />
+                                <!-- <input name="delegaters" type="text" class="dfinput " value="1" /> -->
+                                <div class="vocation">
+                                    <select name="delegaters" class="select1 load_dealer">
+                                         
+                                    </select>
+                                </div>
                             </li>
                              <li>
                                 <label>车辆型号列表<b>:</b></label>
-                                <input name="vehiclenos" type="text" class="dfinput " value="1" />
+                                <input name="vehiclenos" type="text" class="dfinput" value="1" />
                             </li>
                             
                             <li>
@@ -157,7 +177,7 @@
                             
                             <li>
                                 <label>授权品牌列表<b>:</b></label>
-                                <input name="grants" type="text" class="dfinput " value=" 艾玛,雅迪" />
+                                <input name="grants" type="text" class="dfinput " value="艾玛,雅迪" />
                             </li>
                              <li>
                                
@@ -232,10 +252,16 @@
     $('input[id=lefile]').change(function() {
         $('.fileval').val($(this).val());
     });
-    </script>
-    <script type="text/javascript">
+  
     $("#usual1 ul").idTabs();
     $('.tablelist tbody tr:odd').addClass('odd');
+
+ loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getFixstationList",".load_fixstations")   // 加载维保站
+     loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getFirmList",".load_brand")   // 加载品牌
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getFirmList",".load_host")   // 加载厂商
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getDealerList",".load_delegater")   // 加载代理商
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getDealerList",".load_dealer")   //添 加载经销商
+    loadAllType("https://www.8gps8.cn:8011/bikePublic/api/site/getInvestorList",".load_investor")   // 加载投资商
     </script>
 
 </html>

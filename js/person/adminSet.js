@@ -1,9 +1,6 @@
-function loadAllType(user_id,url,obj){
-     var user_id = getSession()[2];
-    
-
-
-    var form = new FormData();
+function loadAllType(url,obj){
+    var user_id=getSession()[2];
+      var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
     form.append("user_id", user_id);
@@ -22,11 +19,11 @@ function loadAllType(user_id,url,obj){
     $.ajax(settings).done(function(res) {
 
             var res = JSON.parse(res);
-            console.log(res);
+           
             if (res.ret == 0) {
                 var list=res.data;
                 $.each(list,function(index, el) {
-                    var option=$("<option id='"+el.id+"'>"+el.name+"</option>");
+                    var option=$("<option title='"+el.name+"'>"+el.id+"</option>");
                     $(obj).append(option);
                 });
             
@@ -40,6 +37,8 @@ function loadAllType(user_id,url,obj){
 
         });
 }
+
+
 
 function timestampToTime(timestamp) {
     var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -194,7 +193,7 @@ $(".ad_btn").click(function() {
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}]").split(",}]")[0] + "}]";
 
     if ($(".ad_id").val() != "") {
-        // console.log(Infos);
+         //console.log(Infos);
         addBike(user_id, Infos);
     } else {
 
