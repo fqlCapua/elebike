@@ -169,9 +169,46 @@ function subLoginForm(phone,code) {
     form.append("time",time_token()[0]);
     form.append("token",time_token()[0]);
     form.append("phone", phone);
-    //  form.append("truename", name);
-    // form.append("id",id);
+     
      form.append("code",code);
+    form.append("auth", "0");
+
+    var settings = {
+        "async":false,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/user/userLogin",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+      var res=JSON.parse(res);
+       console.log(res); 
+        if (res.ret == 0) {
+            layer.msg("登录成功");
+            var userid=res.data.user_id;
+            userInfoSession(userid);
+           window.location.href="main.html#/user";
+        } else {
+           requestStatus(res.ret);
+        }
+    });
+
+
+}
+
+
+function subPwdLoginForm(phone,pwd) {
+ 
+    var form = new FormData();
+    form.append("time",time_token()[0]);
+    form.append("token",time_token()[0]);
+    form.append("phone", phone);
+     
+     form.append("password",pwd);
     form.append("auth", "0");
 
     var settings = {
@@ -248,5 +285,15 @@ $(".loginBtn").click(function() {
         subLoginForm(phone,vCode);
     } else {
 
+    }
+});
+
+$(".pwdloginBtn").click(function() {
+    var phone = $(".userPhone").val();
+    var pwd = $(".userpwd").val();
+    if (check_phone(".userPhone") && pwd!='') {
+       subPwdLoginForm(phone,pwd);
+    } else {
+          layer.msg("完善信息！");
     }
 });
