@@ -193,7 +193,8 @@ $(".ad_btn").click(function() {
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}]").split(",}]")[0] + "}]";
 
     if ($(".ad_id").val() != "") {
-         //console.log(Infos);
+         
+          console.log(Infos);
         addBike(user_id, Infos);
     } else {
 
@@ -313,16 +314,16 @@ function getBikelist() {
             var res = JSON.parse(res);
  
             if (res.ret == 0) {
-                var bikelist;
+              
                 if (res.data.length == 0) {
                     layer.msg("数据为空");
                 } else {
-                       bikelist=res.data        
+                     var  bikelist=res.data;     
                     $.each(bikelist, function(index, el) {
                         var tr = $("<tr><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
                         $(".bikeList_cont").append(tr);
                     });
-                      $(".tablelist").trigger("update");
+                    $(".tablelist").trigger("update");
 
                 }
 
@@ -631,7 +632,7 @@ function returnRepairWorkingStr(Str) {
     var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>维修ID号</th><th>维修人</th><th>维修人ID</th><th>维修时间</th>";
     $.each(JSONstr, function(index, el) {
 
-        strObj += "</tr><tr><td>" + el.repair_id + "</td><td>" + el.worker_name + "</td><td> " + el.worker_id + "</td><td>" + timestampToTime(el.repair_time) + "</td></tr>";
+        strObj += "</tr><tr><td>" + el.repair_id + "</td><td>" + el.worker_name + "</td><td> " + el.worker_id + "</td><td>" +  el.repair_time  + "</td></tr>";
     });
     strObj += "</table>";
     return strObj;
@@ -663,7 +664,7 @@ function  bikeWorkingReportList() {
                 } else {
                     var bikeWorkingList = res.data;
                     $.each(bikeWorkingList, function(index, el) {
-                        var bikeWorking = $("<tr><td>" + el.id + "</td><td> " + el.agent_name + "</td><td> " + el.investor_name + "</td><td> " + el.brand + "</td><td> " + el.enter_time + "</td><td> " + el.sale_time + "</td><td> " + el.type + "</td><td> " + el.pile_id + "</td><td name='" + JSON.stringify(el.repaired_record) + "' class='bikeWorkbtn'><a href='#' style='color:blue;'>查看记录</a></td></tr>");
+                        var bikeWorking = $("<tr><td>" + el.SIM + "</td><td> " + el.agent_name + "</td><td> " + el.investor_name + "</td><td> " + el.brand + "</td><td> " + el.enter_time + "</td><td> " + el.sale_time + "</td><td> " + el.type + "</td><td> " + el.pile_id + "</td><td name='" + JSON.stringify(el.repaired_record) + "' class='bikeWorkbtn'><a href='#' style='color:blue;'>查看记录</a></td></tr>");
                         $(".bikeWorkingReport_cont").append(bikeWorking);
                     });
                      $(".tablelist").trigger("update");
@@ -1081,9 +1082,7 @@ function  userList(num,page) {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
-
-
-            if (res.ret == 0){
+           if (res.ret == 0){
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");
                 } else {
@@ -1092,8 +1091,7 @@ function  userList(num,page) {
                         var investor = $("<tr><td>" + el.id + "</td><td> " + el.name + "</td><td> " + el.money + "</td><td> " + el.vehicles + "</td><td> " + el.auth + "</td><td> " + el.phone + "</td><td> " + el.deposited + "</td><td> " + el.photo + "</td><td>"+el.identity+"</td><td>" +nullreturn(el.owner_id)+"</td></tr>");
                         $(".users_cont").append(investor);
                     });
-
-                     $(".tablelist").trigger("update");
+                    $(".tablelist").trigger("update");
                 }
 
                 
