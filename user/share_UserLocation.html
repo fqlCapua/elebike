@@ -1,44 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
-		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
-		#allmap{width:100%;height:100%;}
-		#r-result{width:100%;margin-top:5px;}
-		p{margin:5px; font-size:14px;}
-	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=	jSl59rO4plxRmCllNElYDPOsflSAO5Qo"></script>
-	<title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>折线、多边形、圆</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <script src="http://webapi.amap.com/maps?v=1.4.6&key=630197c099745d94fba4a6269d4ab09b"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 </head>
 <body>
-	<div id="allmap"></div>
+<div id="container"></div>
+<script>
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        center: [116.397428, 39.90923],
+        zoom:13
+    });
+    var lineArr = [
+        [116.368904, 39.913423],
+        [116.382122, 39.901176],
+        [116.387271, 39.912501],
+        [116.398258, 39.904600]
+    ];
+    var polyline = new AMap.Polyline({
+        path: lineArr,          //设置线覆盖物路径
+        strokeColor: "#3366FF", //线颜色
+        strokeOpacity: 1,       //线透明度
+        strokeWeight: 5,        //线宽
+        strokeStyle: "solid",   //线样式
+        strokeDasharray: [10, 5] //补充线样式
+    });
+    polyline.setMap(map);
 
+    var polygonArr = new Array();//多边形覆盖物节点坐标数组
+    polygonArr.push([116.403322, 39.920255]);
+    polygonArr.push([116.410703, 39.897555]);
+    polygonArr.push([116.402292, 39.892353]);
+    polygonArr.push([116.389846, 39.891365]);
+    var  polygon = new AMap.Polygon({
+        path: polygonArr,//设置多边形边界路径
+        strokeColor: "#FF33FF", //线颜色
+        strokeOpacity: 0.2, //线透明度
+        strokeWeight: 3,    //线宽
+        fillColor: "#1791fc", //填充色
+        fillOpacity: 0.35//填充透明度
+    });
+    polygon.setMap(map);
+
+    var circle = new AMap.Circle({
+        center: new AMap.LngLat("116.403322", "39.920255"),// 圆心位置
+        radius: 1000, //半径
+        strokeColor: "#F33", //线颜色
+        strokeOpacity: 1, //线透明度
+        strokeWeight: 3, //线粗细度
+        fillColor: "#ee2200", //填充颜色
+        fillOpacity: 0.35//填充透明度
+    });
+    circle.setMap(map);
+</script>
 </body>
 </html>
-<script type="text/javascript">
-	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-
-	var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
-	var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
-	var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
-	/*缩放控件type有四种类型:
-	BMAP_NAVIGATION_CONTROL_SMALL：仅包含平移和缩放按钮；BMAP_NAVIGATION_CONTROL_PAN:仅包含平移按钮；BMAP_NAVIGATION_CONTROL_ZOOM：仅包含缩放按钮*/
-	
-	//添加控件和比例尺
-	function add_control(){
-		map.addControl(top_left_control);        
-		map.addControl(top_left_navigation);     
-		map.addControl(top_right_navigation);    
-	}
-	//移除控件和比例尺
-	function delete_control(){
-		map.removeControl(top_left_control);     
-		map.removeControl(top_left_navigation);  
-		map.removeControl(top_right_navigation); 
-	}
-	add_control();
-</script>

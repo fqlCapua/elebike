@@ -301,7 +301,7 @@ function getBikelist() {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://www.8gps8.cn:8011/bikePublic/api/bike/getBikeId",
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/bike/getBikeList",
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -311,25 +311,15 @@ function getBikelist() {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
-
+ 
             if (res.ret == 0) {
                 var bikelist;
                 if (res.data.length == 0) {
                     layer.msg("数据为空");
                 } else {
-
-                    if (getSession()[4] == 1) {
-
-                        bikelist = res.data;
-
-
-                    } else {
-                        bikelist = res.data;
-
-                    }
-
+                       bikelist=res.data        
                     $.each(bikelist, function(index, el) {
-                        var tr = $("<tr><td class='bike_user_id'>" + el.user_id + "</td>" + returnBikeStr(el.bike_ids) + returnBikeBtn(el.bike_ids) + "</tr>");
+                        var tr = $("<tr><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
                         $(".bikeList_cont").append(tr);
                     });
 
@@ -569,7 +559,7 @@ function returnAgent_repairRecordStr(Str) {
     var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>维修人员ID</th><th>维修人员名称</th><th>电车ID</th><th>维修描述</th><th>维修时间</th></tr>";
     $.each(JSONstr, function(index, el) {
 
-        strObj += "<tr><td>" + el.worker_id + "</td><td>" + el.worker_name + "</td><td>" + el.vehicle_id + "</td><td>" + el.repair_desc + "</td><td>" + timestampToTime(el.repair_time) + "</td></tr>";
+        strObj += "<tr><td>" + el.worker_id + "</td><td>" + el.worker_name + "</td><td>" + el.vehicle_id + "</td><td>" + el.repair_desc + "</td><td>" +  el.repair_time  + "</td></tr>";
     });
     strObj += "</table>";
     return strObj;
@@ -596,7 +586,7 @@ function repairerReportList() {
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
 
-
+ 
             if (res.ret == 0) {
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");

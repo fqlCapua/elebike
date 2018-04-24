@@ -7,22 +7,19 @@
         <title></title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link href="css/select.css" rel="stylesheet" type="text/css" />
-          <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-       
-                <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
         <script type="text/javascript" src="js/select-ui.min.js"></script>
         <script type="text/javascript" src="js/md5.js"></script>
         <script type="text/javascript" src="js/getSession.js"></script>
         <script type="text/javascript" src="js/com.js"></script>
         <script type="text/javascript" src="js/layer.js"></script>
-       
-      <style>
-         .bikeList_cont td a{
+        <style>
+        .bikeList_cont td a {
             color: blue;
-          }
-     
-      </style>
+        }
+        </style>
         <script type="text/javascript">
         $(document).ready(function(e) {
             $(".select1").uedSelect({
@@ -47,24 +44,21 @@
                 <li><a href="#">车辆列表</a></li>
             </ul>
         </div>
-        <div class="formbody" >
+        <div class="formbody">
             <div style="clear: both;"></div>
             <div id="usual1" class="usual">
                 <div class="itab">
                     <ul>
                         <li><a href="#tab2" class="selected">车辆列表</a></li>
-                       
                     </ul>
                 </div>
-              
                 <div id="tab2" class="tabson">
                     <ul class="seachform">
                         <li>
                             <label>车辆id查询</label>
                             <input name="" type="text" class="scinput" />
                         </li>
-                        
-                      <!--   <li>
+                        <!--   <li>
                             <label>重点客户</label>
                             <div class="vocation">
                                 <select class="select3">
@@ -87,43 +81,45 @@
                             <input name="" type="button" class="scbtn" value="查询" />
                         </li>
                     </ul>
-                    <table class="tablelist" >
+                    <table class="tablelist">
                         <thead>
                             <tr>
-                                
-                                <th>所有者ID<i class="sort"><img src="images/px.gif" /></i></th>
-                                <th>车辆列表</th>
-                               
-                                 <th>查看</th>
+                                <th>车辆ID<i class="sort"><img src="images/px.gif" /></i></th>
+                                <th>品牌</th>
+                                <th>型号</th>
+                                <th>代理商姓名</th>
+                                <th>经销商 </th>
+                                <th>厂商 </th>
+                                <th>投资商</th>
+                                <th>入网日期</th>
+                                <th>销售日期</th>
+                                <th>保修期(天)</th>
+                                <th>售出状态</th>
+                                <th>车辆购买者id</th>
+                                <th>车辆购买者姓名</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
-                       
-                        <tbody class="bikeList_cont"  >
-                             
+                        <tbody class="bikeList_cont">
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <div></div>
             <script type="text/javascript">
-                   $("#usual1 ul").idTabs();
+            $("#usual1 ul").idTabs();
             </script>
             <script type="text/javascript">
-                   $('.tablelist tbody tr:odd').addClass('odd');
+            $('.tablelist tbody tr:odd').addClass('odd');
             </script>
         </div>
     </body>
-
-<script type="text/javascript" src="js/angular.js"></script>
-<script type="text/javascript" src="js/person/adminSet.js"></script>
-<script type="text/javascript">
-    
-    $(function(){
-       getBikelist();
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/person/adminSet.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        getBikelist();
     })
-
-  
-</script>
+    </script>
 
 </html>
