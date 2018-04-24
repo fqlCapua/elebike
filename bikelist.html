@@ -15,7 +15,11 @@
         <script type="text/javascript" src="js/getSession.js"></script>
         <script type="text/javascript" src="js/com.js"></script>
         <script type="text/javascript" src="js/layer.js"></script>
+        <script type="text/javascript" src="js/person/jquery.tablesorter.js"></script>
         <style>
+        .tablelist tr th{
+            cursor: pointer;
+        }
         .bikeList_cont td a {
             color: blue;
         }
@@ -32,6 +36,7 @@
                 width: 100
             });
         });
+        $(".tablelist").tablesorter();
         </script>
     </head>
 

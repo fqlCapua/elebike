@@ -322,7 +322,7 @@ function getBikelist() {
                         var tr = $("<tr><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
                         $(".bikeList_cont").append(tr);
                     });
-
+                      $(".tablelist").trigger("update");
 
                 }
 
@@ -744,7 +744,7 @@ function  userReportList() {
                         var user = $("<tr><td>" + el.user_id + "</td><td> " + el.user_name + "</td><td> " + el.primary_phone + "</td><td> " + el.vice_phone1 + "</td><td name='" + JSON.stringify(el.ride_record) + "' class='checkRide_record'><a href='#' style='color:blue;'>查看列表</a></td></tr>");
                         $(".userReport_cont").append(user);
                     });
-                       $(".tablelist").trigger("update");
+                     $(".tablelist").trigger("update");
                 }
             } else {
                 requestStatus(res.ret);
