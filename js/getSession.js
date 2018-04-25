@@ -6,8 +6,8 @@
 		var name=jsonTxt.name;
 		var userphone=jsonTxt.phone;
 		var user_id=jsonTxt.id;
-    var auth=jsonTxt.auth;
-        var bikeArr=(jsonTxt.vehicles).split(",");
+        var auth=jsonTxt.auth;
+        var bikeArr=(jsonTxt.vehicles).split(";");
 		    userInfos.push(name);
 		    userInfos.push(userphone);
         userInfos.push(user_id);
@@ -54,6 +54,37 @@
  	}
  	
  }
+
+
+ function LocalTime(timestamp) {
+    var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    Y = date.getFullYear() + '-';
+    M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    D = date.getDate() + ' ';
+    h = date.getHours() + ':';
+    m = date.getMinutes() + ':';
+    s = date.getSeconds();
+    return Y + M + D + h + m + s;
+}
+
+function check_code(obj) {
+    var code = $(obj).val();
+    var flag;
+
+    if (code != "") {
+        flag = true;
+    } else {
+
+        flag = false;
+        layer.tips("不能为空", obj, {
+            tips: [1, "#4082D4"],
+            tipsMore: true
+        });
+    }
+
+
+    return flag;
+}
 
     
  
