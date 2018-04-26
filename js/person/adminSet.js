@@ -75,6 +75,53 @@ function check_code(obj) {
  *date:2018/3/28
  *part:设置用户类型
  */
+
+/*获取隶属公司信息*/
+function getCompany(usertype){
+ var opnum;
+    var user_id=getSession()[2];
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("user_id", user_id);
+    form.append("user_type",usertype);
+    var settings = {
+        "async":false,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/site/getCompany",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+        $(".type_ownerid").empty();
+            var res = JSON.parse(res);
+           
+
+            if (res.ret == 0) {
+                var list=res.data;
+                opnum=list.length;
+                
+               // $(".type_ownerid").append($("<option>请选择</option>"));
+                $.each(list,function(index, el) {
+                    var option=$("<option name='"+el.id+"'>"+el.name+"</option>");
+                    $(".type_ownerid").append(option);
+                });
+            } else {
+                requestStatus(res.ret);
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+             
+        });
+   return opnum;
+}
 function setType(a, b, c, d) {
 
     var index = layer.load(1, {
@@ -115,13 +162,34 @@ function setType(a, b, c, d) {
         .always(function() {
             layer.close(index);
         });
-}
+};
+$(".type_type").change(function(event){
+     var user_type = $(".type_type").children('option:selected').attr("name");
+
+       var opnum1=getCompany(user_type);
+     
+        // $(".type_ownerid").children('option').eq(0).attr("selected",true);
+     if(opnum1==0){
+        $(".type_ownerid").parent().parent().parent().hide();
+     }else{
+        $(".type_ownerid").parent().parent().parent().show();
+     }
+        
+
+});
 $(".usertypeBtn").click(function() {
     var manager_id = getSession()[2];
     var user_id = $(".type_userid").val();
-    var owner_id = $(".type_ownerid").children('option:selected').attr("name");
+   
     var user_type = $(".type_type").children('option:selected').attr("name");
-
+    var owner_id = $(".type_ownerid").children('option:selected').attr("name");
+      
+if(owner_id==undefined){
+     var owner_id="";
+     
+}else{
+     
+}
     //console.log(manager_id+"-"+owner_id+"-"+user_id+"-"+user_type);
     if (user_id != "") {
 
