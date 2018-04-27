@@ -1,10 +1,11 @@
+
 function loadAllType(url,obj){
     var user_id=getSession()[2];
       var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
     form.append("user_id", user_id);
-    
+     
     var settings = {
         "async":false,
         "crossDomain": true,
@@ -69,12 +70,19 @@ function check_code(obj) {
 
     return flag;
 }
+
+$(function(){
+    if(getSession()[4]==1){
+        $(".addFirm,addFirmBox").hide();
+    }
+})
 /*
  *email:13523450460@sina.cn 
  *name:capua
  *date:2018/3/28
  *part:设置用户类型
  */
+
 
 /*获取隶属公司信息*/
 function getCompany(usertype){

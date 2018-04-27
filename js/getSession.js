@@ -10,11 +10,11 @@
         var bikeArr=(jsonTxt.vehicles).split(";");
 		    userInfos.push(name);
 		    userInfos.push(userphone);
-        userInfos.push(user_id);
-        userInfos.push(bikeArr);
-        userInfos.push(auth);
+            userInfos.push(user_id);
+            userInfos.push(bikeArr);
+            userInfos.push(auth);
 		     return userInfos;
-  } else {
+  }else {
       layer.msg('请先登录');
     
   }

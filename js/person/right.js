@@ -91,6 +91,7 @@ function setUser(user_id, bike_id, userPhone, actionStatus) {
                 requestStatus(res.ret);
             }
         }).fail(function() {
+            layer.msg("绑定失败");
             console.log("error");
         })
         .always(function() {
