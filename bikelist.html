@@ -17,7 +17,8 @@
         <script type="text/javascript" src="js/layer.js"></script>
         <script type="text/javascript" src="js/person/jquery.tablesorter.js"></script>
         <style>
-    .tablelist tr th,.tablelist .check_traval{
+        .tablelist tr th,
+        .tablelist .check_traval {
             cursor: pointer;
         }
         .bikeList_cont td a {
@@ -36,10 +37,18 @@
                 width: 100
             });
         });
-        $(function(){
+        $(function() {
             $(".tablelist").tablesorter();
+           // $(".tablelist").tablesorter( {sortList:[[0,0],[1,0]]}); 
+            // $(".tablelist").tablesorter({
+            //     headers: {
+            //        0:{
+            //              sorter: false
+            //         },   
+            //     },
+                
+            // });
         })
-        
         </script>
     </head>
 
@@ -61,37 +70,12 @@
                     </ul>
                 </div>
                 <div id="tab2" class="tabson">
-                    <ul class="seachform">
-                        <li>
-                            <label>车辆id查询</label>
-                            <input name="" type="text" class="scinput" />
-                        </li>
-                        <!--   <li>
-                            <label>重点客户</label>
-                            <div class="vocation">
-                                <select class="select3">
-                                    <option>全部</option>
-                                    <option>其他</option>
-                                </select>
-                            </div>
-                        </li>
-                        <li>
-                            <label>客户状态</label>
-                            <div class="vocation">
-                                <select class="select3">
-                                    <option>全部</option>
-                                    <option>其他</option>
-                                </select>
-                            </div>
-                        </li> -->
-                        <li>
-                            <label>&nbsp;</label>
-                            <input name="" type="button" class="scbtn" value="查询" />
-                        </li>
-                    </ul>
+                    
                     <table class="tablelist">
                         <thead>
                             <tr>
+                                <th class="bikeAll">
+                                    <input type="checkbox" class="bikeAllBtn" />全选</th>
                                 <th>车辆ID<i class="sort"><img src="images/px.gif" /></i></th>
                                 <th>品牌</th>
                                 <th>型号</th>
@@ -112,6 +96,48 @@
                         </tbody>
                     </table>
                 </div>
+                <ul class="seachform">
+                        <li>
+                            <label>车辆id查询</label>
+                            <input name="" type="text" class="scinput" />
+                             <input name="" type="button" class="scbtn" value="查询" />
+                        </li>
+                        <!--   <li>
+                            <label>重点客户</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>客户状态</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>全部</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li> -->
+                        
+                         <li>
+                            <label style="font-size:16px;font-weight: bold;" class="">移库给经销商:</label>
+                            <div class="vocation">
+                                <select class="select3">
+                                    <option>经销商1</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label>&nbsp;</label>
+                            <input name="" type="button" class="scbtn" value="提交" />
+                        </li>
+                    </ul>
+                <ul class="seachform">
+                       
+                </ul>
             </div>
             <div></div>
             <script type="text/javascript">
