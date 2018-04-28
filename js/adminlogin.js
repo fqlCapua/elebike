@@ -194,7 +194,7 @@ function remainTime() {
 
 }
 
-function userInfoSession(userid,auth) {
+function userInfoSession(userid) {
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
@@ -216,7 +216,7 @@ function userInfoSession(userid,auth) {
         var res=JSON.parse(res);
         var userInfo=res.data;
          var ss=window.sessionStorage;
-         userInfo.auth=auth;
+        
         ss.setItem("io",JSON.stringify(userInfo));
      
     });
@@ -257,7 +257,7 @@ function subAdminForm(auth) {
         if (res.ret == 0) {
             layer.msg("登录成功");
             var userid=res.data.user_id;
-            userInfoSession(userid,auth);
+            userInfoSession(userid);
             window.location.href="main.html#/admin";
         } else {
             layer.msg("登录失败");

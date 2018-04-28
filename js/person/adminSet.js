@@ -72,7 +72,7 @@ function check_code(obj) {
 }
 
 $(function(){
-    if(getSession()[4]==1){
+    if(getSession()[4]!=1){
         $(".addFirm,addFirmBox").hide();
     }
 })
@@ -216,6 +216,11 @@ if(owner_id==undefined){
  *part:添加车辆
  */
 
+ $(function(){
+    var owner_id=getSession()[5]
+    $(".ad_host").val(owner_id);
+ })
+
 function addBike(a, b) {
     var index = layer.load(1, {
         shade: [0.1, '#000']
@@ -248,6 +253,7 @@ function addBike(a, b) {
         })
         .fail(function() {
             console.log("error");
+            layer.msg("添加失败");
         })
         .always(function() {
             layer.close(index);
@@ -270,7 +276,7 @@ $(".ad_btn").click(function() {
 
     if ($(".ad_id").val() != "") {
          
-          console.log(Infos);
+        //  console.log(Infos);
         addBike(user_id, Infos);
     } else {
 
@@ -288,7 +294,7 @@ $(".ad_btn").click(function() {
 function addUser() {
 
     var user_id = getSession()[2];
-    var user_type = $(".ct_type").children("option:selected").attr("name");
+    var user_type = getSession()[4];
     var phone = $(".ct_phone").val();
     var truename = $(".ct_uname").val();
     var id = $(".ct_uid").val();
@@ -365,7 +371,84 @@ function returnBikeBtn(JSON) {
 
     return str;
 }
+ //返回选中车辆
+function getcheckedBike(){
+    var  checkArr=new Array();
+    var trs=$('.bikeList_cont tr .uncheckedbox_bike');
+       
+    $.each(trs,function(index, el) {
+        if($(el).is(":checked")){
+            var bike_id=$(el).parent().siblings('.bike_user_id').html();
+               checkArr.push(bike_id);
+        }else{
 
+        }
+  });
+
+   return   checkArr.join(',');
+}
+//移库给经销商
+function sendToDelaer(duid,bikeStr) {
+    var form = new FormData();
+    var user_id=getSession()[2];
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("fuid", user_id);
+    form.append("duid", duid);
+    form.append("vids", vids);
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://www.8gps8.cn:8011/bikePublic/api/bike/bikeDetail",
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    };
+
+    $.ajax(settings).done(function(res) {
+            var res = JSON.parse(res);
+
+            if (res.ret == 0){
+                 layer.msg("添加成功");
+            } else {
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            layer.msg("服务器出现未知错误");
+        })
+        .always(function() {
+
+        });
+};
+
+
+
+$(".Allchecked").click(function(){
+    //   var flag=$('.bikeList_cont tr .uncheckedbox_bike').is(":checked");
+    // if(flag==true){
+    //     $('.bikeList_cont tr .uncheckedbox_bike').removeAttr("checked");
+    // }else{
+    //     $('.bikeList_cont tr .uncheckedbox_bike').attr("checked",true);
+    // }
+ var xxx = document.getElementsByName("bikdck");
+ 
+ var obj=document.getElementsByClassName('Allchecked')[0];
+  if(obj.checked) {
+   for(var i = 0;i < xxx.length;i++) {
+    xxx[i].checked = true;
+   }
+  } else {
+   for(var i = 0;i < xxx.length;i++) {
+    xxx[i].checked = false;
+   }
+  }
+    
+       
+  
+});
 function getBikelist() {
 
     var user_id = getSession()[2];
@@ -396,8 +479,13 @@ function getBikelist() {
                 } else {
                      var  bikelist=res.data;     
                     $.each(bikelist, function(index, el) {
-                        var tr = $("<tr><td><input type='checkbox' class='singlebike'/></td><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
-                        $(".bikeList_cont").append(tr);
+                      if(el.dealer!=''){
+                        var tr = $("<tr><td class='checkedbox_bike text-success'>已移库</td><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td class='bike_dealer'>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
+                       }else{
+                        var tr = $("<tr><td ><input class='uncheckedbox_bike' name='bikdck'  type='checkbox'/></td><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td class='bike_dealer'>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
+                      }
+                      $(".bikeList_cont").append(tr);
+            
                     });
                     $(".tablelist").trigger("update");
 
