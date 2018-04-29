@@ -1,15 +1,14 @@
-
-function loadAllType(url,obj){
-    var user_id=getSession()[2];
-      var form = new FormData();
+function loadAType(url, obj) {
+    var user_id = getSession()[2];
+    var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
     form.append("user_id", user_id);
-     
+
     var settings = {
-        "async":false,
+        "async": false,
         "crossDomain": true,
-        "url":url,
+        "url": url,
         "method": "POST",
         "processData": false,
         "contentType": false,
@@ -20,15 +19,15 @@ function loadAllType(url,obj){
     $.ajax(settings).done(function(res) {
 
             var res = JSON.parse(res);
-           
+
             if (res.ret == 0) {
-                var list=res.data;
-                $.each(list,function(index, el) {
-                    var option=$("<option title='"+el.name+"'>"+el.id+"</option>");
+                var list = res.data;
+                $.each(list, function(index, el) {
+                    var option = $("<option title='" + el.id + "'>" + el.name + "</option>");
                     $(obj).append(option);
                 });
-            
-          }else{
+
+            } else {
                 requestStatus(res.ret);
             }
         }).fail(function() {
@@ -40,6 +39,45 @@ function loadAllType(url,obj){
 }
 
 
+function loadAllType(url, obj) {
+    var user_id = getSession()[2];
+    var form = new FormData();
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[1]);
+    form.append("user_id", user_id);
+
+    var settings = {
+        "async": false,
+        "crossDomain": true,
+        "url": url,
+        "method": "POST",
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": form
+    }
+
+    $.ajax(settings).done(function(res) {
+
+            var res = JSON.parse(res);
+
+            if (res.ret == 0) {
+                var list = res.data;
+                $.each(list, function(index, el) {
+                    var option = $("<option title='" + el.name + "'>" + el.id + "</option>");
+                    $(obj).append(option);
+                });
+
+            } else {
+                requestStatus(res.ret);
+            }
+        }).fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+
+        });
+}
 
 function timestampToTime(timestamp) {
     var date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -71,8 +109,8 @@ function check_code(obj) {
     return flag;
 }
 
-$(function(){
-    if(getSession()[4]!=1){
+$(function() {
+    if (getSession()[4] != 1) {
         $(".addFirm,addFirmBox").hide();
     }
 })
@@ -85,16 +123,16 @@ $(function(){
 
 
 /*获取隶属公司信息*/
-function getCompany(usertype){
- var opnum;
-    var user_id=getSession()[2];
+function getCompany(usertype) {
+    var opnum;
+    var user_id = getSession()[2];
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
     form.append("user_id", user_id);
-    form.append("user_type",usertype);
+    form.append("user_type", usertype);
     var settings = {
-        "async":false,
+        "async": false,
         "crossDomain": true,
         "url": "https://www.8gps8.cn:8011/bikePublic/api/site/getCompany",
         "method": "POST",
@@ -105,17 +143,17 @@ function getCompany(usertype){
     }
 
     $.ajax(settings).done(function(res) {
-        $(".type_ownerid").empty();
+            $(".type_ownerid").empty();
             var res = JSON.parse(res);
-           
+
 
             if (res.ret == 0) {
-                var list=res.data;
-                opnum=list.length;
-                
-               // $(".type_ownerid").append($("<option>请选择</option>"));
-                $.each(list,function(index, el) {
-                    var option=$("<option name='"+el.id+"'>"+el.name+"</option>");
+                var list = res.data;
+                opnum = list.length;
+
+                // $(".type_ownerid").append($("<option>请选择</option>"));
+                $.each(list, function(index, el) {
+                    var option = $("<option name='" + el.id + "'>" + el.name + "</option>");
                     $(".type_ownerid").append(option);
                 });
             } else {
@@ -126,10 +164,11 @@ function getCompany(usertype){
             console.log("error");
         })
         .always(function() {
-             
+
         });
-   return opnum;
+    return opnum;
 }
+
 function setType(a, b, c, d) {
 
     var index = layer.load(1, {
@@ -171,33 +210,33 @@ function setType(a, b, c, d) {
             layer.close(index);
         });
 };
-$(".type_type").change(function(event){
-     var user_type = $(".type_type").children('option:selected').attr("name");
+$(".type_type").change(function(event) {
+    var user_type = $(".type_type").children('option:selected').attr("name");
 
-       var opnum1=getCompany(user_type);
-     
-        // $(".type_ownerid").children('option').eq(0).attr("selected",true);
-     if(opnum1==0){
+    var opnum1 = getCompany(user_type);
+
+    // $(".type_ownerid").children('option').eq(0).attr("selected",true);
+    if (opnum1 == 0) {
         $(".type_ownerid").parent().parent().parent().hide();
-     }else{
+    } else {
         $(".type_ownerid").parent().parent().parent().show();
-     }
-        
+    }
+
 
 });
 $(".usertypeBtn").click(function() {
     var manager_id = getSession()[2];
     var user_id = $(".type_userid").val();
-   
+
     var user_type = $(".type_type").children('option:selected').attr("name");
     var owner_id = $(".type_ownerid").children('option:selected').attr("name");
-      
-if(owner_id==undefined){
-     var owner_id="";
-     
-}else{
-     
-}
+
+    if (owner_id == undefined) {
+        var owner_id = "";
+
+    } else {
+
+    }
     //console.log(manager_id+"-"+owner_id+"-"+user_id+"-"+user_type);
     if (user_id != "") {
 
@@ -216,10 +255,10 @@ if(owner_id==undefined){
  *part:添加车辆
  */
 
- $(function(){
-    var owner_id=getSession()[5]
+$(function() {
+    var owner_id = getSession()[5]
     $(".ad_host").val(owner_id);
- })
+})
 
 function addBike(a, b) {
     var index = layer.load(1, {
@@ -275,7 +314,7 @@ $(".ad_btn").click(function() {
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}]").split(",}]")[0] + "}]";
 
     if ($(".ad_id").val() != "") {
-         
+
         //  console.log(Infos);
         addBike(user_id, Infos);
     } else {
@@ -371,84 +410,91 @@ function returnBikeBtn(JSON) {
 
     return str;
 }
- //返回选中车辆
-function getcheckedBike(){
-    var  checkArr=new Array();
-    var trs=$('.bikeList_cont tr .uncheckedbox_bike');
-       
-    $.each(trs,function(index, el) {
-        if($(el).is(":checked")){
-            var bike_id=$(el).parent().siblings('.bike_user_id').html();
-               checkArr.push(bike_id);
-        }else{
+//返回选中车辆
+function getcheckedBike() {
+    var checkArr = new Array();
+    var trs = $('.bikeList_cont tr .uncheckedbox_bike');
+
+    $.each(trs, function(index, el) {
+        if ($(el).is(":checked")) {
+            var bike_id = $(el).parent().siblings('.bike_user_id').html();
+            checkArr.push(Number(bike_id));
+        } else {
 
         }
-  });
-
-   return   checkArr.join(',');
+    });
+    //.join(',')
+    return checkArr;
 }
 //移库给经销商
-function sendToDelaer(duid,bikeStr) {
-    var form = new FormData();
-    var user_id=getSession()[2];
-    form.append("time", time_token()[0]);
-    form.append("token", time_token()[1]);
-    form.append("fuid", user_id);
-    form.append("duid", duid);
-    form.append("vids", vids);
+function sendToDelaer(duid, vids) {
 
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://www.8gps8.cn:8011/bikePublic/api/bike/bikeDetail",
-        "method": "POST",
-        "processData": false,
-        "contentType": false,
-        "mimeType": "multipart/form-data",
-        "data": form
-    };
+    var user_id = getSession()[2];
+  
 
-    $.ajax(settings).done(function(res) {
-            var res = JSON.parse(res);
 
-            if (res.ret == 0){
-                 layer.msg("添加成功");
+    $.ajax({
+            "url": "https://www.8gps8.cn:8011/bikePublic/api/factory/assign/vehicle",
+            "method": "POST",
+            "data": {
+                time: time_token()[0],
+                token: time_token()[1],
+                fuid: user_id,
+                did: duid,
+                vids: vids
+            }
+        })
+        .done(function(res) {
+            //var res = JSON.parse(res);
+                if (res.ret == 0) {
+               
+                layer.msg("移库成功");
+            window.location.reload();
             } else {
                 requestStatus(res.ret);
             }
-        }).fail(function() {
-            layer.msg("服务器出现未知错误");
+        })
+        .fail(function() {
+             layer.msg("移库失败");
         })
         .always(function() {
-
+            console.log("complete");
         });
+
 };
 
 
 
-$(".Allchecked").click(function(){
-    //   var flag=$('.bikeList_cont tr .uncheckedbox_bike').is(":checked");
-    // if(flag==true){
-    //     $('.bikeList_cont tr .uncheckedbox_bike').removeAttr("checked");
-    // }else{
-    //     $('.bikeList_cont tr .uncheckedbox_bike').attr("checked",true);
-    // }
- var xxx = document.getElementsByName("bikdck");
- 
- var obj=document.getElementsByClassName('Allchecked')[0];
-  if(obj.checked) {
-   for(var i = 0;i < xxx.length;i++) {
-    xxx[i].checked = true;
-   }
-  } else {
-   for(var i = 0;i < xxx.length;i++) {
-    xxx[i].checked = false;
-   }
-  }
-    
-       
-  
+$(".Allchecked").click(function() {
+
+    var xxx = document.getElementsByName("bikdck");
+
+    var obj = document.getElementsByClassName('Allchecked')[0];
+    if (obj.checked) {
+        for (var i = 0; i < xxx.length; i++) {
+            xxx[i].checked = true;
+        }
+    } else {
+        for (var i = 0; i < xxx.length; i++) {
+            xxx[i].checked = false;
+        }
+    }
+
+
+
 });
+
+
+$(function() {
+    loadAType("https://www.8gps8.cn:8011/bikePublic/api/site/getDealerList", ".deaderchecked");
+})
+$(".sendTodealer").click(function(event) {
+    var duid = $(".deaderchecked").children('option:selected').attr("title");
+    var vids = JSON.stringify(getcheckedBike());
+    console.log(duid + "/" + vids);
+    sendToDelaer(duid, vids)
+});
+
 function getBikelist() {
 
     var user_id = getSession()[2];
@@ -471,21 +517,21 @@ function getBikelist() {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
- 
+
             if (res.ret == 0) {
-              
+
                 if (res.data.length == 0) {
                     layer.msg("数据为空");
                 } else {
-                     var  bikelist=res.data;     
+                    var bikelist = res.data;
                     $.each(bikelist, function(index, el) {
-                      if(el.dealer!=''){
-                        var tr = $("<tr><td class='checkedbox_bike text-success'>已移库</td><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td class='bike_dealer'>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
-                       }else{
-                        var tr = $("<tr><td ><input class='uncheckedbox_bike' name='bikdck'  type='checkbox'/></td><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td class='bike_dealer'>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
-                      }
-                      $(".bikeList_cont").append(tr);
-            
+                        if (el.dealer != '') {
+                            var tr = $("<tr><td class='checkedbox_bike text-success'>已移库</td><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td class='bike_dealer'>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
+                        } else {
+                            var tr = $("<tr><td ><input class='uncheckedbox_bike' name='bikdck'  type='checkbox'/></td><td class='bike_user_id'>" + el.vehicle_id + "</td><td>" + el.brand + "</td><td>" + el.version + "</td><td>" + el.delegater + "</td><td class='bike_dealer'>" + el.dealer + "</td><td>" + el.firm + "</td><td>" + el.investor + "</td><td>" + el.inNetDate + "</td><td>" + el.saleDate + "</td><td>" + el.maintenance + "</td><td>" + el.sale_status + "</td><td>" + el.bike_user_id + "</td><td>" + el.bike_user_name + "</td><td><a class='check_traval'>查看轨迹</a></td></tr>");
+                        }
+                        $(".bikeList_cont").append(tr);
+
                     });
                     $(".tablelist").trigger("update");
 
@@ -611,9 +657,9 @@ function investorReportList() {
 
         });
 }
-$(".investor_cont").on('click','.checkBikeInfo', function() {
+$(".investor_cont").on('click', '.checkBikeInfo', function() {
     var Bikestr = $(this).attr('name');
-    var Str=returnBikearrStr(Bikestr);
+    var Str = returnBikearrStr(Bikestr);
     layer.open({
         type: 1,
         title: '车辆列表',
@@ -724,7 +770,7 @@ function returnAgent_repairRecordStr(Str) {
     var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>维修人员ID</th><th>维修人员名称</th><th>电车ID</th><th>维修描述</th><th>维修时间</th></tr>";
     $.each(JSONstr, function(index, el) {
 
-        strObj += "<tr><td>" + el.worker_id + "</td><td>" + el.worker_name + "</td><td>" + el.vehicle_id + "</td><td>" + el.repair_desc + "</td><td>" +  el.repair_time  + "</td></tr>";
+        strObj += "<tr><td>" + el.worker_id + "</td><td>" + el.worker_name + "</td><td>" + el.vehicle_id + "</td><td>" + el.repair_desc + "</td><td>" + el.repair_time + "</td></tr>";
     });
     strObj += "</table>";
     return strObj;
@@ -751,7 +797,7 @@ function repairerReportList() {
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
 
- 
+
             if (res.ret == 0) {
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");
@@ -796,13 +842,13 @@ function returnRepairWorkingStr(Str) {
     var strObj = "<table style='margin:10px;width:100%;' class='bike_Info tablelist' border='0'><tr><th>维修ID号</th><th>维修人</th><th>维修人ID</th><th>维修时间</th>";
     $.each(JSONstr, function(index, el) {
 
-        strObj += "</tr><tr><td>" + el.repair_id + "</td><td>" + el.worker_name + "</td><td> " + el.worker_id + "</td><td>" +  el.repair_time  + "</td></tr>";
+        strObj += "</tr><tr><td>" + el.repair_id + "</td><td>" + el.worker_name + "</td><td> " + el.worker_id + "</td><td>" + el.repair_time + "</td></tr>";
     });
     strObj += "</table>";
     return strObj;
 }
 
-function  bikeWorkingReportList() {
+function bikeWorkingReportList() {
     var user_id = getSession()[2];
     var form = new FormData();
     form.append("time", time_token()[0]);
@@ -822,7 +868,7 @@ function  bikeWorkingReportList() {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
-                   if (res.ret == 0) {
+            if (res.ret == 0) {
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");
                 } else {
@@ -831,7 +877,7 @@ function  bikeWorkingReportList() {
                         var bikeWorking = $("<tr><td>" + el.SIM + "</td><td> " + el.agent_name + "</td><td> " + el.investor_name + "</td><td> " + el.brand + "</td><td> " + el.enter_time + "</td><td> " + el.sale_time + "</td><td> " + el.type + "</td><td> " + el.pile_id + "</td><td name='" + JSON.stringify(el.repaired_record) + "' class='bikeWorkbtn'><a href='#' style='color:blue;'>查看记录</a></td></tr>");
                         $(".bikeWorkingReport_cont").append(bikeWorking);
                     });
-                     $(".tablelist").trigger("update");
+                    $(".tablelist").trigger("update");
                 }
 
 
@@ -846,7 +892,7 @@ function  bikeWorkingReportList() {
         });
 }
 
-$(".bikeWorkingReport_cont").on('click','.bikeWorkbtn', function() {
+$(".bikeWorkingReport_cont").on('click', '.bikeWorkbtn', function() {
     var repairer_record = $(this).attr('name');
     var Str = returnRepairWorkingStr(repairer_record);
     layer.open({
@@ -868,17 +914,17 @@ $(".bikeWorkingReport_cont").on('click','.bikeWorkbtn', function() {
 
 function returnRide_recordStr(Str) {
     var JSONstr = JSON.parse(Str);
-   
+
     var strObj = "<table style='margin:10px;width:100%;' class='tablelist' border='0'><tr><th>电车ID</th><th>骑行开始时间</th><th>骑行开始时间</th><th>骑行时长(分钟)</th><th>骑行距离(米)</th>";
-    $.each(JSONstr[0], function(index,el) {
-    
-        strObj += "</tr><tr><td>" + el.vehicle_id + "</td><td>" +timestampToTime(el.start_time) + "</td><td> " + timestampToTime(el.end_time)+ "</td><td>" +((el.ride_time - el.start_time)/60).toFixed(2)+ "</td><td>" +el.distance+ "</td></tr>";
+    $.each(JSONstr[0], function(index, el) {
+
+        strObj += "</tr><tr><td>" + el.vehicle_id + "</td><td>" + timestampToTime(el.start_time) + "</td><td> " + timestampToTime(el.end_time) + "</td><td>" + ((el.ride_time - el.start_time) / 60).toFixed(2) + "</td><td>" + el.distance + "</td></tr>";
     });
     strObj += "</table>";
     return strObj;
 }
 
-function  userReportList() {
+function userReportList() {
     var user_id = getSession()[2];
     var form = new FormData();
     form.append("time", time_token()[0]);
@@ -909,7 +955,7 @@ function  userReportList() {
                         var user = $("<tr><td>" + el.user_id + "</td><td> " + el.user_name + "</td><td> " + el.primary_phone + "</td><td> " + el.vice_phone1 + "</td><td name='" + JSON.stringify(el.ride_record) + "' class='checkRide_record'><a href='#' style='color:blue;'>查看列表</a></td></tr>");
                         $(".userReport_cont").append(user);
                     });
-                     $(".tablelist").trigger("update");
+                    $(".tablelist").trigger("update");
                 }
             } else {
                 requestStatus(res.ret);
@@ -1213,25 +1259,26 @@ $(".Investor_btn").click(function() {
 });
 
 /*
-*Capua
-*2018/4/11
-*用户列表
-*/
-function nullreturn(str){
-    if(str==null){
-        str="无"; 
-    }else{
+ *Capua
+ *2018/4/11
+ *用户列表
+ */
+function nullreturn(str) {
+    if (str == null) {
+        str = "无";
+    } else {
 
     }
     return str;
 }
-function  userList(num,page) {
+
+function userList(num, page) {
     var user_id = getSession()[2];
     var form = new FormData();
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
     form.append("user_id", user_id);
-    form.append("list_order","id");
+    form.append("list_order", "id");
 
     var settings = {
         "async": true,
@@ -1246,19 +1293,19 @@ function  userList(num,page) {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
-           if (res.ret == 0){
+            if (res.ret == 0) {
                 if (res.data[0].length == 0) {
                     layer.msg("数据为空");
                 } else {
                     var usersList = res.data;
                     $.each(usersList, function(index, el) {
-                        var investor = $("<tr><td>" + el.id + "</td><td> " + el.name + "</td><td> " + el.money + "</td><td> " + el.vehicles + "</td><td> " + el.auth + "</td><td> " + el.phone + "</td><td> " + el.deposited + "</td><td> " + el.photo + "</td><td>"+el.identity+"</td><td>" +nullreturn(el.owner_id)+"</td></tr>");
+                        var investor = $("<tr><td>" + el.id + "</td><td> " + el.name + "</td><td> " + el.money + "</td><td> " + el.vehicles + "</td><td> " + el.auth + "</td><td> " + el.phone + "</td><td> " + el.deposited + "</td><td> " + el.photo + "</td><td>" + el.identity + "</td><td>" + nullreturn(el.owner_id) + "</td></tr>");
                         $(".users_cont").append(investor);
                     });
                     $(".tablelist").trigger("update");
                 }
 
-                
+
             } else {
                 requestStatus(res.ret);
             }
@@ -1286,7 +1333,7 @@ function addRepairRecord() {
     var vehicle_id = $(".addRepair_vehicle_id").val();
     var worker_id = $(".addRepair_worker_id").val();
     var repair_desc = $(".addRepair_repair_desc").val();
-    var repair_time=Date.parse(new Date())/1000;
+    var repair_time = Date.parse(new Date()) / 1000;
 
 
     var form = new FormData();
@@ -1330,7 +1377,7 @@ function addRepairRecord() {
 $(".addRepair_btn").click(function() {
 
     if (check_code(".addRepair_adstation_id") && check_code(".addRepair_user_id") && check_code(".addRepair_vehicle_id")) {
-       addRepairRecord();
+        addRepairRecord();
 
     }
 

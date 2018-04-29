@@ -2,27 +2,65 @@
  	  var ss=window.sessionStorage;
  	   var userInfos=[];
  	   if(ss.getItem('io')) {
-      var jsonTxt=JSON.parse(ss.getItem('io'));
-		var name=jsonTxt.name;
-		var userphone=jsonTxt.phone;
-		var user_id=jsonTxt.id;
+        var jsonTxt=JSON.parse(ss.getItem('io'));
+		    var name=jsonTxt.name;
+		    var userphone=jsonTxt.phone;
+		    var user_id=jsonTxt.id;
         var auth=jsonTxt.auth;
-        var bikeArr=(jsonTxt.vehicles).split(";");
+        var bikeArr=(jsonTxt.vehicles).split(";"); 
         var owner_id=jsonTxt.ownerid;
-		    userInfos.push(name);
-		    userInfos.push(userphone);
+		        userInfos.push(name);
+		        userInfos.push(userphone);
             userInfos.push(user_id);
             userInfos.push(bikeArr);
             userInfos.push(auth);
             userInfos.push(owner_id);
-		     return userInfos;
+		        return userInfos;
   }else {
       layer.msg('请先登录');
     
   }
  	 // return  userInfos=['admin','13523450460','9',''];
  };
- 
+  function usertype(status){
+    var usertype;
+    switch(status){
+        case 1:
+        usertype="管理员";
+        break;
+        case 2:
+         usertype="财务管理";
+        break;
+        case 3:
+        usertype="客服";
+        break;
+        case 4:
+        usertype="维保";
+        break;
+        case 5:
+        usertype="厂商";
+        break;
+        case 6:
+         usertype="经销商";
+        break;
+        case 7:
+         usertype="投资商";
+        break;
+        case 8:
+         usertype="用户";
+          break;
+          case 9:
+         usertype="用户";
+         break;
+         default:
+         usertype="代理商";
+         break;
+    }
+
+
+    return usertype;
+    
+ }
 
  function requestStatus(status){
  	switch(status){

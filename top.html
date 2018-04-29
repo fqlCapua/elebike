@@ -8,12 +8,29 @@
         <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/layer.js"></script>
         <script type="text/javascript" src="js/getSession.js"></script>
+        <style>
+            .userInfo{
+                font-size:23px;
+                font-weight: bold;
+                color: #fff;
+                position:fixed;
+                 width:50%;
+                 margin:0 auto;
+                 text-align: center;
+                 line-height: 88px;
+            }
+        </style>
     </head>
 
     <body style="background:url(images/topbg.gif) repeat-x;">
         <div class="topleft">
             <a href="main.html" target="_parent"><img height="71" src="images/logo.png" title="系统首页" /></a>
+         </div>
+        <div  class="userInfo" style="font-size:24px;font-weight: bold;color: #fff;" >
+            
+            
         </div>
+
         <!--  <ul class="nav">
     <li><a href="default.html" target="rightFrame" class="selected"><img src="images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
     <li><a href="imgtable.html" target="rightFrame"><img src="images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
@@ -23,6 +40,8 @@
     <li><a href="tab.html"  target="rightFrame"><img src="images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
     </ul> -->
         <div class="topright">
+
+            
             <ul>
                 <li>
                     <span><img src="images/help.png" title="帮助"  class="helpimg"/></span>
@@ -44,7 +63,11 @@
     </body>
     <script type="text/javascript">
      $(function(){
+
       $(".name").html(getSession()[0]);  
+      $(".userInfo").html("你好," +usertype(getSession()[4])+getSession()[0]+","+getSession()[1]);
+       
+
      })
     $(".clear").click(function(){
 
