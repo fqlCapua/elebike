@@ -19,6 +19,9 @@
                  text-align: center;
                  line-height: 88px;
             }
+            .clear{
+              cursor: pointer;
+            }
         </style>
     </head>
 
@@ -55,7 +58,8 @@
                 </li>
             </ul>
             <div class="user">
-                <span class="name">admin</span>
+                
+                <span class="name"> </span>
                 <!--<i>消息</i>
                 <b>5</b> -->
             </div>
@@ -63,10 +67,10 @@
     </body>
     <script type="text/javascript">
      $(function(){
-
-      $(".name").html(getSession()[0]);  
-      $(".userInfo").html("你好," +usertype(getSession()[4])+getSession()[0]+","+getSession()[1]);
-       
+       $(".name").attr("title",getSession()[1]);
+      $(".name").html(usertype(getSession()[4])+getSession()[0]);  
+      $(".userInfo").html("你好," +usertype(getSession()[4]));
+      
 
      })
     $(".clear").click(function(){

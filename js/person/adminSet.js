@@ -28,10 +28,10 @@ function loadAType(url, obj) {
                 });
 
             } else {
-                requestStatus(res.ret);
+               // requestStatus(res.ret);
             }
         }).fail(function() {
-            console.log("error");
+            layer.msg("参数出错");
         })
         .always(function() {
 
