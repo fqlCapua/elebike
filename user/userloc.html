@@ -8,12 +8,22 @@
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <script src="http://webapi.amap.com/maps?v=1.4.6&key=630197c099745d94fba4a6269d4ab09b"></script>
     <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+     <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/getSession.js"></script>
 </head>
 <body>
 <div id="container">
 
 </div>
+  <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/layer.js"></script>
 <script>
+    $(function () {
+        // body...
+        var href=window.location.href;
+        var traval_id=href.split("traval_id=")[1];
+        alert(traval_id)
+    })
     var map = new AMap.Map('container', {
         resizeEnable: true,
         center: [116.397428, 39.90923],

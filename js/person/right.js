@@ -64,7 +64,7 @@ function setUser(user_id, bike_id, userPhone, actionStatus) {
     form.append("time", time_token()[0]);
     form.append("token", time_token()[1]);
     form.append("user_id", user_id);
-    form.append("simno", bike_id);
+    form.append("vehicle_id", bike_id);
     form.append("user_phone", userPhone);
     form.append("action", actionStatus);
 

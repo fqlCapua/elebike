@@ -315,7 +315,7 @@ $(".ad_btn").click(function() {
 
     if ($(".ad_id").val() != "") {
 
-        //  console.log(Infos);
+          console.log(Infos);
         addBike(user_id, Infos);
     } else {
 
@@ -517,7 +517,7 @@ function getBikelist() {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
-
+              console.log(res);
             if (res.ret == 0) {
 
                 if (res.data.length == 0) {
@@ -538,8 +538,9 @@ function getBikelist() {
                 }
 
 
-            } else {
-                requestStatus(res.ret);
+            }else{
+
+                 requestStatus(res.ret);
             }
         }).fail(function() {
             layer.msg("请求失败");
