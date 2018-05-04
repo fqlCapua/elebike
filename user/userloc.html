@@ -1,75 +1,194 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <title>轨迹</title>
-    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
-    <script src="http://webapi.amap.com/maps?v=1.4.6&key=630197c099745d94fba4a6269d4ab09b"></script>
-    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
-     <script type="text/javascript" src="../js/md5.js"></script>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+        <title>两点间距离</title>
+        <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+        <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=630197c099745d94fba4a6269d4ab09b"></script>
+        <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+        <script type="text/javascript" src="../js/md5.js"></script>
         <script type="text/javascript" src="../js/getSession.js"></script>
-</head>
-<body>
-<div id="container">
+        <script type="text/javascript" src="../js/com.js"></script>
+        <script type="text/javascript" src="../js/location.js"></script>
+        <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+        .amap-marker .marker-route {
+            position: absolute;
+            width: 40px;
+            height: 44px;
+            color: #e90000;
+            background: url(http://webapi.amap.com/theme/v1.3/images/newpc/poi-1.png) no-repeat;
+            cursor: pointer;
+        }
+        .amap-marker .marker-marker-bus-from {
+            background-position: -334px -180px;
+        }
+        .amap-marker .marker-marker-bus-to {
+            background-position: -334px -139px;
+        }
+        </style>
+    </head>
 
-</div>
-  <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/layer.js"></script>
-<script>
-    $(function () {
-        // body...
-        var href=window.location.href;
-        var traval_id=href.split("traval_id=")[1];
-        alert(traval_id)
-    })
-    var map = new AMap.Map('container', {
+    <body>
+        <div id="container"></div>
+    </body>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/layer.js"></script>
+    <script type="text/javascript" src="../js/person/traval.js"></script>
+    <script type="text/javascript">
+    console.log(coordtransform.wgs84togcj02(116.404, 39.915));
+    var map = new AMap.Map("container", {
         resizeEnable: true,
-        center: [116.397428, 39.90923],
-        zoom:13
+        zoom: 13
     });
-    var lineArr = [
-        [116.368904, 39.913423],
-        [116.382122, 39.901176],
-        [116.387271, 39.912501],
-        [116.398258, 39.904600]
-    ];
-    var polyline = new AMap.Polyline({
-        path: lineArr,          //设置线覆盖物路径
-        strokeColor: "#3366FF", //线颜色
-        strokeOpacity: 1,       //线透明度
-        strokeWeight: 5,        //线宽
-        strokeStyle: "solid",   //线样式
-        strokeDasharray: [10, 5] //补充线样式
-    });
-    polyline.setMap(map);
 
-    var polygonArr = new Array();//多边形覆盖物节点坐标数组
-    polygonArr.push([116.403322, 39.920255]);
-    polygonArr.push([116.410703, 39.897555]);
-    polygonArr.push([116.402292, 39.892353]);
-    polygonArr.push([116.389846, 39.891365]);
-    var  polygon = new AMap.Polygon({
-        path: polygonArr,//设置多边形边界路径
-        strokeColor: "#FF33FF", //线颜色
-        strokeOpacity: 0.2, //线透明度
-        strokeWeight: 3,    //线宽
-        fillColor: "#1791fc", //填充色
-        fillOpacity: 0.35//填充透明度
-    });
-    polygon.setMap(map);
+    function updateMarker(arr, cont) {
+        var marker = new AMap.Marker({ //添加自定义点标记
+            map: map,
+            position: [116.1428, 39.90921], //基点位置
+            offset: new AMap.Pixel(-17, -42), //相对于基点的偏移位置
+            draggable: true, //是否可拖动
+            content: '<div class="marker-route marker-marker-bus-from"></div>' //自定义点标记覆盖物内容
+        });
+    }
 
-    var circle = new AMap.Circle({
-        center: new AMap.LngLat("116.403322", "39.920255"),// 圆心位置
-        radius: 1000, //半径
-        strokeColor: "#F33", //线颜色
-        strokeOpacity: 1, //线透明度
-        strokeWeight: 3, //线粗细度
-        fillColor: "#ee2200", //填充颜色
-        fillOpacity: 0.35//填充透明度
-    });
-    circle.setMap(map);
-</script>
-</body>
+
+    function wgsToGcj02(arr) {
+
+
+    }
+
+    function getTravallist(vehicle_id) {
+
+
+        var form = new FormData();
+        form.append("time", time_token()[0]);
+        form.append("token", time_token()[1]);
+
+        form.append("travel_id", vehicle_id);
+
+
+
+        var settings = {
+            "async": false,
+            "crossDomain": true,
+            "url": "https://www.8gps8.cn:8011/bikePublic/api/travel/position",
+            "method": "POST",
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+            "data": form
+        };
+
+        $.ajax(settings).done(function(res) {
+                var res = JSON.parse(res);
+                // console.log(res); 
+                if (res.ret == 0) {
+                    if (res.data.length == 0) {
+                        layer.msg("数据为空");
+                    } else {
+                        var posList = res.data;
+
+                         
+                        var arrArr = new Array();
+                        $.each(posList, function(index, el) {
+                           
+                            var ar = [];
+                            ar.push(el.longitude,el.latitude);
+                            arrArr.push(ar);
+                          
+                        });
+                   
+ 
+                        var newArr = new Array();
+                        $.each(arrArr, function(index, el) {
+                              console.log(el);
+                            var newel = coordtransform.wgs84togcj02(el[0],el[1]);
+                            newArr.push(newel);
+                        });
+                          
+                          var pointArr = new Array();
+                        $.each(newArr, function(index, el) {
+                             var point = new AMap.LngLat(el[0],el[1]); 
+                            pointArr.push(point);
+                        });
+
+
+
+                        // console.log(arrArr);
+                        new AMap.Polyline({
+                            map: map,
+                            strokeColor: 'red',
+                            path: pointArr
+                        })
+
+
+                        new AMap.Marker({
+                            map: map,
+                            position: pointArr[0],
+                            content: '<div class="marker-route marker-marker-bus-from"></div>' //自定义点标记覆盖物内容
+                        });
+                        new AMap.Marker({
+                            map: map,
+                            position: pointArr[pointArr.length - 1],
+                            content: '<div class="marker-route marker-marker-bus-to"></div>'
+                        });
+
+
+                        map.setFitView();
+
+                    }
+
+
+                } else {
+                    requestStatus(res.ret);
+                }
+            }).fail(function() {
+                layer.msg("请求失败");
+            })
+            .always(function() {
+
+            });
+    };
+
+    $(function() {
+        // body...
+        var href = window.location.href;
+        var traval_id = href.split("traval_id=")[1];
+        getTravallist(traval_id);
+
+    })
+    //初始化地图对象，加载地图
+
+    var lnglat1 = new AMap.LngLat(113.685458, 34.771415)
+    var lnglat2 = new AMap.LngLat(113.683458, 34.722501)
+    var lnglat3 = new AMap.LngLat(113.681458, 34.722501)
+
+    // new AMap.Marker({
+    //     map: map,
+    //     position:lnglat3
+    // });
+
+
+    // new AMap.Text({
+    //     text: '两点相距' + Math.round(lnglat1.distance(lnglat2) + lnglat2.distance(lnglat3)) + '米',
+    //     position: lnglat1.divideBy(2).add(lnglat2.divideBy(2)),
+    //     map: map,
+    //     style: {
+    //         'background-color': '#ccccff',
+    //         'border-color': 'green',
+    //         'font-size': '12px'
+    //     }
+    // })
+    </script>
+
 </html>
