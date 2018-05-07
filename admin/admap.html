@@ -7,6 +7,7 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
         <title> </title>
         <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=630197c099745d94fba4a6269d4ab09b"></script>
         <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
         <script type="text/javascript" src="../js/md5.js"></script>
@@ -35,18 +36,129 @@
         .amap-marker .marker-marker-bus-to {
             background-position: -334px -139px;
         }
-
+        .bikelist {
+            background-color: #fff;
+            border: 1px solid #BABABA;
+            width: 220px;
+            height: 500px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            overflow-y: scroll;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        .travalBox {
+            width: 220px;
+        }
+        .showList,
+        .hideList {
+            font-size: 12px;
+            font-weight: normal;
+        }
+        a:hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
+        table {
+            width: 220px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        table td {
+            cursor: pointer;
+        }
+        .bike_id {
+            font-size: 20px;
+        }
+        .traval_distance {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .traval_time {
+            font-size: 12px;
+        }
         </style>
     </head>
 
     <body>
         <div id="container"></div>
-        
+        <div class="button-group">
+            <div class="bikelist">
+            </div>
+        </div>
     </body>
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="../js/layer.js"></script>
-    <script type="text/javascript" src="../js/person/traval.js"></script>
+    <script type="text/javascript" src="../js/getSession.js"></script>
+    <script type="text/javascript" src="../js/person/adtraval.js"></script>
     <script type="text/javascript">
+    $(function() {
+        var href = window.location.href;
+        var bike_id = href.split("bike_id=")[1];
+        var table = $("<table class='table table-hover'><thead><tr><th><a class='bike_id'>" + bike_id + "</a> </th></tr></thead><tbody class='traval_cont'></tbody></table>");
+        $(".bikelist").append(table);
+        getBikelist(bike_id,$("table"));
+
+    });
+
+    function getBikelist(vehicle_id,obj) {
+         
+        var user_id = getSession()[2];
+        var form = new FormData();
+        form.append("time", time_token()[0]);
+        form.append("token", time_token()[1]);
+        form.append("user_id", user_id);
+        form.append("vehicle_id",vehicle_id);
+        form.append("num", 100);
+        form.append("page", 1);
+
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://www.8gps8.cn:8011/bikePublic/api/vehicle/travel",
+            "method": "POST",
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+            "data": form
+        };
+
+        $.ajax(settings).done(function(res) {
+                var res = JSON.parse(res);
+                //  console.log(res); 
+                if (res.ret == 0) {
+                    if (res.data.length == 0) {
+                        layer.msg("数据为空");
+                    } else {
+                        var bikelist = res.data;
+                        $.each(bikelist, function(index, el) {
+                            var tr = $("<tr traval_id='" + el.travel_id + "'><td class='traval_time'><div class='text-muted'><span>开始:</span><span class='traval_start_time'>" + LocalTime(el.start_time) + "</span></div><div class='text-muted'><span>结束:</span><span class='traval_end_time'>" + LocalTime(el.end_time) + "</span></div><div class='traval_distance'>" + el.distance + "km</div></td></tr>");
+                              obj.find("tbody").append(tr);
+                        });
+                    }
+
+
+                } else {
+                    requestStatus(res.ret);
+                }
+            }).fail(function() {
+                layer.msg("请求失败");
+            })
+            .always(function() {
+
+            });
+    };
+   
+
+
+    $(".bikelist").click(function(event) {
+
+    });
     // console.log(coordtransform.wgs84togcj02(116.404, 39.915));
     var map = new AMap.Map("container", {
         resizeEnable: true,
@@ -65,9 +177,7 @@
 
 
 
-    function getTravallist(vehicle_id) {
-
-
+    function getTravallist(vehicle_id){
         var form = new FormData();
         form.append("time", time_token()[0]);
         form.append("token", time_token()[1]);
@@ -143,33 +253,6 @@
 
             });
     };
-
-    $(function() {
-
-        // body...
-        var href = window.location.href;
-        var traval_id = href.split("traval_id=")[1];
-        getTravallist(traval_id);
-
-    })
-    //初始化地图对象，加载地图
-    var lnglat1 = new AMap.LngLat(113.685458, 34.771415);
-    var lnglat2 = new AMap.LngLat(113.683458, 34.722501);
-    var lnglat3 = new AMap.LngLat(113.681458, 34.722501);
-    // new AMap.Marker({
-    //     map: map,
-    //     position:lnglat3
-    // });
-    // new AMap.Text({
-    //     text: '两点相距' + Math.round(lnglat1.distance(lnglat2) + lnglat2.distance(lnglat3)) + '米',
-    //     position: lnglat1.divideBy(2).add(lnglat2.divideBy(2)),
-    //     map: map,
-    //     style: {
-    //         'background-color': '#ccccff',
-    //         'border-color': 'green',
-    //         'font-size': '12px'
-    //     }
-    // })
     </script>
 
 </html>

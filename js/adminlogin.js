@@ -212,7 +212,7 @@ function userInfoSession(userid) {
     }
 
     $.ajax(settings).done(function(res) {
-       
+       console.log(222);
         var res=JSON.parse(res);
         var userInfo=res.data;
          var ss=window.sessionStorage;
@@ -253,11 +253,11 @@ function subAdminForm(auth) {
 
     $.ajax(settings).done(function(res) {
       var res=JSON.parse(res);
-      console.log(res);
+      
         if (res.ret == 0) {
             layer.msg("登录成功");
             var userid=res.data.user_id;
-            userInfoSession(userid);
+       userInfoSession(userid);
             window.location.href="main.html#/admin";
         } else {
             layer.msg("登录失败");

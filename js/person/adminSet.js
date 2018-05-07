@@ -28,7 +28,7 @@ function loadAType(url, obj) {
                 });
 
             } else {
-               // requestStatus(res.ret);
+                // requestStatus(res.ret);
             }
         }).fail(function() {
             layer.msg("参数出错");
@@ -315,7 +315,7 @@ $(".ad_btn").click(function() {
 
     if ($(".ad_id").val() != "") {
 
-          console.log(Infos);
+        console.log(Infos);
         addBike(user_id, Infos);
     } else {
 
@@ -430,7 +430,7 @@ function getcheckedBike() {
 function sendToDelaer(duid, vids) {
 
     var user_id = getSession()[2];
-  
+
 
 
     $.ajax({
@@ -446,19 +446,19 @@ function sendToDelaer(duid, vids) {
         })
         .done(function(res) {
             //var res = JSON.parse(res);
-                if (res.ret == 0) {
-               
+            if (res.ret == 0) {
+
                 layer.msg("移库成功");
-            window.location.reload();
+                window.location.reload();
             } else {
                 requestStatus(res.ret);
             }
         })
         .fail(function() {
-             layer.msg("移库失败");
+            layer.msg("移库失败");
         })
         .always(function() {
-            console.log("complete");
+            // console.log("complete");
         });
 
 };
@@ -491,7 +491,7 @@ $(function() {
 $(".sendTodealer").click(function(event) {
     var duid = $(".deaderchecked").children('option:selected').attr("title");
     var vids = JSON.stringify(getcheckedBike());
-    console.log(duid + "/" + vids);
+    // console.log(duid + "/" + vids);
     sendToDelaer(duid, vids)
 });
 
@@ -517,7 +517,7 @@ function getBikelist() {
 
     $.ajax(settings).done(function(res) {
             var res = JSON.parse(res);
-              console.log(res);
+            //    console.log(res);
             if (res.ret == 0) {
 
                 if (res.data.length == 0) {
@@ -538,9 +538,9 @@ function getBikelist() {
                 }
 
 
-            }else{
+            } else {
 
-                 requestStatus(res.ret);
+                requestStatus(res.ret);
             }
         }).fail(function() {
             layer.msg("请求失败");
@@ -593,14 +593,21 @@ function getBikeDetail(bikeid) {
 
         });
 };
-$(".bikeList_cont").on('click', '.bike_detailBtn', function() {
-    var index = $(this).index();
+// $(".bikeList_cont").on('click', '.bike_detailBtn', function() {
+//     var index = $(this).index();
 
-    var bikeid = $(this).parent().parent().siblings(".bike_id").children().children().eq(index).html();
+//     var bikeid = $(this).parent().parent().siblings(".bike_id").children().children().eq(index).html();
 
-    getBikeDetail(bikeid);
+//     getBikeDetail(bikeid);
+// });
+
+$(".bikeList_cont").on('click', '.check_traval', function() {
+
+
+    var bikeid = $(this).parent().siblings(".bike_user_id").html();
+  window.open("././admin/admap.html?bike_id="+bikeid);
+     
 });
-
 //投资商收益报表
 
 function returnBikearrStr(Str) {

@@ -71,7 +71,7 @@ $(".travalBox").on('click','.bike_id,.hideList',function() {
 });
 $(".travalBox ").on('click','.traval_cont tr',function() {
    var traval_id=$(this).attr('traval_id');
- //  console.log(traval_id);
+  
  
  parent.window.$("#rightFrame").attr("src","userloc.html?traval_id="+traval_id);
  

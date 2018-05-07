@@ -9,12 +9,14 @@
         var auth=jsonTxt.auth;
         var bikeArr=(jsonTxt.vehicles).split(";"); 
         var owner_id=jsonTxt.ownerid;
+        var ownername=jsonTxt.ownername;
 		        userInfos.push(name);
 		        userInfos.push(userphone);
             userInfos.push(user_id);
             userInfos.push(bikeArr);
             userInfos.push(auth);
             userInfos.push(owner_id);
+             userInfos.push(ownername);
 		        return userInfos;
   }else {
       layer.msg('请先登录');
