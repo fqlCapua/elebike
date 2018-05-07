@@ -1,4 +1,4 @@
-function loadAType(url, obj) {
+function loadAType(url,obj) {
     var user_id = getSession()[2];
     var form = new FormData();
     form.append("time", time_token()[0]);

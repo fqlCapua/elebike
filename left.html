@@ -5,13 +5,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>管理员</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <script language="JavaScript" src="js/jquery.js"></script>
+      <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript">
+            // console.log(parent.find("frame"));
+            //  parent.window.find("#rightFrame").attr("src",$(".menuson li.active").find("a").attr("href"));
         $(function() {
+             
             //导航切换
             $(".menuson li").click(function() {
                 $(".menuson li.active").removeClass("active")
                 $(this).addClass("active");
+
             });
 
             $('.title').click(function() {
@@ -28,16 +32,19 @@
     </head>
 
     <body style="background:#f0f9fd;">
-        <div class="lefttop"><span></span>登录信息</div>
+        <div class="lefttop"><span></span>设置</div>
         <dl class="leftmenu">
             <dd>
                 <div class="title"><span><img src="images/leftIcon1.png" /></span>操作</div>
                 <ul class="menuson">
-                    <li>
+                    <li class="active">
+                        <cite></cite><a href="user/share_UserControl.html" target="rightFrame">控制与状态</a><i></i>
+                    </li>
+                    <li >
                         <cite></cite><a href="user/checktraval.html" target="rightFrame">查看轨迹列表</a><i></i>
                     </li>
-                     <li>
-                        <cite></cite><a href="user/share_UserControl.html" target="rightFrame">控制与状态</a><i></i>
+                      <li >
+                        <cite></cite><a href="user/mbind.html" target="rightFrame">主卡绑定副卡</a><i></i>
                     </li>
                    <!--  <li>
                         <cite></cite><a href="user/share_UserFix.html" target="rightFrame">维保记录</a><i></i>

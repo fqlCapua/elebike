@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>无标题文档</title>
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/select.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
+        <script type="text/javascript" src="../js/select-ui.min.js"></script>
+        <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/getSession.js"></script>
+        <script type="text/javascript" src="../js/com.js"></script>
+        <script type="text/javascript" src="../js/layer.js"></script>
+        <script type="text/javascript">
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function(e) {
+            $(".select1").uedSelect({
+                width: 345
+            });
+            $(".select2").uedSelect({
+                width: 167
+            });
+            $(".select3").uedSelect({
+                width: 100
+            });
+        });
+        </script>
+    </head>
+
+    <body>
+        <div class="place">
+            <span>位置：</span>
+            <ul class="placeul">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">系统管理员</a></li>
+                <li><a href="#">主卡绑定</a></li>
+            </ul>
+        </div>
+        <div class="formbody " style="clear: both;">
+            <div id="usual1" class="usual">
+                <style>
+                .forminfo li {
+                    height: 60px;
+                }
+                </style>
+                <div class="itab">
+                    <ul>
+                        <li><a href="#tab1" class="selected">绑定</a></li>
+                        <li><a href="#tab2">解绑</a></li>
+                    </ul>
+                </div>
+                <style>
+                .forminfo {
+                    margin-top: 20px;
+                }
+                </style>
+                <ul class="forminfo">
+                    <li>
+                        <label>主卡手机号: </label>
+                        <input type="text" placeholder="主卡手机号" class="dfinput primary_phone" />
+                    </li>
+                    <li>
+                        <label>副卡手机号: </label>
+                        <input type="text" class="dfinput vice_phone" />
+                    </li>
+                    <li>
+                        <label>获取验证码: </label>
+                        <input type="button" class="bindbtn btn" onclick="Noclick()" value="获取验证码" />
+                    </li>
+                    <li>
+                        <label>主卡验证码: </label>
+                        <input type="text" class="dfinput primary_code" />
+                    </li>
+                    <li>
+                        <label>电车ID: </label>
+                        <input type="text" class="dfinput bikeid" />
+                    </li>
+                </ul>
+                <div id="tab1" class="tabson">
+                    <div style="height:30px;"></div>
+                    <input style="margin-left:50px;"   type="button" class="bindsub  btn" value="绑定" />
+                        
+                   
+                </div>
+                <div id="tab2" class="tabson">
+                    <div style="height:30px;"></div>
+                     <input style="margin-left:50px;" name="" type="button" class="unbindsub  btn" value="解绑" />
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../js/person/adminSet.js"></script>
+    <script type="text/javascript">
+    function Send_code() {
+        var Code;
+
+        var phone = $(".primary_phone").val();
+        if (phone != "") {
+            var timeStamp = Date.parse(new Date) / 1000;
+            var md_token = hex_md5(hex_md5( timeStamp));
+            $.ajax({
+                    url: 'https://www.8gps8.cn:8011/bikePublic/api/user/getCode',
+                    type: 'POST',
+                    async: false,
+                    data: {
+                        time: time_token()[0],
+                        token: time_token()[1],
+                        phone: phone
+                    },
+                })
+                .done(function(res) {
+                    if (res.ret == 0) {
+                        layer.msg("验证码已发送");
+                        Code = res.data.code;
+
+                    } else {
+                        layer.msg(res.msg);
+                    }
+
+
+                })
+
+                .fail(function(err) {
+
+                })
+                .always(function() {
+
+                });
+        } else {
+            layer.tips("不能为空", ".phone", {
+                tips: [1, "#4082D4"],
+                tipsMore: true
+            });
+        }
+
+        return Code;
+    }
+    var count = 60;
+    var curCount;
+
+    function Noclick(){
+        var phone = $(".primary_phone").val();
+       
+        if (phone != "") {
+            var serviceCode = Send_code() //获取验证码函数
+            //set_session(serviceCode);
+            curCount = count;
+            $(".bindbtn").attr("disabled", true);
+            $(".bindbtn").val(curCount + "s后重新发送");
+            timer1 = window.setInterval("remainTime()", 1000);
+        } else {
+               layer.msg("手机号不能为空！");
+        } 
+
+
+    }
+
+ 
+    function remainTime() {
+        if (curCount == 0) {
+            clearInterval(timer1);
+            $(".bindbtn").val("免费获取验证码");
+            $(".bindbtn").removeAttr('disabled');
+
+        } else {
+            curCount--;
+            $(".bindbtn").val(curCount + "s后重新发送");
+        }
+
+    }
+    $("#usual1 ul").idTabs();
+
+    $('.tablelist tbody tr:odd').addClass('odd');
+    </script>
+    <script type="text/javascript">
+    function bikebindelse(url) {
+        var primary_phone = $(".primary_phone").val();
+        var vice_phone = $(".vice_phone").val();
+        var vehicle_id = $(".bikeid").val();
+        var primary_code = $(".primary_code").val();
+        var form = new FormData();
+        form.append("time",time_token()[0]);
+        form.append("token",time_token()[1]);
+        form.append("primary_phone",primary_phone);
+        form.append("vice_phone",vice_phone);
+        form.append("primary_code",primary_code);
+        form.append("vehicle_id",vehicle_id);
+        var settings = {
+            "async": false,
+            "crossDomain": true,
+            "url": url,
+            "method": "POST",
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+            "data": form
+        }
+        $.ajax(settings).done(function(res) {
+                var res = JSON.parse(res);
+                if (res.ret == 0) {
+
+                    layer.msg("操作成功");
+                }else{
+                   layer.msg("操作失败");
+                }
+            }).fail(function() {
+                layer.msg("服务器出错");
+            })
+            .always(function() {
+
+            });
+
+    }
+
+    $(".bindsub").click(function(){
+  
+        bikebindelse("https://www.8gps8.cn:8011/bikePublic/api/bike/bindPhone");
+    });
+    $(".unbindsub").click(function() {
+    
+        bikebindelse("https://www.8gps8.cn:8011/bikePublic/api/bike/unbindPhone");
+    });
+    </script>
+
+</html>

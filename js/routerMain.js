@@ -23,11 +23,11 @@
         var r=new Router();
         r.path('/user',function(){
           $("#leftFrame").attr("src","left.html");
-         // $("#rightFrame").attr("src","left.html");
+          $("#rightFrame").attr("src","./user/checktraval.html");
         });
         r.path('/admin',function(){
             $("#leftFrame").attr("src","adminMenu.html");
-           // $("#leftFrame").attr("src","left.html")
+             $("#rightFrame").attr("src","userlist.html")
          });
         r.init();
 function checklogin(){

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="shortcut icon" href="images/home/moto.png" type="image/x-icon" />
@@ -65,18 +66,41 @@
         }
         .Qrcode {
             z-index: 10;
-            position: absolute;
-            top: 30px;
+            position: fixed;
+            left: 0;
+            top: 300px;
         }
         .getRegCode {
             cursor: pointer;
         }
-        .userbtn{
+        .userbtn {
             color: #fff;
             background-color: #4098CA;
-            border-radius:3px;
+            border-radius: 3px;
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+        .login{
+            cursor: pointer;
+            position: absolute;
+            top:15px;
+            right:20px;
+            font-size: 12px;
             padding:10px 20px;
-            font-size:13px;
+            border-radius:4px;
+            background-color:#00A1D9;
+            color: #fff;
+        }
+        .reg {
+            cursor: pointer;
+            position: absolute;
+            top:15px;
+            right:100px;
+            font-size: 12px;
+            padding:10px 20px;
+            border-radius:4px;
+            background-color:green;
+            color: #fff;
         }
         /* .loadQrCode:hover .Qrcode{
 
@@ -113,6 +137,14 @@
 <![endif]-->
 
         <body>
+            <div class="Qrcode" title="也可点击相应二维码进行下载">
+                <a style="display: block;" target="_blank" href="https://fir.im/smartCar">
+                                          <img width="100"  src="images/home/eleBikeAndroidCode.png" alt="安卓版">
+                </a>&nbsp;&nbsp;&nbsp;
+                <a  target="_blank" style="display: block;" href="https://fir.im/smartCar">
+                                          <img width="100" src="images/home/iphone.png" alt="苹果版">
+                </a>
+            </div>
             <div>
                 <div class="header_child">
                     <div class="container">
@@ -125,43 +157,39 @@
                             <div class="form_box col-md-3">
                                 <div class="">
                                     <span class="show_location loadQrCode ">
-                                  <a  class="text-muted" ><i class="text-info fa   fa-download"></i>下载App</a>&nbsp;&nbsp;| &nbsp;
-                                  <div class="Qrcode" title="也可点击相应二维码进行下载"> 
-                                      <a href="https://fir.im/smartCar">
-                                          <img width="100"  src="images/home/eleBikeAndroidCode.png" alt="安卓版">
-                                      </a>&nbsp;&nbsp;&nbsp;
-                                      <a href="https://fir.im/smartCar">
-                                          <img width="100" src="images/home/iphone.png" alt="苹果版">
-                                      </a>
-                                  </div> 
+                                   <!--   <a  class="text-muted" ><i class="text-info fa   fa-download"></i>下载App</a>&nbsp;&nbsp;| &nbsp; -->
+                                  
                                 </span>
                                     <span>
-                                   <a href="#">
+                                 <!--   <a href="#">
                                    <i class="fa fa-reorder text-muted"></i>
                                     网站导航
-                                   </a>
+                                   </a> -->
                                 </span>&nbsp;&nbsp;&nbsp;
-                                    <span>
-                                   <a class="login" data-toggle="modal" data-target="#Login"  >
-                                     登录 
-                                   </a>
-                                </span> &nbsp;|&nbsp;
-                                    <span>
-                                  <a  class="reg" data-toggle="modal" data-target="#Reg">
-                                      注册 
-                                  </a>
-                                   &nbsp;
-                                </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="search_Box container">
-                    <main class="">
+                    <main class="" style="position: relative;">
                         <div class="logo">
                             <img class="logo_img" src="images/home/logo.png" />
                         </div>
+                        <div>
+                             <span>
+                                   <a class="login"  style="color: #fff;" data-toggle="modal" data-target="#Login"  >
+                                     登录 
+                                   </a>
+                                </span>
+                                        <span>
+                                  <a  class="reg " style="color: #fff;" data-toggle="modal" data-target="#Reg">
+                                      注册 
+                                  </a>
+                                   &nbsp;
+                                </span>
+                        </div>
+                               
                     </main>
                 </div>
             </div>
@@ -529,17 +557,13 @@
                         </div>
                         <div class="modal-footer" style="">
                             <div style="width:48%;display: inline-block;margin-right: 5px;">
-                                  <button type="button" class="userbtn pull-left  pwdloginBtn">登录</button>
-                                 <button type="button" style="display: none;" class="userbtn pull-left  loginBtn">登录</button>
-
+                                <button type="button" class="userbtn pull-left  pwdloginBtn">登录</button>
+                                <button type="button" style="display: none;" class="userbtn pull-left  loginBtn">登录</button>
                             </div>
-                          
-                             <div style="width:48%;display:inline-block;">
-                                 <button type="button" style="display:none;" class="pull-right userbtn   pwdBtn">密码登录</button>
-                                 <button type="button"   class="pull-right userbtn codeBtn">验证码登录</button>
+                            <div style="width:48%;display:inline-block;">
+                                <button type="button" style="display:none;" class="pull-right userbtn   pwdBtn">密码登录</button>
+                                <button type="button" class="pull-right userbtn codeBtn">验证码登录</button>
                             </div>
-                           
-                           
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -556,31 +580,28 @@
         <script type="text/javascript" src="js/person/userReg.js"></script>
         <script type="text/javascript" src="js/person/userLogin.js"></script>
         <script type="text/javascript">
-         $(".codeLogin").hide();
+        $(".codeLogin").hide();
         $(".loadQrCode").click(function(event) {
             $(".Qrcode").toggle();
         });
         $(".pwdBtn").click(function() {
             $(this).hide();
             $(".pwdloginBtn").show();
-             $(".loginBtn").hide();
+            $(".loginBtn").hide();
             $(".codeBtn").show();
 
             $(".codeLogin").toggle();
             $(".pwdLogin").toggle();
         })
         $(".codeBtn").click(function() {
-             $(".pwdloginBtn").hide();
-             $(".loginBtn").show();
+            $(".pwdloginBtn").hide();
+            $(".loginBtn").show();
             $(this).hide();
             $(".pwdBtn").show();
 
             $(".codeLogin").toggle();
             $(".pwdLogin").toggle();
         })
-
-
-    
         </script>
 
 </html>

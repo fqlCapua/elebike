@@ -1,193 +1,272 @@
 <!DOCTYPE html>
-<html  >
+<html>
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>控制与状态</title>
         <script type="text/javascript" src="../js/jquery.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="../css/style.css" rel="stylesheet" type="text/css" />
         <script src="../js/chart/raphael.2.1.0.min.js"></script>
         <script src="../js/chart/justgage.1.0.1.min.js"></script>
         <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+        }
         li a {
             color: black;
         }
-        #g1,
-        #g2 {
-            width: 300px;
+        #g1 {
+            width: 90%;
+            margin: 0 auto;
             height: 220px;
+        }
+        .phone_top {
+            border-bottom: 1px solid #F9F9F9;
+            display: flex;
+            line-height: 40px;
+        }
+        .phone_top li {
+            flex: 33%;
+            font-size: 20px;
+            font-weight: bold;
+            vertical-align: top;
             display: inline-block;
-            margin: 30px 0 30px 50px;
-            border: 1px soild #202020;
-            box-shadow: 0px 0px 15px #101010;
-            border-radius: 8px;
         }
-        #g3 {
-            border: 1px soild red;
-            width: 500px;
-            height: 220px;
+        .phone_top li:nth-child(1) {
+            padding-left: 10px;
+        }
+        .phone_top li:nth-child(2) {}
+        .phone_top li:nth-child(3) {
+            padding-right: 10px;
+            text-align: end;
+        }
+        .phone_mid li a {
+            padding-left: 10px;
+            font-size: 18px;
+            line-height: 32px;
+            font-weight: bold;
             display: inline-block;
-            margin: 30px 0 30px 50px;
+            width: 49%;
+            letter-spacing: 1px;
         }
-        .dleft {
-            display: inline-block;
-            height: 40px;
-            margin: 12px;
-            width: 40px;
-            margin-top: 15px;
-            background: none;
+        .phone_mid li a:nth-child(2) {
+            text-align: end;
         }
-        .dright {
-            margin-left: 60px;
-            fonts-size: 20px;
-            padding: 5px 15px;
-            float: none;
+        .phone_mid_b {
+            display: flex;
+            flex-wrap: wrap;
         }
+        .phone_mid_b li {
+            line-height: 32px;
+            font-size: 18px;
+            text-align: center;
+            width: 49%;
 
-        #g3 li {
-
+            font-weight: 600;
+        }
+        .phone_mid_b li a:nth-child(1) {
+            color: #858585;
+        }
+        .phone_mid_b li a:nth-child(2) {
+            color: #7598C9;
+        }
+        .phone_b {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .phone_b {
+            padding-left: 1.6%;
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .phone_b li {
             clear: both;
+            height: 80px;
+
+
+            text-align: center;
+            width: 32%;
+            text-align: center;
+            line-height: 60px;
         }
-        .placeul li a {
-            color: #000;
+        .phone_b li div {
+            cursor: pointer;
+            width: 96%;
+            height: 80%;
+            margin: 10% auto;
+            border: 1px solid #BABABA;
+            border-radius: 5px;
+        }
+        .phone_b li div a {
+            display: inline-block;
+
+            vertical-align: top;
+        }
+        .phone_b li a:nth-child(1) {
+            height: 35px;
+            width: 35px;
+            font-size: 35px;
+        }
+        .phone_b li a:nth-child(2) {
+            font-size: 22px;
+            height: 35px;
+        }
+
+        .phone_b li div a img {
+            height: 100%;
+            width: 100%;
+        }
+        .phone_b li div:hover {
+
+            background-color: #ABABAB;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        .phone_b li div:hover .phone_b .title {
+            color: #fff;
+        }
+        body {
+            display: none;
+            width:302px;
+            height:534px;
+            position: relative;
+            
+            height: 533px;
+           
+            background: url(../images/home/phoneBj.png) no-repeat 0 0;
+            background-size: 100% auto;
+            background-attachment: fixed;
+        }
+        .phone_cont {
+             width:273px;
+             position:absolute;
+            left: 20px;
+            top:62px; 
+            height:468px;
+           overflow-y: scroll;
         }
         </style>
     </head>
 
     <body>
-        <div class="place">
-            <span>位置：</span>
-            <ul class="placeul">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">共享电车用户</a></li>
-                <li><a href="#">控制与状态</a></li>
+        <div class="phone_cont">
+            <div>
+                <ul class="phone_top">
+                    <li><i class="fa fa-bars " style="color:#A7A9A7;"></i></li>
+                    <li class="text-center text-success" style="color: #3E7168;letter-spacing:2px;">智能电摩</li>
+                    <li><i class="fa fa-exchange  " style="color:#A7A9A7;"></i></li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+            var g1;
+            window.onload = function() {
+                var g1 = new JustGage({
+                    id: "g1",
+                    value: getRandomInt(1, 3),
+                    //value:78,
+                    min: 0,
+                    max: 100,
+                    title: " ",
+                    label: "电量", //下方文字  
+                    gaugeWidthScale: 1, //轨道宽度
+                    showInnerShadow: true,
+                    levelColors: [
+                        // "#222222",
+                        // "#555555",
+                        // "#CCCCCC"
+                        "#066CAD"
+                    ]
+                });
+
+
+                setInterval(function() {
+                    g1.refresh(getRandomInt(78, 79));
+                }, 1000);
+            };
+            $('.tablelist tbody tr:odd').addClass('odd');
+            </script>
+            <div style="clear:both;background-color:#DFDDDE;width: 94%;margin:0 auto;border-radius:5px;">
+                <ul class="phone_mid">
+                    <li>
+                        <a style="color:#858585;">续航里程:</a>
+                        <a class="distan text-primary" style="color: #527DCA;">26.29公里</a>
+                    </li>
+                    <li>
+                        <a style="color:#858585;">电池寿命:</a>
+                        <a class="distan text-primary" style="color: #527DCA;">76%</a>
+                    </li>
+                </ul>
+                <div id="g1" class="chart"></div>
+                <ul class="phone_mid_b">
+                    <li>
+                        <a>额定电压:</a>&nbsp;&nbsp;
+                        <a class="distan text-primary">48V</a>
+                    </li>
+                    <li>
+                        <a>开路电压:</a>&nbsp;&nbsp;
+                        <a class="distan text-primary">52.1V</a>
+                    </li>
+                    <li>
+                        <a>车辆状态:</a>&nbsp;&nbsp;
+                        <a class="distan text-primary">启动</a>
+                    </li>
+                    <li>
+                        <a>网络状态:</a>&nbsp;&nbsp;
+                        <a class="distan text-primary">蓝牙</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="phone_b">
+                <li>
+                    <div>
+                        <a><img src="../images/home/phone01.png" /></a>
+                        <!--  <a class="fa fa-archive   text-muted"></a> -->
+                        <a class="text-muted title">车箱</a>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a><img src="../images/home/phone02.png" /></a>
+                        <!-- <a class="fa fa-warning    text-muted"></a> -->
+                        <a class="text-muted title">寻车</a></div>
+                </li>
+                <li>
+                    <div>
+                        <a><img src="../images/home/phone03.png" /></a>
+                        <!-- <a class="fa fa-unlock-alt   text-muted"></a> -->
+                        <a class="text-muted title">解锁</a></div>
+                </li>
+                <li>
+                    <div>
+                        <a><img src="../images/home/phone04.png" /></a>
+                        <!-- <a class="fa fa-lock   text-muted"> -->
+                        <a class="text-muted title">锁车</a></div>
+                </li>
+                <li>
+                    <div>
+                        <a><img src="../images/home/phone05.png" /></a>
+                        <!-- <a class="fa fa-power-off   text-muted"></a> -->
+                        <a class="text-muted title">启动</a>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a><img src="../images/home/phone06.png" /></a>
+                        <!-- <a class="fa fa-window-restore  text-muted"></a> -->
+                        <a class="text-muted title">布防</a>
+                    </div>
+                </li>
             </ul>
         </div>
-        <div class="rightinfo">
-            <div class="formbody">
-                <div class="formtitle"><span>电车控制</span></div>
-                <div class="toolsli">
-                    <ul class="toollist">
-                        <li><a href="#">
-                            <img src="../images/i01.png" /></a>
-                            <div>布防</div>
-                        </li>
-                        <li><a href="#">
-                            <img src="../images/i02.png" /></a>
-                            <div>闪灯</div>
-                        </li>
-                        <li><a href="#">
-                            <img src="../images/i09.png" /></a>
-                            <div>警报</div>
-                        </li>
-                        <li><a href="#">
-                            <img src="../images/i04.png" /></a>
-                            <div>解除</div>
-                        </li>
-                        <li><a href="#">
-                            <img src="../images/i05.png" /></a>
-                            <div>锁车</div>
-                        </li>
-                    </ul>
-                    <!--   <span class="tooladd"><img src="../images/add.png" title="添加" /></span> -->
-                </div>
-                <div class="formtitle"><span>电车数据</span></div>
-                <div class="toollist">
-                    <script type="text/javascript">
-                    var g1, g2;
-                    window.onload = function() {
-                        var g1 = new JustGage({
-                            id: "g1",
-                            value: getRandomInt(0, 10),
-                            min: 0,
-                            max: 50,
-                            title: "电压",
-                            label: "V(伏特)", //下方文字  
-                            gaugeWidthScale: 1, //轨道宽度
-                            showInnerShadow: true,
-                            levelColors: [
-                                // "#222222",
-                                // "#555555",
-                                // "#CCCCCC"
-                                "#066CAD"
-                            ]
-                        });
-                        var g2 = new JustGage({
-                            id: "g2",
-                            value: getRandomInt(0, 10),
-                            min: 0,
-                            max: 100,
-                            title: "电量",
-                            label: "%", //下方文字  
-                            gaugeWidthScale: 0.9, //轨道宽度
-                            showInnerShadow: true,
-                            levelColors: [
-                                // "#222222",
-                                // "#555555",
-                                // "#CCCCCC"
-                                "#7CE0F7"
-                            ]
-                        });
-
-                        setInterval(function() {
-
-                            g2.refresh(getRandomInt(90, 99));
-                            g1.refresh(getRandomInt(47, 48));
-                        }, 1000);
-                    };
-                    $('.tablelist tbody tr:odd').addClass('odd');
-                    </script>
-                </div>
-            </div>
-            <div style="clear: both;">
-                <div id="g1" class="chart"></div>
-                <div id="g2" class="chart"></div>
-                <div id="g3" style="border:none;vertical-align: top;" class="chart">
-                    <ul>
-                        <li>
-                            <div class="dleft"><img src="../images/g01.png" alt=""></div>
-                            <div class="dright">
-                                <div>续航里程</div>
-                                <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-                                        <span class="sr-only">30% 完成（信息）</span>
-                                    </div>
-                                </div>
-                                <p>标准续航里程50公里</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dleft"><img src="../images/g02.png" alt=""></div>
-                            <div class="dright">
-                                <div>电量状态</div>
-                                <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-                                        <span class="sr-only">30% 完成（信息）</span>
-                                    </div>
-                                </div>
-                                <p>在低于15%时请及时充电</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dleft"><img src="../images/g03.png" alt=""></div>
-                            <div class="dright">
-                                <div>运行状态</div>
-                                <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-                                        <span class="sr-only">30% 完成（信息）</span>
-                                    </div>
-                                </div>
-                                <p class="" style="color: #fff;">布防/</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <br />
-            
         </div>
     </body>
 

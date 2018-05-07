@@ -85,19 +85,13 @@ function Send_code() {
                 if (res.ret == 0) {
                     layer.msg("验证码已发送");
                     Code = res.data.code;
-
                 } else {
                     layer.msg(res.msg);
                 }
-
-
             })
-
             .fail(function(err) {
-
             })
             .always(function() {
-
             });
     } else {
         layer.tips("不能为空", ".phone", {
@@ -105,7 +99,6 @@ function Send_code() {
             tipsMore: true
         });
     }
-
     return Code;
 }
 /*
@@ -164,32 +157,35 @@ function Noclick() {
 
 
 }
-function Noclick1() {
-    var phone = $(".phone3").val();
-     
-    if (check_phone(".phone3")) {
-        var serviceCode = Send_code() //获取验证码函数
-        //set_session(serviceCode);
-        curCount = count;
-        $(".getCode").attr("disabled", true);
-        $(".getCode").val(curCount + "s后重新发送");
-        timer1 = window.setInterval("remainTime()", 1000);
-    } else {
+ 
+ 
+    function Noclick1() {
+        var phone = $(".phone3").val();
+
+        if (check_phone(".phone3")) {
+            var serviceCode = Send_code() //获取验证码函数
+            //set_session(serviceCode);
+            curCount = count;
+            $(".getCode").attr("disabled", true);
+            $(".getCode").val(curCount + "s后重新发送");
+            timer1 = window.setInterval("remainTime()", 1000);
+        } else {
+
+        }
+
 
     }
 
 
-}
-
 function remainTime() {
     if (curCount == 0) {
         clearInterval(timer1);
-        $(".getCode").val("免费获取验证码");
-        $(".getCode").removeAttr('disabled');
+        $(".bindbtn").val("免费获取验证码");
+        $(".bindbtn").removeAttr('disabled');
 
     } else {
         curCount--;
-        $(".getCode").val(curCount + "s后重新发送");
+        $(".bindbtn").val(curCount + "s后重新发送");
     }
 
 }

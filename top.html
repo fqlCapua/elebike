@@ -19,6 +19,11 @@
                 text-align: center;
                 line-height: 88px;
             }
+            .topright li a{
+                cursor: pointer;
+                font-weight:bold;
+                font-size:32px;
+             }
             .clear{
               cursor: pointer;
             }
@@ -29,37 +34,40 @@
         <div class="topleft">
             <a href="main.html" target="_parent"><img height="71" src="images/logo.png" title="系统首页" /></a>
          </div>
-        <div  class="userInfo" style="font-size:24px;font-weight: bold;color: #fff;" >
+        <div  class="userInfo" style="font-size:24px;font-weight: bold;color:#fff;" >
             
             
         </div>
 
         <!--  <ul class="nav">
-    <li><a href="default.html" target="rightFrame" class="selected"><img src="images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
-    <li><a href="imgtable.html" target="rightFrame"><img src="images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
-    <li><a href="imglist.html"  target="rightFrame"><img src="images/icon03.png" title="模块设计" /><h2>模块设计</h2></a></li>
-    <li><a href="tools.html"  target="rightFrame"><img src="images/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
-    <li><a href="computer.html" target="rightFrame"><img src="images/icon05.png" title="文件管理" /><h2>文件管理</h2></a></li>
-    <li><a href="tab.html"  target="rightFrame"><img src="images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
-    </ul> -->
+                  <li><a href="default.html" target="rightFrame" class="selected"><img src="images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
+                  <li><a href="imgtable.html" target="rightFrame"><img src="images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
+                  <li><a href="imglist.html"  target="rightFrame"><img src="images/icon03.png" title="模块设计" /><h2>模块设计</h2></a></li>
+                  <li><a href="tools.html"  target="rightFrame"><img src="images/icon04.png" title="常用工具" /><h2>常用工具</h2></a></li>
+                  <li><a href="computer.html" target="rightFrame"><img src="images/icon05.png" title="文件管理" /><h2>文件管理</h2></a></li>
+                <li><a href="tab.html"  target="rightFrame"><img src="images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
+              </ul> -->
         <div class="topright">
 
             
             <ul>
-                <li>
+                <!-- <li>
                     <span><img src="images/help.png" title="帮助"  class="helpimg"/></span>
                     <a href="#">帮助</a>
-                </li>
+                </li> -->
                 <li>
-                    <a href="#">关于</a>
+                    <a style="font-size:16px;" href="#">设置</a>
                 </li>
                 <li class="clear">
-                    <a>注销</a>
+                    <a style="font-size:16px;">注销</a>
+                </li>
+                <li>
+                     <a style="font-size:16px;" class="name"> </a>
                 </li>
             </ul>
             <div class="user">
                 
-                <span class="name"> </span>
+               
                 <!--<i>消息</i>
                 <b>5</b> -->
             </div>
@@ -68,13 +76,13 @@
     <script type="text/javascript">
      $(function(){   
        $(".name").attr("title",getSession()[1]);
-      $(".name").html(usertype(getSession()[4])+getSession()[0]);  
+       $(".name").html( getSession()[0] );  
       if(getSession[6]==""){
            var  company="无";
       }else{
         var  company=getSession[6];
       }
-      $(".userInfo").html("公司："+getSession()[6]);
+      $(".userInfo").html(getSession()[6]);
       
 
      })
