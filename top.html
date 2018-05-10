@@ -4,41 +4,43 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>智能电摩</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/layer.js"></script>
+        <script type="text/javascript" src="js/md5.js"></script>
+        <script type="text/javascript" src="js/com.js"></script>
         <script type="text/javascript" src="js/getSession.js"></script>
         <style>
-            .userInfo{
-                font-size:26px;
-                font-weight: bold;
-                color: #fff;
-                position:fixed;
-                width:50%;
-                margin:0 auto;
-                text-align: center;
-                line-height: 88px;
-            }
-            .topright li a{
-                cursor: pointer;
-                font-weight:bold;
-                font-size:32px;
-             }
-            .clear{
-              cursor: pointer;
-            }
+        .userInfo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            position: fixed;
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 88px;
+        }
+        .topright li a {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 32px;
+        }
+        .clear {
+            cursor: pointer;
+        }
         </style>
     </head>
 
     <body style="background:url(images/topbg.gif) repeat-x;">
         <div class="topleft">
             <a href="main.html" target="_parent"><img height="71" src="images/logo.png" title="系统首页" /></a>
-         </div>
-        <div  class="userInfo" style="font-size:24px;font-weight: bold;color:#fff;" >
-            
-            
         </div>
-
+        <div class="userInfo" style="font-size:24px;font-weight: bold;color:#fff;">
+        </div>
         <!--  <ul class="nav">
                   <li><a href="default.html" target="rightFrame" class="selected"><img src="images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
                   <li><a href="imgtable.html" target="rightFrame"><img src="images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
@@ -48,57 +50,47 @@
                 <li><a href="tab.html"  target="rightFrame"><img src="images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
               </ul> -->
         <div class="topright">
-
-            
             <ul>
-                <!-- <li>
-                    <span><img src="images/help.png" title="帮助"  class="helpimg"/></span>
-                    <a href="#">帮助</a>
-                </li> -->
-                <li>
-                    <a style="font-size:16px;" href="#">设置</a>
-                </li>
                 <li class="clear">
                     <a style="font-size:16px;">注销</a>
                 </li>
                 <li>
-                     <a style="font-size:16px;" class="name"> </a>
+                    <a style="font-size:16px;" class="name"> </a>
                 </li>
             </ul>
             <div class="user">
-                
-               
-                <!--<i>消息</i>
-                <b>5</b> -->
+                <!-- <i>消息</i>
+                <b>5</b>  -->
             </div>
         </div>
+        
     </body>
     <script type="text/javascript">
-     $(function(){   
-       $(".name").attr("title",getSession()[1]);
-       $(".name").html( getSession()[0] );  
-      if(getSession[6]==""){
-           var  company="无";
-      }else{
-        var  company=getSession[6];
-      }
-      $(".userInfo").html(getSession()[6]);
-      
+    $(function() {
+        $(".name").attr("title", getSession()[1]);
+        $(".name").html(getSession()[0]);
+        if (getSession[6] == "") {
+            var company = "无";
+        } else {
+            var company = getSession[6];
+        }
+        $(".userInfo").html(getSession()[6]);
 
-     })
-    $(".clear").click(function(){
 
-         var ss=window.sessionStorage;
-         if(confirm("确定要注销么？")){
-                 ss.removeItem("io");
-               parent.window.location.href="index.html#/8gps8";            
-         }else{
-   
-         }
-              
-           
-              
-       
+    })
+    $(".clear").click(function() {
+
+        var ss = window.sessionStorage;
+        if (confirm("确定要注销么？")) {
+            ss.removeItem("io");
+            parent.window.location.href = "index.html#/8gps8";
+        } else {
+
+        }
+
+
+
+
 
     });
     </script>

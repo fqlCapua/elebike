@@ -12,6 +12,11 @@
         <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="../js/chart/raphael.2.1.0.min.js"></script>
         <script src="../js/chart/justgage.1.0.1.min.js"></script>
+        <script type="text/javascript" src="../js/md5.js"></script>
+        <script type="text/javascript" src="../js/echart.js"></script>
+        <script type="text/javascript" src="../js/com.js"></script>
+        <script type="text/javascript" src="../js/getSession.js"></script>
+        <script type="text/javascript" src="../js/layer.js"></script>
         <style>
         * {
             margin: 0;
@@ -22,19 +27,19 @@
         li a {
             color: black;
         }
-        #g1 {
-            width: 90%;
-            margin: 0 auto;
-            height: 220px;
+        #main {
+            height:200px;
+            padding:0;
         }
         .phone_top {
             border-bottom: 1px solid #F9F9F9;
             display: flex;
             line-height: 40px;
         }
-        .phone_top li {
+        .phone_top>li {
+            cursor: pointer;
             flex: 33%;
-            font-size: 20px;
+            font-size: 12px;
             font-weight: bold;
             vertical-align: top;
             display: inline-block;
@@ -42,15 +47,15 @@
         .phone_top li:nth-child(1) {
             padding-left: 10px;
         }
-        .phone_top li:nth-child(2) {}
-        .phone_top li:nth-child(3) {
+        .phone_top>li:nth-child(2) {}
+        .phone_top>li:nth-child(3) {
             padding-right: 10px;
             text-align: end;
         }
         .phone_mid li a {
             padding-left: 10px;
-            font-size: 18px;
-            line-height: 32px;
+            font-size: 12px;
+            line-height: 20px;
             font-weight: bold;
             display: inline-block;
             width: 49%;
@@ -64,12 +69,13 @@
             flex-wrap: wrap;
         }
         .phone_mid_b li {
-            line-height: 32px;
-            font-size: 18px;
+            padding-left: 10px;
+            line-height: 20px;
+            font-size: 12px;
             text-align: center;
             width: 49%;
-
             font-weight: 600;
+            text-align: start;
         }
         .phone_mid_b li a:nth-child(1) {
             color: #858585;
@@ -89,35 +95,33 @@
         }
         .phone_b li {
             clear: both;
-            height: 80px;
-
-
+            height: 50px;
             text-align: center;
             width: 32%;
             text-align: center;
-            line-height: 60px;
         }
         .phone_b li div {
             cursor: pointer;
-            width: 96%;
+            width: 98%;
             height: 80%;
             margin: 10% auto;
             border: 1px solid #BABABA;
             border-radius: 5px;
+            line-height: 38px;
         }
+        .phone_b li div a,
         .phone_b li div a {
             display: inline-block;
-
             vertical-align: top;
         }
-        .phone_b li a:nth-child(1) {
-            height: 35px;
-            width: 35px;
-            font-size: 35px;
+        .phone_b li a {
+            height: 30px;
+            width: 30px;
         }
-        .phone_b li a:nth-child(2) {
-            font-size: 22px;
-            height: 35px;
+        .phone_b li span {
+
+            font-size: 13px;
+            height: 30px;
         }
 
         .phone_b li div a img {
@@ -125,34 +129,45 @@
             width: 100%;
         }
         .phone_b li div:hover {
-
-            background-color: #ABABAB;
+            background-color: #BABABA;
+            color: #fff;
         }
         a:hover {
             text-decoration: none;
         }
-        .phone_b li div:hover .phone_b .title {
-            color: #fff;
-        }
+
+
         body {
-            display: none;
-            width:302px;
-            height:534px;
+
+            width: 273px;
+            height: 573px;
             position: relative;
-            
-            height: 533px;
-           
             background: url(../images/home/phoneBj.png) no-repeat 0 0;
-            background-size: 100% auto;
-            background-attachment: fixed;
+            /*background-size: 100% auto;*/
+            /*background-attachment: fixed;*/
         }
         .phone_cont {
-             width:273px;
-             position:absolute;
-            left: 20px;
-            top:62px; 
-            height:468px;
-           overflow-y: scroll;
+            overflow-x: hidden;
+            width: 248px;
+            position: absolute;
+            left: 10px;
+            top: 53px;
+            height: 420px;
+            overflow-y: scroll;
+        }
+        .exchangelist li {
+            font-size: 12px;
+            line-height: 20px;
+            color: #fff;
+            background-color: #BABABA;
+            border-bottom: 1px solid #EEEEEE;
+            border-radius: 3px;
+        }
+
+        .exchangelist li:hover {
+            background-color: green;
+
+            cursor: pointer;
         }
         </style>
     </head>
@@ -161,113 +176,315 @@
         <div class="phone_cont">
             <div>
                 <ul class="phone_top">
-                    <li><i class="fa fa-bars " style="color:#A7A9A7;"></i></li>
+                    <li><i class="fa1 fa-bars1 " style="color:#A7A9A7;"></i></li>
                     <li class="text-center text-success" style="color: #3E7168;letter-spacing:2px;">智能电摩</li>
-                    <li><i class="fa fa-exchange  " style="color:#A7A9A7;"></i></li>
+                    <li style="position: relative;"><i class="fa fa-exchange  exchangeBike" style="color:#A7A9A7;">
+                        </i>
+                        <ul style="position: absolute;display:none;left:0;top:30px;z-index:10;padding:0;" class="exchangelist">
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <script type="text/javascript">
-            var g1;
-            window.onload = function() {
-                var g1 = new JustGage({
-                    id: "g1",
-                    value: getRandomInt(1, 3),
-                    //value:78,
-                    min: 0,
-                    max: 100,
-                    title: " ",
-                    label: "电量", //下方文字  
-                    gaugeWidthScale: 1, //轨道宽度
-                    showInnerShadow: true,
-                    levelColors: [
-                        // "#222222",
-                        // "#555555",
-                        // "#CCCCCC"
-                        "#066CAD"
-                    ]
-                });
+            // var g1;
+            // window.onload = function() {
+            //     var g1 = new JustGage({
+            //         id: "g1",
+            //         value: getRandomInt(1, 3),
+            //         //value:78,
+            //         min: 0,
+            //         max: 100,
+            //         title: " ",
+            //         label: "电量", //下方文字  
+            //         gaugeWidthScale: 1, //轨道宽度
+            //         showInnerShadow: true,
+            //         levelColors: [
+            //             // "#222222",
+            //             // "#555555",
+            //             // "#CCCCCC"
+            //             "#066CAD"
+            //         ]
+            //     });
 
 
-                setInterval(function() {
-                    g1.refresh(getRandomInt(78, 79));
-                }, 1000);
-            };
+            //     setInterval(function() {
+            //         g1.refresh(getRandomInt(78, 79));
+            //     }, 1000);
+            // };
             $('.tablelist tbody tr:odd').addClass('odd');
             </script>
             <div style="clear:both;background-color:#DFDDDE;width: 94%;margin:0 auto;border-radius:5px;">
                 <ul class="phone_mid">
                     <li>
                         <a style="color:#858585;">续航里程:</a>
-                        <a class="distan text-primary" style="color: #527DCA;">26.29公里</a>
+                        <a class="distance text-primary" style="color: #527DCA;">48公里</a>
                     </li>
                     <li>
                         <a style="color:#858585;">电池寿命:</a>
-                        <a class="distan text-primary" style="color: #527DCA;">76%</a>
+                        <a class="life text-primary" style="color: #527DCA;">100</a>
                     </li>
                 </ul>
-                <div id="g1" class="chart"></div>
+                <div id="main"></div>
+                <!-- <div id="g1" class="chart"></div> -->
                 <ul class="phone_mid_b">
                     <li>
-                        <a>额定电压:</a>&nbsp;&nbsp;
-                        <a class="distan text-primary">48V</a>
+                        <a>额定电压:</a>&nbsp;
+                        <a class="rated_voltage text-primary">48V</a>
                     </li>
                     <li>
-                        <a>开路电压:</a>&nbsp;&nbsp;
-                        <a class="distan text-primary">52.1V</a>
+                        <a>开路电压:</a>&nbsp;
+                        <a class="voltage text-primary">52.1V</a>
                     </li>
                     <li>
-                        <a>车辆状态:</a>&nbsp;&nbsp;
-                        <a class="distan text-primary">启动</a>
+                        <a>车辆状态:</a>&nbsp;
+                        <a class="isStart text-primary">启动</a>
                     </li>
                     <li>
-                        <a>网络状态:</a>&nbsp;&nbsp;
-                        <a class="distan text-primary">蓝牙</a>
+                        <a>上锁状态:</a>&nbsp;
+                        <a class="islock text-primary"> </a>
                     </li>
                 </ul>
             </div>
             <ul class="phone_b">
                 <li>
-                    <div>
+                    <div action="4">
                         <a><img src="../images/home/phone01.png" /></a>
-                        <!--  <a class="fa fa-archive   text-muted"></a> -->
-                        <a class="text-muted title">车箱</a>
+                        <!--  <a class="fa fa-archive text-muted"></a> -->
+                        <span class="text-muted title">车箱</span>
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div action="3">
                         <a><img src="../images/home/phone02.png" /></a>
                         <!-- <a class="fa fa-warning    text-muted"></a> -->
-                        <a class="text-muted title">寻车</a></div>
+                        <span class="text-muted title">寻车</span></div>
                 </li>
                 <li>
-                    <div>
+                    <div action="1">
                         <a><img src="../images/home/phone03.png" /></a>
                         <!-- <a class="fa fa-unlock-alt   text-muted"></a> -->
-                        <a class="text-muted title">解锁</a></div>
+                        <span class="text-muted title">解锁</span></div>
                 </li>
                 <li>
-                    <div>
+                    <div action="0">
                         <a><img src="../images/home/phone04.png" /></a>
                         <!-- <a class="fa fa-lock   text-muted"> -->
-                        <a class="text-muted title">锁车</a></div>
+                        <span class="text-muted title">锁车</span></div>
                 </li>
                 <li>
-                    <div>
+                    <div action="2">
                         <a><img src="../images/home/phone05.png" /></a>
                         <!-- <a class="fa fa-power-off   text-muted"></a> -->
-                        <a class="text-muted title">启动</a>
+                        <span class="text-muted title">启动</span>
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div action="5">
                         <a><img src="../images/home/phone06.png" /></a>
                         <!-- <a class="fa fa-window-restore  text-muted"></a> -->
-                        <a class="text-muted title">布防</a>
+                        <span class="text-muted title">布防</span>
                     </div>
                 </li>
             </ul>
         </div>
         </div>
     </body>
+    <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        tooltip: {
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+            show: false,
+            feature: {
+                mark: { show: true },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        series: [{
+            name: '电量',
+            type: 'gauge',
+            min: 0,
+            max: 100,
+            splitNumber: 5, // 分割段数，默认为5
+            axisLine: { // 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
+                    color: [
+                        [0.3, 'red'],
+
+                        [1, 'green']
+                    ],
+                    width: 4
+                }
+            },
+            axisTick: { // 坐标轴小标记
+                splitNumber: 5, // 每份split细分多少段
+                length: 9, // 属性length控制线长
+                lineStyle: { // 属性lineStyle控制线条样式
+                    color: 'auto'
+                }
+            },
+            axisLabel: { // 坐标轴文本标签，详见axis.axisLabel
+                textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    color: 'auto'
+                }
+            },
+            splitLine: { // 分隔线
+                show: true, // 默认显示，属性show控制显示与否
+                length: 30, // 属性length控制线长
+                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                    color: 'auto'
+                }
+            },
+            pointer: {
+                width: 4
+            },
+            title: {
+                show: true,
+                offsetCenter: [0, '-40%'], // x, y，单位px
+                textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: 'bolder'
+                }
+            },
+            detail: {
+                formatter: '{value}',
+                textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    color: 'auto',
+                    fontWeight: 'bolder'
+                }
+            },
+            data: [{ value: "", name: ' ' }]
+        }]
+    };
+
+    // 为echarts对象加载数据 
+    myChart.setOption(option);
+
+    // setInterval(function() {
+    //     option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+    //     myChart.setOption(option, true);
+    // }, 2000);
+
+
+    function loadAbikeInfo(bikid, url) {
+
+        var user_id = getSession()[2];
+        var form = new FormData();
+        form.append("time", time_token()[0]);
+        form.append("token", time_token()[1]);
+        form.append("vehicle_id", bikid);
+
+        var settings = {
+            "async": false,
+            "crossDomain": true,
+            "url": url,
+            "method": "POST",
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+            "data": form
+        }
+
+        $.ajax(settings).done(function(res) {
+
+                var res = JSON.parse(res);
+
+                if (res.ret == 0) {
+                    var bikeInfo = res.data;
+                    $(".distance").html(bikeInfo.distance.toFixed(2)+"km");
+                    $(".life").html(bikeInfo.life+"%");
+                    option.series[0].data[0].value = bikeInfo.electricity.toFixed(2);
+                    myChart.setOption(option, true);
+
+                    $(".rated_voltage").html(bikeInfo.rated_voltage+"V");
+                    $(".voltage").html(bikeInfo.voltage.toFixed(0)+"V");
+                    if (bikeInfo.isStart == 0) {
+                        $(".isStart").html("关闭");
+
+                    } else {
+                        $(".isStart").html("启动");
+                    }
+                    if (bikeInfo.islock == 0) {
+                        $(".islock").html("未锁");
+                    } else {
+                        $(".islock").html("上锁");
+                    }
+                } else {
+                    requestStatus(res.ret);
+                }
+            }).fail(function() {
+                layer.msg("参数出错");
+            })
+            .always(function() {
+
+            });
+
+
+    }
+    $(document).ready(function() {
+        var bikearr = getSession()[3];
+        bikearr.unshift("58210171989");
+        $.each(bikearr, function(index,el) {
+            var li = $("<li style='padding:2px 0;text-align:center;'>" + el + "</li>");
+            $(".exchangelist").append(li);
+        });
+    })
+    $(".exchangeBike").click(function() {
+        $(".exchangelist").toggle(400);
+    });
+    $(function() {
+        var bikeid = getSession()[3][0];
+        $(".exchangeBike").attr("chosebike", getSession()[3][0]);
+        loadAbikeInfo(bikeid, "https://www.8gps8.cn:8011/bikePublic/api/bike/bikeRunningInfo");
+    })
+    $(".exchangelist").on('click', "li", function(event) {
+        var bikeid = $(this).html();
+        $(".exchangelist").toggle(400);
+        $(".exchangeBike").attr("chosebike", bikeid);
+        loadAbikeInfo(bikeid, "https://www.8gps8.cn:8011/bikePublic/api/bike/bikeRunningInfo");
+    });
+
+
+    function actionBike(status, bikeid) {
+
+        var user_id = getSession()[2];
+
+
+        $.ajax({
+            type: "post",
+            url: "https://www.8gps8.cn:8011/bikePublic/api/bike/bikeCommand",
+            async: false,
+            "data": {
+                time: time_token()[0],
+                token: time_token()[1],
+                user_id: user_id,
+                vehicle_id: bikeid,
+                action: status
+            },
+            success: function(res) {
+                //    var res = JSON.parse(res);
+                if (res.ret == 0) {
+                    layer.msg("命令已发出")
+                } else {
+                    requestStatus(res.ret);
+                }
+            },
+            error: function(err) {
+                layer.msg("参数出错");
+            }
+        });
+
+
+    }
+    $(".phone_b li div").click(function() {
+        var stastu = $(this).attr("action");
+        var bike_id = $(".exchangeBike").attr("chosebike");
+
+        actionBike(stastu, bike_id);
+    });
+    </script>
 
 </html>
