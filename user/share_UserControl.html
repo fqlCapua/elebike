@@ -294,7 +294,7 @@
     var myChart = echarts.init(document.getElementById('main'));
     var option = {
         tooltip: {
-            formatter: "{a} <br/>{b} : {c}%"
+            formatter: "{a}{b}{c}%"
         },
         toolbox: {
             show: false,
@@ -344,7 +344,7 @@
             },
             title: {
                 show: true,
-                offsetCenter: [0, '-40%'], // x, y，单位px
+                offsetCenter: [0, '-20%'], // x, y，单位px
                 textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                     fontWeight: 'bolder'
                 }
@@ -356,7 +356,7 @@
                     fontWeight: 'bolder'
                 }
             },
-            data: [{ value: "", name: ' ' }]
+            data: [{ value: "", name: '电量' }]
         }]
     };
 

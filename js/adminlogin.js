@@ -357,11 +357,11 @@ function changePwdFuc() {
 
 
 };
-$(".setPwd").click(function() {
+// $(".setPwd").click(function() {
   
-    if(check_phone(".phone3")&&ptp()) {
-        changePwdFuc();
-    } else {
+//     if(check_phone(".phone3")&&ptp()) {
+//         changePwdFuc();
+//     } else {
 
-    }
-});
+//     }
+// });

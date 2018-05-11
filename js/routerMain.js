@@ -27,7 +27,7 @@
         });
         r.path('/admin',function(){
             $("#leftFrame").attr("src","adminMenu.html");
-             $("#rightFrame").attr("src","userlist.html")
+             $("#rightFrame").attr("src","./admin/userlist.html")
          });
         r.init();
 function checklogin(){
