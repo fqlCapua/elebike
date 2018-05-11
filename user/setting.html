@@ -49,10 +49,13 @@
                     margin-bottom: 30px;
                 }
                 </style>
+                <form  class="changeForm">
+                    
+                
                 <ul class="forminfo">
                     <li>
                         <label>手机号: </label>
-                        <input type="text" placeholder=" 手机号" class="dfinput youphone" />
+                        <input name="phone" type="text" placeholder="手机号" class="dfinput youphone" />
                     </li>
                     <li>
                         <label>密码: </label>
@@ -60,12 +63,16 @@
                     </li>
                     <li>
                         <label>再次输入密码: </label>
-                        <input type="password" class="dfinput youpwd2" />
+                        <input name="password" type="password" class="dfinput youpwd2" />
                     </li>
                     <li>
                         <label> 验证码: </label>
                         <input type="button" class="bindbtn btn" onclick="Noclick()" value="获取验证码" />
-                        <input type="text" class="dfinput vcode" style="width:100px;" />
+                        <!-- <input type="text" class="dfinput VerCode" style="width:100px;" /> -->
+                    </li>
+                     <li>
+                        <label>验证码: </label>
+                        <input name="code" type="text" class="dfinput vercode" />
                     </li>
                 </ul>
                 <div id="tab1" class="tabson">
@@ -74,8 +81,9 @@
                         <input type="button" class="changepwdbtn  btn" value="修改" />
                     </div>
                 </div>
-                <div id="tab2" class="tabson">
-                </div>
+
+                </form>
+             
             </div>
         </div>
     </body>
@@ -159,28 +167,23 @@
     $("#usual1 ul").idTabs();
 
     $('.tablelist tbody tr:odd').addClass('odd');
-    </script>
-    <script type="text/javascript">
-    function subchange(phone, pwd, code) {
-
-
-
-
-
-    }
+ 
 
     $(".changepwdbtn").click(function() {
-        var phone = $(".primary_phone").val();
+        var phone = $(".youphone").val();
         var pwd = $(".youpwd").val();
         var pwd2 = $(".youpwd2").val();
-        var code = $(".vcode").val();
-        
+        var code = $(".vercode").val();
+     
+ 
         if (pwd == pwd2 && code != "" && phone != "") {
+  
             var form = new FormData();
             form.append("time",  time_token()[0]);
             form.append("token", time_token()[1],);
+           form.append("password",pwd2);
             form.append("phone",phone);
-            form.append("password",pwd);
+           
             form.append("code",code);
             var settings={
                 "async": true,
@@ -194,42 +197,19 @@
             }
            $.ajax(settings).done(function(res) {
                     var res = JSON.parse(res);
-                     console.log(res);
+                  
                     if (res.ret == 0) {
-                        layer.msg("成功");
+                        layer.msg("修改成功");
                     } else {
-                        layer.msg("失败");
+                        layer.msg("修改失败");
                     }
             }).fail(function(err) {
-                  console.log(err);
+                
                 })
                 .always(function() {
 
                 });
-            // $.ajax({
-            //     type: "post",
-            //     url: "https://www.8gps8.cn:8011/bikePublic/api/user/changePassword",
-            //     "data": {
-            //         time: time_token()[0],
-            //         token: time_token()[1],
-            //         phone: phone,
-            //         password: pwd,
-            //         code: code
-            //     },
-            //     success: function(res) {
-            //         console.log(res);
-            //         var res = JSON.parse(res);
-            //         if (res.ret == 0) {
-            //             layer.msg("成功")
-            //         } else {
-            //             requestStatus(res.ret);
-            //         }
-            //     },
-            //     error: function(err) {
-            //         console.log(err)
-            //         layer.msg("出问题了");
-            //     }
-            // });
+
         } else {
             layer.msg("两次输入不一致");
         }
