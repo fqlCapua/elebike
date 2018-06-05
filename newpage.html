@@ -78,22 +78,14 @@
                             <label>  </label>
                             <input type="text" name="count" class="dfinput" value="1000"    />
                           </li>
-                       <li>
-                        <label> </label>
-                        <input name="like" type="text" placeholder="关键词" class="scinput" />
-                       </li> 
-                       
-                    
-                
-                     
-                      
+                          
                 </ul>
                  </form>
                     </li>
-                     <li    >
+                     <li style=" " >
                           <label>&nbsp;</label>
-                          <input name="/userManage/get" target="userForm"  onclick="checkInfo(this)"   type="button" class="scbtn "  value="查询" />
-                        </li>
+                          <input name="/userManage/get" target="userForm" onclick="checkInfo(this)"   type="button" class="scbtn getdata"  value="查询" />
+                       </li>
                 </ul>
                  
                 <div>
@@ -412,15 +404,16 @@
             let selectedOption=$(this).children('option:selected');
             let form=$(selectedOption).attr("target");
             let hash=$(selectedOption).attr("name");
-             $(".actionType li .getdata").attr("name","/get");
+             $("li .getdata").attr("name","/get");
              $(".actionType li  .adddata").attr("name","/add");
               $(".actionType li  .deldata").attr("name","/del");
                $(".actionType li input").attr("target","");
             $("."+form).slideDown();
             $("."+form).siblings('.formbox').slideUp();
-            console.log()
-            $(".actionType li input").attr("name",hash+$(".actionType li input").attr("name"));
-              $(".actionType li input").attr("target",form);
+             $("li .getdata").attr("name",hash+$("li .getdata").attr("name"));
+            $(".actionType li .adddata").attr("name",hash+$(".actionType li .adddata").attr("name"));
+            $(".actionType li .deldata").attr("name",hash+$(".actionType li .deldata").attr("name"));
+            $(".actionType li input").attr("target",form);
         })
        
     </script>

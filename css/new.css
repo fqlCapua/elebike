@@ -18,6 +18,7 @@
     }
 
      table th {
+      background-color:#6FAAB4;
         border-right: 1px solid #BABABA;
         text-align: center;
         flex: 1;
@@ -92,7 +93,7 @@ ul{
      line-height:35px;
      text-align:center;
    }
-   
+
    .actionBtns{
     display:flex;
      

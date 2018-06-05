@@ -72,22 +72,19 @@ function dataFormater(data) {
     var Infos = (Inf.substring(Inf, Inf.split("").length) + "}]").split(",}]")[0] + "}";
 
     var Infos = JSON.parse(Infos);
-    console.log(Infos);
-    if (Infos.like) {
-        var val = Infos.like;
-        Infos.like = "User.name," + val;
-    } else {
-
-    }
+   console.log(Infos);
+    
     return Infos;
 }
-
+ 
 function checkInfo(n) {
     $("input[name=user_id]").val(getSession()[2]);
-    $(".data").html("");
+    $(".data").html(" ");
     var url = urlTips + $(n).attr("name");
+  f()
     var submitData = $(".checkForm").serializeArray();
     var form = dataFormater(submitData);
+    console.log(form);
     var settings = {
         "url": url,
         "method": "POST",
@@ -96,9 +93,10 @@ function checkInfo(n) {
     $.ajax(settings).done(function(res) {
         if (res.ret == 0) {
             var result = res.data.res_data;
+            console.log(result);
             // var obj = "." + $(n).attr("target") + "data";
             $(".data").columns({
-                data: result
+                data:result
             });
 
             setInterval("NameTranslate()", 100);
@@ -108,29 +106,29 @@ function checkInfo(n) {
         }
     });
 }
-
+ 
+ 
 function addInfo(n) {
-    layer.msg("添加成功");
     $("input[name=user_id]").val(getSession()[2]);
-    // var url = urlTips + $(n).attr("name");
-    // var submitData = $("." + $(n).attr("target")).find("form").serializeArray();
-    // console.log($("." + $(n).attr("target")).find("form"));
-    // var form = dataFormater(submitData);
-    // console.log(form);
-    // var settings = {
-    //     "url": url,
-    //     "method": "POST",
-    //     "data": form
-    // }
-    // $.ajax(settings).done(function(res) {
-    //     if (res.ret == 0) {
-    //         layer.msg("添加成功");
-    //         $("input[type=text]").val("");
-    //     } else {
-    //         console.log(res.msg);
-    //         layer.msg("添加失败");
-    //     }
-    // });
+    var url = urlTips + $(n).attr("name");
+    var submitData = $("." + $(n).attr("target")).find("form").serializeArray();
+    console.log($("." + $(n).attr("target")));
+    var form = dataFormater(url);
+    console.log(form);
+    var settings = {
+        "url": url,
+        "method": "POST",
+        "data": form
+    }
+    $.ajax(settings).done(function(res) {
+        if (res.ret == 0) {
+            layer.msg("添加成功");
+            $("input[type=text]").val("");
+        } else {
+            console.log(res.msg);
+            layer.msg("添加失败");
+        }
+    });
 }
 
 function editInfo(n) {
@@ -162,19 +160,19 @@ function delInfo(n) {
             layer.msg('删除类型id：' + pass+"成功");
         
     });
-    // var url = urlTips + $(n).attr("name");
-    // var submitData = $("#" + $(n).attr("target")).serializeArray();
-    // var form = dataFormater(submitData);
-    // var settings = {
-    //     "url": url,
-    //     "method": "POST",
-    //     "data": form
-    // }
-    // $.ajax(settings).done(function(res) {
-    //     if (res.ret == 0) {
-    //         layer.msg("删除成功！");
-    //     } else {
-    //         layer.msg(res.msg);
-    //     }
-    // });
+    var url = urlTips + $(n).attr("name");
+    var submitData = $("#" + $(n).attr("target")).serializeArray();
+    var form = dataFormater(submitData);
+    var settings = {
+        "url": url,
+        "method": "POST",
+        "data": form
+    }
+    $.ajax(settings).done(function(res) {
+        if (res.ret == 0) {
+            layer.msg("删除成功！");
+        } else {
+            layer.msg(res.msg);
+        }
+    });
 }

@@ -1634,3 +1634,25 @@ a:link {
 .allBicycle option{
     color: #000;
 }
+.ui-table-search{
+display: block;
+    height:35px;
+    width:200px;
+    margin-bottom:15px;
+}
+.data{
+    padding:20px 10px;
+}
+
+.ui-table-footer{
+    margin-top: 15px;
+    line-height:35px;
+}
+.ui-table-footer select{
+    height: 35px;
+    width: 45px;
+}
+.ui-table-footer span{
+    padding:0 10px;
+    
+}
