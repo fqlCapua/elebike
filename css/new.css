@@ -92,9 +92,7 @@ ul{
      line-height:35px;
      text-align:center;
    }
-   .data{
-     border: 1px solid #000;
-   }
+   
    .actionBtns{
     display:flex;
      
