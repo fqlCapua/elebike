@@ -1,0 +1,105 @@
+    
+  table {
+        width: 100%;
+        border: none;
+        font-size: 14px;
+    }
+
+    table td {
+        border-right: 1px solid #BABABA;
+        text-align: center;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block; 
+        height: 35px;
+        line-height: 35px;
+    }
+
+     table th {
+        border-right: 1px solid #BABABA;
+        text-align: center;
+        flex: 1;
+        height: 35px;
+        line-height: 35px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; 
+    } 
+
+    table tr {
+        height: 35px;
+        background-color: #f5fafe;
+        border-bottom: 1px solid #BABABA;
+        display: flex;
+    }
+
+    table tr:nth-child(1) {
+        border-top: 1px solid #BABABA;
+        border-bottom: 1px solid #BABABA;
+    }
+
+ 
+
+ul{
+    display: inline-block;
+    
+}
+
+.formbox{
+    clear: both;
+    border: 1px solid #BABABA;
+    width:60%;
+   
+    padding:30px 20px;
+    display: none;
+    text-align: left;
+}
+.form{
+    width:80%;
+     padding:10px;
+     display: block;
+}
+.formbox:nth-child(1){
+    display: block;
+}
+.forminfo{
+    margin-bottom:20px;
+}
+ .form_ul li{
+    line-height: 45px;
+
+ }
+  .form_ul li label, .form_ul li input,  .form_ul li select{
+    display: inline-block;
+    font-size: 13px;
+     line-height:45px;
+  }
+   .form_ul li label{
+    width:100px;
+    
+   }
+   .form_ul li input[type=text]{
+    height:35px;
+   }
+   .form_ul li select{
+    width: 100px;
+    padding:6px 10px;
+    line-height:35px;
+   }
+   .form_ul li select option{
+     line-height:35px;
+     text-align:center;
+   }
+   .data{
+     border: 1px solid #000;
+   }
+   .actionBtns{
+    display:flex;
+     
+    
+   }
+   .actionBtns li{
+    vertical-align: top;
+   }
