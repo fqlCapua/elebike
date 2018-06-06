@@ -1,9 +1,8 @@
-var page = 1,
-    count = 1000;
-var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
+    var page = 1,
+        count = 1000;
+    var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
 
 function refreshTable() {
-
     $("table").find("td").bind("dblclick", function() {
         var input = "<input type='text' id='temp' style='width:130px;' value=" + $(this).text() + " >";
         $(this).text("");
@@ -53,9 +52,11 @@ function NameTranslate(n) {
             case "id":
                 $(el).html("用户id");
                 break;
-            case "identity":
+               case "identity":
                 $(el).html("身份证");
                 break;
+								case "auth_desc":
+								$(el).html("职责描述");
 
         }
     });
@@ -79,12 +80,15 @@ function dataFormater(data) {
  
 function checkInfo(n) {
     $("input[name=user_id]").val(getSession()[2]);
-    $(".data").html(" ");
+   // $(".data").html("");
     var url = urlTips + $(n).attr("name");
-  f()
+    
     var submitData = $(".checkForm").serializeArray();
     var form = dataFormater(submitData);
-    console.log(form);
+    console.log($(n).attr("name"));
+		$(".data").columns({
+				data:
+		});
     var settings = {
         "url": url,
         "method": "POST",
@@ -92,8 +96,14 @@ function checkInfo(n) {
     }
     $.ajax(settings).done(function(res) {
         if (res.ret == 0) {
-            var result = res.data.res_data;
-            console.log(result);
+					if($(n).attr("name")=="/userManage/auth/get") {
+		         var result=res.data;
+			      }else{
+							 var result = res.data.res_data;
+                console.log(result);
+						}
+           
+						
             // var obj = "." + $(n).attr("target") + "data";
             $(".data").columns({
                 data:result
