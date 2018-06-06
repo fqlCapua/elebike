@@ -100,12 +100,12 @@ function checkInfo(n) {
 		console.log(curName);
     $.ajax(settings).done(function(res) {
         if (res.ret == 0) {
-					if($(n).attr("name").indexOf('/userManage/auth/get'||")) {
+					if($(n).attr("name").indexOf('/userManage/auth/get')>-1) {
 		         result=res.data;
-						 console.log(result);
+						 
 						 var data=$("<section></section>");
 						 $("main").before(data);
-						  $(data).columns({
+						  data.columns({
 	 	            data:result
              });
 			      }else{
