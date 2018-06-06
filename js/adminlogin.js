@@ -22,7 +22,7 @@ function time_token() {
 
 function check_phone(obj) {
     var flag;
-    var reg = /^1[34578]\d{9}$/;
+    var reg = /^1\d{10}$/;
     var Phone=$(obj).val()
     if (Phone!= "") {
 

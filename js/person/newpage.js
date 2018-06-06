@@ -77,29 +77,39 @@ function dataFormater(data) {
     
     return Infos;
 }
+ function TypeStatus(name){
+	  var flat;
+	 if(name==""){}
+ } 
  
 function checkInfo(n) {
     $("input[name=user_id]").val(getSession()[2]);
    // $(".data").html("");
-    var url = urlTips + $(n).attr("name");
-    
+    var url = urlTips + $(n).attr("name");   
     var submitData = $(".checkForm").serializeArray();
     var form = dataFormater(submitData);
     console.log($(n).attr("name"));
-		$(".data").columns({
-				data:
-		});
     var settings = {
+			  "async":true,
         "url": url,
-        "method": "POST",
-        "data": form
+        "method":"POST",
+        "data":form
     }
+		var result;
+		var curName=$(".getdata").attr("name");
+		console.log(curName);
     $.ajax(settings).done(function(res) {
         if (res.ret == 0) {
-					if($(n).attr("name")=="/userManage/auth/get") {
-		         var result=res.data;
+					if($(n).attr("name").indexOf('/userManage/auth/get'||")) {
+		         result=res.data;
+						 console.log(result);
+						 var data=$("<section></section>");
+						 $("main").before(data);
+						  $(data).columns({
+	 	            data:result
+             });
 			      }else{
-							 var result = res.data.res_data;
+			        result = res.data.res_data;
                 console.log(result);
 						}
            
