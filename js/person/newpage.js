@@ -1,4 +1,4 @@
-    var page = 1,
+       var page = 1,
         count = 1000;
     var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
 
@@ -57,6 +57,7 @@ function NameTranslate(n) {
                 break;
 								case "auth_desc":
 								$(el).html("职责描述");
+								break;
 
         }
     });
@@ -78,8 +79,26 @@ function dataFormater(data) {
     return Infos;
 }
  function TypeStatus(name){
-	  var flat;
-	 if(name==""){}
+	  var flat=false;
+		switch(name){
+			case '/userManage/auth/get':
+			flag=false;
+			break;
+			case '/investManage/costRule/get':
+			flag=false;
+			break;
+			case '/investManage/investRule/get':
+			flag=false;
+			break;
+			case '/investManage/get':
+			flag=false;
+			break;
+			default:
+			flag=true;
+			break;
+		}
+		console.log(flag);
+	 return  false;
  } 
  
 function checkInfo(n) {
@@ -95,12 +114,15 @@ function checkInfo(n) {
         "method":"POST",
         "data":form
     }
-		var result;
+		var result=[];
 		var curName=$(".getdata").attr("name");
 		console.log(curName);
     $.ajax(settings).done(function(res) {
-        if (res.ret == 0) {
-					if($(n).attr("name").indexOf('/userManage/auth/get')>-1) {
+
+		`if (res.ret == 0) {
+					//||"/investManage/costRule/get"||'/investManage/investRule/get'||'/investManage/get')
+					if(TypeStatus(name)) {
+						 
 		         result=res.data;
 						 
 						 var data=$("<section></section>");
