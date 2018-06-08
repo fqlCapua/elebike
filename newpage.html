@@ -1,422 +1,543 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-   
-       <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title> </title>
-         <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
-      
-        
-        <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
-        <script type="text/javascript" src="js/select-ui.min.js"></script>   <script type="text/javascript" src="js/md5.js"></script>
-        <script type="text/javascript" src="js/getSession.js"></script>
-        <script type="text/javascript" src="js/com.js"></script>
-        <script type="text/javascript" src="js/layer.js"></script>
-         <script type="text/javascript" src="js/jqClum.min.js"></script>
-     <script type="text/javascript" src="js/person/jquery.tablesorter.js"></script>
-    
-        <link rel="stylesheet" href="css/new.css" />
-        
-      
-        <style>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> </title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
+    <script type="text/javascript" src="js/select-ui.min.js"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/getSession.js"></script>
+    <script type="text/javascript" src="js/com.js"></script>
+    <script type="text/javascript" src="js/layer.js"></script>
+    <script type="text/javascript" src="js/jqClum.min.js"></script>
+    <script type="text/javascript" src="js/person/jquery.tablesorter.js"></script>
+
+    <link rel="stylesheet" href="css/new.css" />
+
+
+    <style>
         table th {
             cursor: pointer;
         }
-        </style>
-    </head>
+        .datalist {
+            height: 30px;
+        }
 
-    <body>
-        <div class="place">
-            <span>位置：</span>
-            <ul class="placeul">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">系统管理员</a></li>
-                
+         .savedata{
+            padding:7px 25px;
+						font-weight:bolder;
+						color: #fff;
+            border-radius: 5px;
+            background-color: #3E97C9;
+            text-align: center;
+            line-height: 35px;
+        }
+    </style>
+	 
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li>
+                <a href="#">首页</a>
+            </li>
+            <li>
+                <a href="#">系统管理员</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="formbody">
+        <div style="clear: both;"></div>
+        <div id="usual1" class="usual">
+            <ul class="seachform">
+                <li>
+                    <label>身份(类别):</label>
+                </li>
+                <li class="selectBox">
+                    <select class="select3 form-control">
+                        <option name="/userManage" target="userForm">用户</option>
+                        <option name="/userManage/auth" target="authForm">角色</option>
+                        <option name="/firmManage" target="firmManageForm">厂家</option>
+                        <option name="/dealerManage" target="dealerManageForm">经销商</option>
+                        <option name="/investorManage" target="investorManageForm">投资商</option>
+                        <option name="/investManage" target="investManageForm">投资</option>
+                        <option name="/investManage/investRule" target="investRuleForm">投资分成</option>
+                        <option name="/delegaterManage" target="delegaterManageForm">代理商</option>
+                        <option name="/fixstationManage" target="fixstationManageForm">维保站</option>
+                        <option name="/fixstationRecordManage" target="fixstationRecordManageForm">维修记录</option>
+                        <option name="/powerManage" target="powerManageForm"> 充电桩</option>
+                        <option name="/bikesManage" target="bikeForm">车辆</option>
+                        <option name="/investManage/costRule" target="costRuleForm">车辆计费规则</option>
+                        <option name="/saleManage" target="saleManageForm">优惠活动</option>
+
+
+                    </select>
+
+                </li>
+                <li>
+                    <form class="checkForm">
+                        <ul class="actionBtns actionType  searchbox">
+
+                            <li style="display: none;" class="user_id">
+                                <label> </label>
+                                <input type="text" name="user_id" class="dfinput" />
+                            </li>
+
+                            <li style="display: none;">
+                                <label> </label>
+                                <input type="text" name="page" class="dfinput" value="1" />
+                            </li>
+                            <li style="display: none;">
+                                <label> </label>
+                                <input type="text" name="count" class="dfinput" value="1000" />
+                            </li>
+
+                        </ul>
+                    </form>
+                </li>
+                <li style=" ">
+                    <label>&nbsp;</label>
+                    <input name="/userManage/get" target="userForm" onclick="checkInfo(this)" type="button" class="scbtn getdata" value="查询"
+                    />
+                </li>
             </ul>
-        </div>
 
-        <div class="formbody">
-            <div style="clear: both;"></div>
-            <div id="usual1" class="usual">
-                <ul class="seachform">
-                    <li> <label>身份(类别):</label></li>
-                    <li class="selectBox"  >
-                          <select class="select3 form-control">
-                                   <option name="/userManage" target="userForm">用户</option>
-                                   <option  name="/userManage/auth" target="authForm">角色</option>
-                                   <option name="/firmManage" target="firmManageForm">厂家</option>
-                                   <option name="/dealerManage" target="dealerManageForm">经销商</option>
-                                    <option name="/investorManage" target="investorManageForm">投资商</option>
-                                   <option name="/investManage" target="investManageForm">投资</option>
-                                   <option name="/investManage/investRule" target="investRuleForm">投资分成</option>
-                                   <option name="/delegaterManage" target="delegaterManageForm">代理商</option>
-                                   <option name="/fixstationManage" target="fixstationManageForm">维保站</option>
-                                   <option name="/fixstationRecordManage" target="fixstationRecordManageForm">维修记录</option>
-                                   <option name="/powerManage" target="powerManageForm"> 充电桩</option>
-                                   <option name="/bikesManage" target="bikeForm">车辆</option>
-                                   <option name="/investManage/costRule" target="costRuleForm">车辆计费规则</option>
-                                   
-                                </select>
-                       
-                    </li>
-                    <li>
-                  <form class="checkForm">
-                     <ul class="actionBtns actionType  searchbox" >
-                  
-                         <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                     
-                        <li style="display: none;"  >
-                            <label>  </label>
-                            <input type="text" name="page" class="dfinput" value="1"    />
-                          </li>
-                           <li style="display: none;"  >
-                            <label>  </label>
-                            <input type="text" name="count" class="dfinput" value="1000"    />
-                          </li>
-                          
-                </ul>
-                 </form>
-                    </li>
-                     <li style=" " >
-                          <label>&nbsp;</label>
-                          <input name="/userManage/get" target="userForm" onclick="checkInfo(this)"   type="button" class="scbtn getdata"  value="查询" />
-                       </li>
-                </ul>
-                 
-                <div>
-               <main>
-                   
-                 <div class="data"></div>
+            <div>
+                <div class="datalist">
 
-         
+                </div>
+                <main>
+
+
+
+
                     <div class="formbox userForm">
-                    
-                      <form  class="form"> 
-                     <ul class="form_ul">
-                         <li style="display: none;" class="user_id">
-                            <label>  </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>手机号:<b>*</b></label>
-                            <input  type="text" name="phone" class="dfinput ct_phone" placeholder="用户手机号" />
-                          </li>
-                         <li>
-                            <label>真实姓名:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput " placeholder="用户名称" />
-                        </li>
-                         <li>
-                            <label>密码:<b>*</b></label>
-                            <input type="text" name="password" class="dfinput  " placeholder="密码" />
-                        </li>
-                         <li>
-                            <label>身份证:<b>*</b></label>
-                            <input type="text" name="identity" class="dfinput"   />
-                        </li>
-                         <li>
-                            <label>金额:<b>*</b></label>
-                            <input type="text" name="money" class="dfinput"  />
-                        </li>
-                          <li>
-                            <label>是否交押金:<b>*</b></label>
-                            <input type="number" maxlength="1" min="0" max="1" name="deposited" class="dfinput"  />
-                        </li>
-                         <li>
-                            <label>隶属公司:<b>*</b></label>
-                            <input type="text"   name="ownerid" class="dfinput"  />
-                        </li>
-                        <!-- <li>
+
+                        <form class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>手机号:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="phone" class="dfinput ct_phone" placeholder="用户手机号" />
+                                </li>
+                                <li>
+                                    <label>真实姓名:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput " placeholder="用户名称" />
+                                </li>
+                                <li>
+                                    <label>密码:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="password" class="dfinput  " placeholder="密码" />
+                                </li>
+                                <li>
+                                    <label>身份证:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="identity" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>金额:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="money" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>是否交押金:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="number" maxlength="1" min="0" max="1" name="deposited" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>隶属公司:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="ownerid" class="dfinput" />
+                                </li>
+                                <!-- <li>
                             <label>头像:<b>*</b></label>
                             <input type="file"   name="photo" class="dfinput"  />
                         </li> -->
-                    </ul>
-            </form>
-        </div>
-        <div class="formbox authForm">
-            <form   class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label>  </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>角色名称:<b>*</b></label>
-                            <input type="text" name="auth_name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>角色描述:<b>*</b></label>
-                            <input  type="text" name="auth_desc" class="dfinput "   />
-                        </li>
-                    </ul>
-            </form>
-        </div>
-        <div class="formbox firmManageForm">
-            <form action="" class="form">
-                  <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                        <li>
-                            <label>地址:<b>*</b></label>
-                            <input  type="text" name="addr" class="dfinput "   />
-                        </li>
-                        <li>
-                            <label>客服电话:<b>*</b></label>
-                            <input  type="text" name="phone" class="dfinput "   />
-                        </li>
-                        <li>
-                            <label>负责人姓名:<b>*</b></label>
-                            <input  type="text" name="officer" class="dfinput "   />
-                        </li>
-                        <li>
-                            <label>维保站列表:<b>*</b></label>
-                            <input  type="text" name="fixstations" class="dfinput "   />
-                        </li>
-                        <li>
-                            <label>代理商列表:<b>*</b></label>
-                            <input  type="text" name="delegaters" class="dfinput "   />
-                        </li>
-                        <li>
-                            <label>车型列表:<b>*</b></label>
-                            <input  type="text" name="vehiclenos" class="dfinput "   />
-                        </li>
-                    </ul>
-            </form>
-        </div>
-        <div class="formbox dealerManageForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox investorManageForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox investManageForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-         <div class="formbox investRuleForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox delegaterManageForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox fixstationManageForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox fixstationRecordManageForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox powerManageForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox bikeForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-        <div class="formbox costRuleForm">
-            <form action="" class="form">
-               <ul class="form_ul">
-                           <li style="display: none;" class="user_id">
-                            <label> </label>
-                            <input type="text" name="user_id" class="dfinput"    />
-                          </li>
-                          <li>
-                            <label>厂家名字:<b>*</b></label>
-                            <input type="text" name="name" class="dfinput  "  />
-                         </li>
-                          <li>
-                            <label>品牌:<b>*</b></label>
-                            <input  type="text" name="brand" class="dfinput "   />
-                        </li>
-                      </ul>
-            </form>
-        </div>
-   
-    </main>   
-     <ul class="seachform actionType" style="margin-top: 20px;">
-        <li>
-            <label>&nbsp;</label>
-               <input name="/userManage/add" target="userForm"   type="button" class="adddata
-                scbtn" onclick="addInfo(this)"  value="添加" />
-             </li>
-          <li>
-               <label>&nbsp;</label>
-               <input name="/userManage/del" target="userForm " onclick="delInfo(this)"   type="button" class="deldata scbtn"  value="删除" />
-           </li>
-    </ul>  
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox authForm">
+                        <form class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>角色名称:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="auth_name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>角色描述:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="auth_desc" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox firmManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                                <li>
+                                    <label>地址:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="addr" class="dfinput " />
+                                </li>
+                                <li>
+                                    <label>客服电话:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="phone" class="dfinput " />
+                                </li>
+                                <li>
+                                    <label>负责人姓名:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="officer" class="dfinput " />
+                                </li>
+                                <li>
+                                    <label>维保站列表:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="fixstations" class="dfinput " />
+                                </li>
+                                <li>
+                                    <label>代理商列表:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="delegaters" class="dfinput " />
+                                </li>
+                                <li>
+                                    <label>车型列表:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="vehiclenos" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox dealerManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox investorManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox investManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox investRuleForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox delegaterManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox fixstationManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox fixstationRecordManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox powerManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox bikeForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox costRuleForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="formbox saleManageForm">
+                        <form action="" class="form">
+                            <ul class="form_ul">
+                                <li style="display: none;" class="user_id">
+                                    <label> </label>
+                                    <input type="text" name="user_id" class="dfinput" />
+                                </li>
+                                <li>
+                                    <label>厂家名字:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="name" class="dfinput  " />
+                                </li>
+                                <li>
+                                    <label>品牌:
+                                        <b>*</b>
+                                    </label>
+                                    <input type="text" name="brand" class="dfinput " />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </main>
+                <ul class="seachform actionType" style="margin-top: 20px;">
+                    <li>
+                        <label>&nbsp;</label>
+                        <input name="/userManage/add" target="userForm" type="button" class="adddata
+                scbtn" onclick="addInfo(this)" value="添加" />
+                    </li>
+                    <li>
+                        <label>&nbsp;</label>
+                        <input name="/userManage/del" target="userForm " onclick="delInfo(this)" type="button" class="deldata scbtn" value="删除" />
+                    </li>
+                </ul>
 
-          
-    </body>
-    <script type="text/javascript" src="js/person/newpage.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('.formbox').hide();
-             $('.userForm').show();
-        })
-        $(".select3").change(function() {
 
-            let selectedOption=$(this).children('option:selected');
-            let form=$(selectedOption).attr("target");
-            let hash=$(selectedOption).attr("name");
-             $("li .getdata").attr("name","/get");
-             $(".actionType li  .adddata").attr("name","/add");
-              $(".actionType li  .deldata").attr("name","/del");
-               $(".actionType li input").attr("target","");
-            $("."+form).slideDown();
-            $("."+form).siblings('.formbox').slideUp();
-             $("li .getdata").attr("name",hash+$("li .getdata").attr("name"));
-            $(".actionType li .adddata").attr("name",hash+$(".actionType li .adddata").attr("name"));
-            $(".actionType li .deldata").attr("name",hash+$(".actionType li .deldata").attr("name"));
-            $(".actionType li input").attr("target",form);
-        })
-       
-    </script>
-     
+</body>
+<script type="text/javascript" src="js/person/newpage.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.formbox').hide();
+        $('.userForm').show();
+    })
+    $(".select3").change(function () {
+
+        let selectedOption = $(this).children('option:selected');
+        let form = $(selectedOption).attr("target");
+        let hash = $(selectedOption).attr("name");
+        $("li .getdata").attr("name", "/get");
+        $(".actionType li  .adddata").attr("name", "/add");
+        $(".actionType li  .deldata").attr("name", "/del");
+        $(".actionType li input").attr("target", "");
+        $("." + form).slideDown();
+        $("." + form).siblings('.formbox').slideUp();
+        $("li .getdata").attr("name", hash + $("li .getdata").attr("name"));
+        $(".actionType li .adddata").attr("name", hash + $(".actionType li .adddata").attr("name"));
+        $(".actionType li .deldata").attr("name", hash + $(".actionType li .deldata").attr("name"));
+        $(".actionType li input").attr("target", form);
+    })
+</script>
+
 
 </html>
