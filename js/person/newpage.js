@@ -1,7 +1,10 @@
        var page = 1,
            count = 1000;
        var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
-
+     
+		 
+		 
+		 
        function refreshTable() {
            $("table").find("td").bind("dblclick", function () {
 						 $(".editdata").show();
