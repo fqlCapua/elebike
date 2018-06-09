@@ -91,6 +91,7 @@
                 var res = JSON.parse(res);
 
                 if (res.ret == 0) {
+					map.clearMap();
                     if (res.data.length == 0) {
                         layer.msg("数据为空");
                     } else {

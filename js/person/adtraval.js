@@ -2,13 +2,14 @@
 
  
  function getTravallist(vehicle_id){
+
         var form = new FormData();
         form.append("time", time_token()[0]);
         form.append("token", time_token()[1]);
 
         form.append("travel_id", vehicle_id);
 
-
+ 
 
         var settings = {
             "async": false,
@@ -22,9 +23,11 @@
         };
 
         $.ajax(settings).done(function(res) {
+					
                 var res = JSON.parse(res);
 
                 if (res.ret == 0) {
+										 map.clearMap();
                     if (res.data.length == 0) {
                         layer.msg("数据为空");
                     } else {
@@ -65,6 +68,7 @@
                             position: pointArr[pointArr.length - 1],
                             content: '<div class="marker-route marker-marker-bus-to"></div>'
                         });
+											
                         map.setFitView();
                     }
                 } else {

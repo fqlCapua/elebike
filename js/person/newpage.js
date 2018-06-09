@@ -5,6 +5,7 @@
        function refreshTable() {
            $("table").find("td").bind("dblclick", function () {
 						 $(".editdata").show();
+						 var $that=$(this);
                var input = "<input type='text' id='temp' style='width:130px;' value=" + $(this).text() + " >";
                $(this).text("");
                $(this).append(input);
@@ -12,7 +13,9 @@
                $("input").blur(function () {
 							
                    if ($(this).val() == "") {
-                       $(this).remove();
+										  $(this).remove();
+										             
+                      
                    } else {
                        $(this).closest("td").text($(this).val());
                    }
@@ -432,7 +435,7 @@
            layer.prompt({
                title: '输入类型的id',
                formType: 1
-           }, function (pass, index) {
+           }, function (pass,index) {
                layer.close(index);
 
                layer.msg('删除类型id：' + pass + "成功");
