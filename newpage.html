@@ -509,7 +509,7 @@
                     </li>
                     <li>
                         <label>&nbsp;</label>
-                        <input name="/userManage/del" target="userForm " onclick="delInfo(this)" type="button" class="deldata scbtn" value="删除" />
+                        <input name="/userManage/delete" target="userForm " onclick="delInfo(this)" type="button" class="deldata scbtn" value="删除" />
                     </li>
                 </ul>
 
@@ -528,7 +528,7 @@
         let hash = $(selectedOption).attr("name");
         $("li .getdata").attr("name", "/get");
         $(".actionType li  .adddata").attr("name", "/add");
-        $(".actionType li  .deldata").attr("name", "/del");
+        $(".actionType li  .deldata").attr("name", "/delete");
         $(".actionType li input").attr("target", "");
         $("." + form).slideDown();
         $("." + form).siblings('.formbox').slideUp();

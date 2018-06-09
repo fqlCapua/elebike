@@ -1,29 +1,26 @@
        var page = 1,
            count = 1000;
        var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
-     
-		 
-		 
-		 
+
        function refreshTable() {
            $("table").find("td").bind("dblclick", function () {
-						 $(".editdata").show();
-						 var $that=$(this);
+               $(".editdata").show();
+               var $that = $(this);
                var input = "<input type='text' id='temp' style='width:130px;' value=" + $(this).text() + " >";
                $(this).text("");
                $(this).append(input);
                $("input#temp").focus();
                $("input").blur(function () {
-							
+
                    if ($(this).val() == "") {
-										  $(this).remove();
-										             
-                      
+                       $(this).remove();
+
+
                    } else {
                        $(this).closest("td").text($(this).val());
                    }
                });
-							 	 
+
            });
        }
 
@@ -31,8 +28,6 @@
 
 
        function NameTranslate() {
-
-
            var ths = $("table th");
            var tds = $("table td");
            $.each(tds, function (index, el) {
@@ -42,7 +37,7 @@
 
                }
            })
-					
+
            $.each(ths, function (index, el) {
                switch ($(el).html()) {
                    case "name":
@@ -346,11 +341,11 @@
 
        function checkInfo(n) {
            $("input[name=user_id]").val(getSession()[2]);
-    
+
            var url = urlTips + $(n).attr("name");
            var submitData = $(".checkForm").serializeArray();
            var form = dataFormater(submitData);
-           
+
            var settings = {
                "async": false,
                "url": url,
@@ -378,7 +373,9 @@
                    dataInfo.columns({
                        data: result
                    });
-									$(".ui-table-footer").append("<input style='display:none;' name='/userManage/edit' target='userForm' onclick='saveInfo(this)' type='button' class='scbtn editdata' value='保存'>");
+                   $(".ui-table-footer").append(
+                       "<input style='display:none;' name='/userManage/edit' target='userForm' onclick='saveInfo(this)' type='button' class='scbtn editdata' value='保存'>"
+                   );
                    $(".ui-table-search").attr("placeholder", "搜索关键词");
                    setInterval("NameTranslate()", 100);
                    refreshTable();
@@ -435,28 +432,48 @@
        }
 
        function delInfo(n) {
+           var form = {};
+
            layer.prompt({
                title: '输入类型的id',
-               formType: 1
-           }, function (pass,index) {
+               formType: 0
+           }, function (pass, index) {
                layer.close(index);
+               layer.confirm('确定要删除么？', {
+                   btn: ['是', '否'] //按钮
+               }, function () {
+                   if ($(n).attr("name") == "/userManage/auth/delete") {
+                       form ={
+                           user_id: getSession()[2],
+                           auth_id:pass
+                       }
+                   } else {
+                       form = {
+                           user_id: getSession()[2],
+                           id:pass
+                       }
+                   }
+									  
+                   var url = urlTips + $(n).attr("name");
+                   // var submitData = $("#" + $(n).attr("target")).serializeArray();
+                   //var form = dataFormater(submitData);
+                   var settings = {
+                       "url": url,
+                       "method": "POST",
+                       "data": form
+                   }
+                   $.ajax(settings).done(function (res) {
+                       if (res.ret == 0) {
+                           layer.msg("删除成功！");
+                       } else {
+                           layer.msg(res.msg);
+                       }
+                   });
+               }, function () {
 
-               layer.msg('删除类型id：' + pass + "成功");
+               });
+
 
            });
-           var url = urlTips + $(n).attr("name");
-           var submitData = $("#" + $(n).attr("target")).serializeArray();
-           var form = dataFormater(submitData);
-           var settings = {
-               "url": url,
-               "method": "POST",
-               "data": form
-           }
-           $.ajax(settings).done(function (res) {
-               if (res.ret == 0) {
-                   layer.msg("删除成功！");
-               } else {
-                   layer.msg(res.msg);
-               }
-           });
+
        }
