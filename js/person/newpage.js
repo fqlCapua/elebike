@@ -337,8 +337,48 @@
            }
 
            return flag;
-       }
+       }//
+			 function setFormWord(arr){
+				 
+			 }
+       function return_word_name(){
+				 var keyArr=new Array();
+           $("input[name=user_id]").val(getSession()[2]);
+           var url = urlTips + $(".getdata").attr("name");
+					 var target=$(".getdata").attr("target");
+           var submitData = $(".checkForm").serializeArray();
+           var form = dataFormater(submitData);
+           var settings = {
+               "async": false,
+               "url": url,
+               "method": "POST",
+               "data": form
+           }
+           var result = [];
+           $.ajax(settings).done(function (res) {
 
+               if (res.ret == 0) {
+                  var dataInfo = $("<section></section>");
+                   $(".datalist").before(dataInfo);
+                   if (!TypeStatus($(".getdata").attr("name"))) {
+                       result = res.data;
+											
+                  } else {
+                       result=res.data.res_data;
+											 
+
+                   }
+									 for (let el in result[0]) {
+											 		keyArr.push(el);
+											 }
+									 
+                   
+                   
+               } else {
+                   layer.msg(res.msg);
+               }
+           });
+       }
        function checkInfo(n) {
            $("input[name=user_id]").val(getSession()[2]);
 
