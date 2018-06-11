@@ -51,8 +51,7 @@ ul{
 .formbox{
     clear: both;
     border: 1px solid #BABABA;
-    width:60%;
-   
+    width:65%;
     padding:30px 20px;
     display: none;
     text-align: left;
@@ -78,7 +77,7 @@ ul{
      line-height:45px;
   }
    .form_ul li label{
-    width:100px;
+    width:200px;
     
    }
    .form_ul li input[type=text]{

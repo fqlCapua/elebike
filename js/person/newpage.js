@@ -26,9 +26,8 @@
 
 
 
-
        function NameTranslate() {
-           var ths = $("table th");
+           var ths = $("table th,li label");
            var tds = $("table td");
            $.each(tds, function (index, el) {
                if (!isNaN($(el).html()) && $(el).html().length == 10) {
@@ -337,15 +336,23 @@
            }
 
            return flag;
-       }//
-			 function setFormWord(arr){
+       }
+			 
+			 function append_input_form(arr){
 				 
+				 var formtext="<ul class='form_ul'><input style='display:none;' name='user_id' type='text'/>";
+				 $.each(arr,function(i,el){
+						var li="<li><label>"+el+"</label><input type='text' name='"+ el +"' class='dfinput' /></li>";
+						formtext+=li; 
+				 });
+           formtext+="</ul>";
+				  return  formtext;
 			 }
        function return_word_name(){
 				 var keyArr=new Array();
            $("input[name=user_id]").val(getSession()[2]);
            var url = urlTips + $(".getdata").attr("name");
-					 var target=$(".getdata").attr("target");
+					 var target=$("."+$(".getdata").attr("target"));
            var submitData = $(".checkForm").serializeArray();
            var form = dataFormater(submitData);
            var settings = {
@@ -378,6 +385,8 @@
                    layer.msg(res.msg);
                }
            });
+					 
+					 return keyArr;
        }
        function checkInfo(n) {
            $("input[name=user_id]").val(getSession()[2]);
@@ -431,19 +440,19 @@
            var url = urlTips + $(n).attr("name");
            var submitData = $("." + $(n).attr("target")).find("form").serializeArray();
            console.log($("." + $(n).attr("target")));
-           var form = dataFormater(url);
+           var form = dataFormater(submitData);
            console.log(form);
            var settings = {
                "url": url,
                "method": "POST",
                "data": form
-           }
+           }	 
            $.ajax(settings).done(function (res) {
                if (res.ret == 0) {
                    layer.msg("添加成功");
                    $("input[type=text]").val("");
                } else {
-                   console.log(res.msg);
+                    console.log(res.msg);
                    layer.msg("添加失败");
                }
            });
