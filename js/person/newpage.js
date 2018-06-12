@@ -1,4 +1,4 @@
-       var page = 1,
+           page = 1,
            count = 1000;
        var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
 
@@ -10,7 +10,7 @@
                $(this).text("");
                $(this).append(input);
                $("input#temp").focus();
-               $("input").blur(function () {
+               $("table input").blur(function () {
 
                    if ($(this).val() == "") {
                        $(this).remove();
@@ -43,13 +43,13 @@
                        $(el).html("名称");
                        break;
                    case "auth_name":
-                       $(el).html("用户身份");
+                       $(el).html("用户身份名称");
                        break;
                    case "photo":
                        $(el).html("用户头像");
                        break;
                    case "auth":
-                       $(el).html("身份id");
+                       $(el).html("用户身份id");
                        break;
                    case "phone":
                        $(el).html("手机");
@@ -64,7 +64,7 @@
                        $(el).html("隶属公司id");
                        break;
                    case "id":
-                       $(el).html("身份id");
+                       $(el).html("id");
                        break;
                    case "identity":
                        $(el).html("身份证");
@@ -169,7 +169,7 @@
                        $(el).html("修理厂id");
                        break;
                    case "vehicle_uid":
-                       $(el).html("私人电单车用户id");
+                       $(el).html("私人用户id");
                        break;
                    case "time":
                        $(el).html("维修完成时间");
@@ -341,10 +341,25 @@
 			 function append_input_form(arr){
 				 
 				 var formtext="<ul class='form_ul'><input style='display:none;' name='user_id' type='text'/>";
-				 $.each(arr,function(i,el){
-						var li="<li><label>"+el+"</label><input type='text' name='"+ el +"' class='dfinput' /></li>";
+					 console.log(arr);
+if(arr.indexOf("s_voltage")>-1){
+     
+			$.each(arr,function(i,el){		 
+				var li="<li><label>"+el+"</label><input type='text' name='"+ el +"' class='dfinput' /></li>";
 						formtext+=li; 
-				 });
+				});	
+}else{
+			 $.each(arr,function(i,el){
+			if(el=='id'){
+	
+       }else{
+	      var li="<li><label>"+el+"</label><input type='text' name='"+ el +"' class='dfinput' /></li>";
+						formtext+=li; 
+        }			
+				 });	 
+}
+	
+	 
            formtext+="</ul>";
 				  return  formtext;
 			 }
@@ -439,7 +454,7 @@
            $("input[name=user_id]").val(getSession()[2]);
            var url = urlTips + $(n).attr("name");
            var submitData = $("." + $(n).attr("target")).find("form").serializeArray();
-           console.log($("." + $(n).attr("target")));
+          // console.log($("." + $(n).attr("target")));
            var form = dataFormater(submitData);
            console.log(form);
            var settings = {
@@ -450,11 +465,11 @@
            $.ajax(settings).done(function (res) {
                if (res.ret == 0) {
                    layer.msg("添加成功");
-                   $("input[type=text]").val("");
+                   $("." + $(n).attr("target")).find("form input[type=text]").val("");
                } else {
                     console.log(res.msg);
-                   layer.msg("添加失败");
-               }
+                    layer.msg("添加失败,"+$("." + $(n).attr("target")).find("form").find("input[name="+res.msg.split("column ")[1].split(" at")[0].replace(/'/g,'')+"]").siblings("label").html()+"出错");
+               } 
            });
        }
 

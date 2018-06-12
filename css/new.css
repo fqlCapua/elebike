@@ -68,6 +68,7 @@ ul{
     margin-bottom:20px;
 }
  .form_ul li{
+	 display: flex;
     line-height: 45px;
 
  }
@@ -77,8 +78,7 @@ ul{
      line-height:45px;
   }
    .form_ul li label{
-    width:200px;
-    
+     width:120px;
    }
    .form_ul li input[type=text]{
     height:35px;
