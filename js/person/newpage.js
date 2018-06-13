@@ -339,12 +339,10 @@
        }
 			 
 			 function append_input_form(arr){
-				 
-				 var formtext="<ul class='form_ul'><input style='display:none;' name='user_id' type='text'/>";
-					 console.log(arr);
+				  var formtext="<ul class='form_ul'><input style='display:none;' name='user_id' type='text'/>";
+	            console.log(arr);
 if(arr.indexOf("s_voltage")>-1){
-     
-			$.each(arr,function(i,el){		 
+      $.each(arr,function(i,el){		 
 				var li="<li><label>"+el+"</label><input type='text' name='"+ el +"' class='dfinput' /></li>";
 						formtext+=li; 
 				});	
@@ -358,9 +356,7 @@ if(arr.indexOf("s_voltage")>-1){
         }			
 				 });	 
 }
-	
-	 
-           formtext+="</ul>";
+    formtext+="</ul>";
 				  return  formtext;
 			 }
        function return_word_name(){
