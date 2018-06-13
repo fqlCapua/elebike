@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> </title>
@@ -72,7 +71,7 @@
                         <option name="/dealerManage" target="dealerManageForm">经销商</option>
                        
                         <option name="/delegaterManage" target="delegaterManageForm">代理商</option>
-						 <option name="/investorManage" target="investorManageForm">投资商</option>
+						            <option name="/investorManage" target="investorManageForm">投资商</option>
                         <option name="/investManage" target="investManageForm">投资</option>
                         <option name="/investManage/investRule" target="investRuleForm">投资分成</option>
                         <option name="/fixstationManage" target="fixstationManageForm">维保站</option>
@@ -105,19 +104,27 @@
                             </li>
 
                         </ul>
+												
                     </form>
+								
+									  
                 </li>
                 <li style=" ">
                     <label>&nbsp;</label>
                     <input name="/userManage/get" target="userForm" onclick="checkInfo(this)" type="button" class="scbtn getdata" value="查询"
                     />
                 </li>
+									  <li>
+																								 <input style='display:none;' name='/userManage/edit' target='userForm' onclick='saveInfo(this)' type='button' class='scbtn editdata' value='保存'>
+
+										</li>
             </ul>
 
-            <div>
+            <div style="position: relative;">
                 <div class="datalist">
 
                 </div>
+							
                 <main>
                     <div class="formbox userForm">
 
@@ -140,7 +147,7 @@
 										<input type="text" name="password" class="dfinput">
 									</li>
                                    
-                  <!--  <li>
+                    <li>
                                         <label>身份id</label>
                                         <input type="text" name="auth" class="dfinput">
                                     </li>
@@ -157,13 +164,13 @@
                                         <input type="text" name="money" class="dfinput">
                                     </li>
                                     
-                              <li>
+                                      <!--<li>
                                         <label>用户头像</label>
-                                        <input type="file" name="photo" class="dfinput">
-                                    </li>
+                                        <input type="file" name="photo" />
+                                    </li>-->
                                     <li>
                                         <label>隶属公司id</label>
-                                        <input type="text" name="ownerid" class="dfinput">
+                                        <input type="text"  name="ownerid" class="dfinput">
                                     </li>
                                     <li>
                                         <label>身份</label>
@@ -172,7 +179,7 @@
                                     <li>
                                         <label>身份证</label>
                                         <input type="text" name="identity" class="dfinput">
-                                    </li>-->
+                                    </li>
                                 </ul>
                             </ul>
                         </form>
@@ -258,6 +265,7 @@
         $("li .getdata").attr("name", "/get");
         $(".actionType li  .adddata").attr("name", "/add");
         $(".actionType li  .deldata").attr("name", "/delete");
+				$(".editdata").attr("name", "/edit");
         $(".actionType li input").attr("target", "");
         $("." + form).slideDown();
         $("." + form).siblings('.formbox').slideUp();
@@ -265,7 +273,9 @@
         $(".actionType li .adddata").attr("name", hash + $(".actionType li .adddata").attr("name"));
         $(".actionType li .deldata").attr("name", hash + $(".actionType li .deldata").attr("name"));
         $(".actionType li input").attr("target", form);
+				$(".editdata").attr("name", hash + $(".editdata").attr("name"));
         $(".getdata").attr("target", form);
+				$(".editdata").attr("target", form);
         var Str = $(append_input_form(return_word_name()));
 
         var isNullForm = $("." + form).find("form").html()
