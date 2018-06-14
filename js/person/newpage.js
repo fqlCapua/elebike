@@ -3,11 +3,12 @@
            var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
 
            function saveInfo(n) {
+						
                var that = this;
                var url = urlTips + $(n).attr("name");
                var submitData = JSON.parse($(n).attr("target_data"));
                submitData.user_id = getSession()[2];
-              var settings = {
+               var settings = {
                    "url": url,
                    "method": "POST",
                    "data": submitData
@@ -17,29 +18,45 @@
 
                        layer.msg("修改成功");
                    } else {
-
-
-                       var msg = res.msg.split("缺少必要参数 ")[1].split(" !")[0];
-//                        		       layer.prompt({
-//                        							 title: '请输入'+msg,
-//                        							 formType: 0
-//                        							 }, function (pass,index){
-// 																			      
-//                        							})
-                     console.log(msg)  
+                       //var msg = res.msg.split("缺少必要参数 ")[1].split(" !")[0];
+                       //                        		       layer.prompt({
+                       //                        							 title: '请输入'+msg,
+                       //                        							 formType: 0
+                       //                        							 }, function (pass,index){
+                       // 																			      
+                       //                        							})
+                       console.log(res.msg)
                    }
                });
            }
 
-           function refreshTable() {
+
+           //检查填补字段
+
+           function checkPoint(JSON) {
+
+               var checkType = $(".select3").children("option:selected").html();
+               switch (checkType) {
+                   case "角色":
+
+                       break;
+                   default:
+
+                       break;
+
+               }
+
+           }
+
+          
                $(".datalist").parent().on("dblclick", 'section table tr td', function () {
                    $(".editdata").show();
                    var $that = $(this);
                    //$(this).text("");
+                    var $that = $(this);
 
+                   var formObject = "";
 
-
-                   var $that = $(this);
                    var formObject = "{";
 
 
@@ -50,12 +67,23 @@
                    var input = "<input  type='text' id='temp' style='width:1" + w +
                        ";position:absolute;z-index:10;left:0;' value=" + $(this).text() +
                        " >";
-                   $(this).append(input);
+
+                   var index = $(this).index();
+                   var thHtml = $(this).parent().parent().siblings("thead").find("tr th").eq(index).html();
+
+                   if (thHtml == 'id') {
+
+                   } else {
+                       $(this).append(input);
+                   }
+
 
 
                    $("input#temp").focus();
-                   $("table input").blur(function () {
-                       if ($(this).val() == "") {
+									// $(".datalist").parent().find("table input").bind('input propertychange',function(){
+                    $("table input").blur(function () {
+                       if ($(this).val() == " " || $(this).val() == null) {
+                           $(this).closest("td").text("");
                            $(this).remove();
                        } else {
                            $(this).closest("td").text($(this).val());
@@ -74,17 +102,20 @@
 
                        formObject = (formObject + "}").split(",}")[0] + "}";
                        var formObj = eval("(" + formObject + ")");
+                       checkPoint(formObj)
                        formStr = JSON.stringify(formObj);
                        $(".editdata").attr("target_data", formStr);
 
                    });
 
                });
-           }
+         
 
 
 
            function NameTranslate() {
+               var checkType = $(".select3").children("option:selected").html();
+
                var ths = $("table th,li label");
                var tds = $("table td");
                $.each(tds, function (index, el) {
@@ -124,7 +155,13 @@
                            $(el).html("隶属公司id");
                            break;
                        case "id":
-                           $(el).html("id");
+                           if (checkType == '角色') {
+                               $(el).attr("data-columns-sortby", "auth_id");
+                               $(el).html('auth_id');
+                           } else {
+                               $(el).html("id");
+                           }
+
                            break;
                        case "identity":
                            $(el).html("身份证");
@@ -451,8 +488,8 @@
                        }
                        for (let el in result[0]) {
                            keyArr.push(el);
-                       }
 
+                       }
 
 
                    } else {
@@ -464,6 +501,7 @@
            }
 
            function checkInfo(n) {
+						 	
                $("input[name=user_id]").val(getSession()[2]);
 
                var url = urlTips + $(n).attr("name");
@@ -498,13 +536,15 @@
                            data: result,
                            pages: 50
                        });
+										
                        //$(".ui-table-size").find("select option").eq(3).attr("selected",true);
                        $(".ui-table-footer").append(
 
                        );
                        $(".ui-table-search").attr("placeholder", "搜索关键词");
                        setInterval("NameTranslate()", 100);
-                       refreshTable();
+									 
+                       
                    } else {
                        layer.msg(res.msg);
                    }
