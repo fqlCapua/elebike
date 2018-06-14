@@ -3,7 +3,7 @@
            var urlTips = "https://www.8gps8.cn:8011/bikePublic/api/newSite";
 
            function saveInfo(n) {
-						
+
                var that = this;
                var url = urlTips + $(n).attr("name");
                var submitData = JSON.parse($(n).attr("target_data"));
@@ -48,68 +48,68 @@
 
            }
 
-          
-               $(".datalist").parent().on("dblclick", 'section table tr td', function () {
-                   $(".editdata").show();
-                   var $that = $(this);
-                   //$(this).text("");
-                    var $that = $(this);
 
-                   var formObject = "";
+           $(".datalist").parent().on("dblclick", 'section table tr td', function () {
+               $(".editdata").show();
+               var $that = $(this);
+               //$(this).text("");
+               var $that = $(this);
 
-                   var formObject = "{";
+               var formObject = "";
+
+               var formObject = "{";
 
 
-                   $(this).css("position", 'relative');
-                   var t = $(this).position().top;
-                   var l = $(this).position().left;
-                   var w = $(this).css("width");
-                   var input = "<input  type='text' id='temp' style='width:1" + w +
-                       ";position:absolute;z-index:10;left:0;' value=" + $(this).text() +
-                       " >";
+               $(this).css("position", 'relative');
+               var t = $(this).position().top;
+               var l = $(this).position().left;
+               var w = $(this).css("width");
+               var input = "<input  type='text' id='temp' style='width:1" + w +
+                   ";position:absolute;z-index:10;left:0;' value=" + $(this).text() +
+                   " >";
 
-                   var index = $(this).index();
-                   var thHtml = $(this).parent().parent().siblings("thead").find("tr th").eq(index).html();
+               var index = $(this).index();
+               var thHtml = $(this).parent().parent().siblings("thead").find("tr th").eq(index).html();
 
-                   if (thHtml == 'id') {
+               if (thHtml == 'id') {
 
+               } else {
+                   $(this).append(input);
+               }
+
+
+
+               $("input#temp").focus();
+               // $(".datalist").parent().find("table input").bind('input propertychange',function(){
+               $("table input").blur(function () {
+                   if ($(this).val() == " " || $(this).val() == null) {
+                       $(this).closest("td").text("");
+                       $(this).remove();
                    } else {
-                       $(this).append(input);
+                       $(this).closest("td").text($(this).val());
+                       $(this).remove();
                    }
+                   var ths = $that.parent().parent().siblings('thead').find("tr").find('th');
+                   var tds = $that.parent().children('td');
+                   $.each(ths, function (i, el) {
+                       var key1 = $(el).attr('data-columns-sortby');
+                       var index = $(el).index();
+                       var val = $(tds[index]).html();
+                       var str = key1 + ":'" + val + "',";
+                       formObject += str;
 
+                   })
 
-
-                   $("input#temp").focus();
-									// $(".datalist").parent().find("table input").bind('input propertychange',function(){
-                    $("table input").blur(function () {
-                       if ($(this).val() == " " || $(this).val() == null) {
-                           $(this).closest("td").text("");
-                           $(this).remove();
-                       } else {
-                           $(this).closest("td").text($(this).val());
-                           $(this).remove();
-                       }
-                       var ths = $that.parent().parent().siblings('thead').find("tr").find('th');
-                       var tds = $that.parent().children('td');
-                       $.each(ths, function (i, el) {
-                           var key1 = $(el).attr('data-columns-sortby');
-                           var index = $(el).index();
-                           var val = $(tds[index]).html();
-                           var str = key1 + ":'" + val + "',";
-                           formObject += str;
-
-                       })
-
-                       formObject = (formObject + "}").split(",}")[0] + "}";
-                       var formObj = eval("(" + formObject + ")");
-                       checkPoint(formObj)
-                       formStr = JSON.stringify(formObj);
-                       $(".editdata").attr("target_data", formStr);
-
-                   });
+                   formObject = (formObject + "}").split(",}")[0] + "}";
+                   var formObj = eval("(" + formObject + ")");
+                   checkPoint(formObj)
+                   formStr = JSON.stringify(formObj);
+                   $(".editdata").attr("target_data", formStr);
 
                });
-         
+
+           });
+
 
 
 
@@ -391,6 +391,18 @@
                        case "sale_did":
                            $(el).html("优惠的代理商id");
                            break;
+											 case "income_month":
+													 		$(el).html("月份");
+													 		break;
+											 case "income_amount":
+													 	$(el).html("金额 分");
+														 break;
+											 case "income_inid":
+																 $(el).html("投资id");
+																 break;
+											case "income_year":
+																	 $(el).html("年份");
+																 break;
 
                    }
                });
@@ -501,7 +513,7 @@
            }
 
            function checkInfo(n) {
-						 	
+
                $("input[name=user_id]").val(getSession()[2]);
 
                var url = urlTips + $(n).attr("name");
@@ -536,15 +548,15 @@
                            data: result,
                            pages: 50
                        });
-										
+
                        //$(".ui-table-size").find("select option").eq(3).attr("selected",true);
                        $(".ui-table-footer").append(
 
                        );
                        $(".ui-table-search").attr("placeholder", "搜索关键词");
                        setInterval("NameTranslate()", 100);
-									 
-                       
+
+
                    } else {
                        layer.msg(res.msg);
                    }
@@ -581,7 +593,6 @@
 
            function delInfo(n) {
                var form = {};
-
                layer.prompt({
                    title: '输入要删除类型的id',
                    formType: 0
@@ -626,6 +637,85 @@
 
            }
 
+           //绑定二维码
+
+           function bindInfo() {
+              layer.prompt({
+                   title: '输入被绑定单车id',
+                   formType: 0
+               }, function (bikeid, index) {
+                   layer.close(index);
+                   layer.prompt({
+                       title: '输入二维码编号',
+                       formType: 0
+                   }, function (Qrcode, ind) {
+										 layer.close(ind);
+ 
+                       var settings = {
+                           "url":"https://www.8gps8.cn:8011/bikePublic/api/newSite/bikesManage/bindQR",
+                           "method": "POST",
+                           "data": {
+                               user_id:getSession()[2],
+															 vehicle_id:bikeid,
+															 QRcode:Qrcode
+                           }
+                       }
+                       $.ajax(settings).done(function (res) {
+                           if (res.ret == 0) {
+                               layer.msg("绑定成功！");
+                           } else {
+														 console.log(res);
+                               layer.msg(res.msg);
+                           }
+                       });
+                   })
+
+              });
+
+           }
+//查看投资商收益
+
+           function checkMoney() {
+             layer.prompt({
+							 title:"请输入投资id",
+							 formType:0
+						 },function(num,index){
+							 layer.close(index);
+							   var url ="https://www.8gps8.cn:8011/bikePublic/api/newSite/investManage/income";
+                 var settings = {
+                   "async": false,
+                   "url": url,
+                   "method": "POST",
+                   "data":{
+										 user_id:getSession()[2],
+										 id:num,
+										 page:page,
+										 count:count
+									 }
+               }
+               var result = [];
+               $.ajax(settings).done(function (res) {
+                   if (res.ret == 0) {
+                       var dataInfo = $("<section></section>");
+                       $(".datalist").before(dataInfo);
+                     
+                           result = res.data.res_data;
+
+                      
+                       // var obj = "." + $(n).attr("target") + "data";
+                       dataInfo.columns({
+                           data: result,
+                           pages: 50
+                       });
+ 
+                       $(".ui-table-search").attr("placeholder", "搜索关键词");
+                       setInterval("NameTranslate()", 100);
 
 
-           //编辑信息
+                   } else {
+                       layer.msg(res.msg);
+                   }
+               });
+						 })
+             
+           }
