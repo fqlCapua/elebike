@@ -23,8 +23,8 @@ function time_token() {
 function check_phone(obj) {
     var flag;
     var reg = /^1\d{10}$/;
-    var Phone=$(obj).val()
-    if (Phone!= "") {
+    var Phone = $(obj).val()
+    if (Phone != "") {
 
         if (reg.test(Phone)) {
             flag = true;
@@ -66,9 +66,9 @@ function get_session() {
 
 function Send_code() {
     var Code;
-    
-     var phone = $(".phone1").val();
-    if (phone!="") {
+
+    var phone = $(".phone1").val();
+    if (phone != "") {
         var timeStamp = Date.parse(new Date) / 1000;
         var md_token = hex_md5("my58_" + hex_md5("my58_" + timeStamp));
         $.ajax({
@@ -81,7 +81,8 @@ function Send_code() {
                     phone: phone
                 },
             })
-            .done(function(res) {
+            .done(function (res) {
+                console.log(res);
                 if (res.ret == 0) {
                     layer.msg("验证码已发送");
                     Code = res.data.code;
@@ -89,10 +90,8 @@ function Send_code() {
                     layer.msg(res.msg);
                 }
             })
-            .fail(function(err) {
-            })
-            .always(function() {
-            });
+            .fail(function (err) {})
+            .always(function () {});
     } else {
         layer.tips("不能为空", ".phone", {
             tips: [1, "#4082D4"],
@@ -143,11 +142,11 @@ var curCount;
 
 function Noclick() {
     var phone = $(".phone1").val();
-     
+
     if (check_phone(".phone1")) {
         var serviceCode = Send_code() //获取验证码函数
         //set_session(serviceCode);
-			
+
         curCount = count;
         $(".getCode").attr("disabled", true);
         $(".getCode").val(curCount + "s后重新发送");
@@ -158,8 +157,8 @@ function Noclick() {
 
 
 }
- 
- 
+
+
 //     function Noclick1() {
 //         var phone = $(".phone3").val();
 // 
@@ -186,7 +185,7 @@ function remainTime() {
         $(".getCode").removeAttr('disabled');
 
     } else {
-				console.log(1111);
+
         curCount--;
         $(".getCode").val(curCount + "s后重新发送");
     }
@@ -210,54 +209,58 @@ function userInfoSession(userid) {
         "data": form
     }
 
-    $.ajax(settings).done(function(res) {
-       console.log(222);
-        var res=JSON.parse(res);
-        var userInfo=res.data;
-         var ss=window.sessionStorage;
-        
-        ss.setItem("io",JSON.stringify(userInfo));
-     
+    $.ajax(settings).done(function (res) {
+
+        var res = JSON.parse(res);
+        var userInfo = res.data;
+        var ss = window.sessionStorage;
+
+        ss.setItem("io", JSON.stringify(userInfo));
+
     });
 }
 
 function subAdminForm(auth) {
     var phone1 = $(".phone1").val();
     var phone2 = $(".phone2").val();
-    if(phone1!=""){
-        var phone=phone1;
-    }else if(phone2!=""){
-        var phone=phone2;
+    if (phone1 != "") {
+        var phone = phone1;
+    } else if (phone2 != "") {
+        var phone = phone2;
     }
     var vCode = $(".vCode").val();
-    var pwd=$(".userpwd").val();
-    var form = new FormData();
-    form.append("time",time_token()[0]);
-    form.append("token",time_token()[0]);
-    form.append("phone", phone);
-    form.append("code",vCode);
-    form.append("password",pwd);
-    form.append("auth", auth);
-
+    var pwd = $(".userpwd").val();
+//     var form = new FormData();
+//     form.append("time", time_token()[0]);
+//     form.append("token", time_token()[0]);
+//     form.append("phone", phone);
+//     form.append("code", vCode);
+//     form.append("password", pwd);
+//     form.append("auth", auth);
+// 
     var settings = {
-        "async":false,
-        "crossDomain": true,
+        "async": false,
+      
         "url": "https://www.8gps8.cn:8011/bikePublic/api/user/userLogin",
         "method": "POST",
-        "processData": false,
-        "contentType": false,
-        "mimeType": "multipart/form-data",
-        "data": form
+      
+        "data":{
+			time:time_token()[0],
+			token:time_token()[1],
+			phone:phone,
+			code:vCode,
+			password:pwd,
+			auth:auth
+		}
     }
 
-    $.ajax(settings).done(function(res) {
-      var res=JSON.parse(res);
-      
+    $.ajax(settings).done(function (res) {
+        
         if (res.ret == 0) {
             layer.msg("登录成功");
-            var userid=res.data.user_id;
-       userInfoSession(userid);
-            window.location.href="main.html#/admin";
+            var userid = res.data.user_id;
+            userInfoSession(userid);
+            window.location.href = "main.html#/admin";
         } else {
             layer.msg("登录失败");
         }
@@ -266,79 +269,81 @@ function subAdminForm(auth) {
 
 }
 
-$(".adminLogin1").click(function() {
+$(".adminLogin1").click(function () {
 
     var phone = $(".phone1").val();
     var vCode = $(".vCode").val();
-     var auth=$(".auth_type").children('option:selected').attr("auth");
-    if(check_phone(".phone1")) {
+    var auth = $(".auth_type").children('option:selected').attr("auth");
+    if (check_phone(".phone1")) {
         subAdminForm(auth);
     } else {
 
     }
 });
-$(".adminLogin2").click(function() {
+$(".adminLogin2").click(function () {
 
     var phone = $(".phone2").val();
-    var auth=$(".auth_type").children('option:selected').attr("auth");
-    if(check_phone(".phone2")) {
+    var auth = $(".auth_type").children('option:selected').attr("auth");
+    if (check_phone(".phone2")) {
         subAdminForm(auth);
     } else {
 
     }
 });
- 
+
 $(".vCodeBox,.changePwdBox").hide();
- 
-$(".pwdLogin").click(function(){
+
+$(".pwdLogin").click(function () {
     $("input[type=text]").val("");
     $(".vCodeBox").hide();
     $(".pwdBox").show();
 });
-$(".vCodeLogin").click(function(){
+$(".vCodeLogin").click(function () {
     $("input[type=text]").val("");
     $(".pwdBox").hide();
     $(".vCodeBox").show();
 });
-$(".forgotBtn").click(function() {
+$(".forgotBtn").click(function () {
     $("input[type=text]").val("");
-   $("form").hide();
-   $(".changePwdBox").show();
+    $("form").hide();
+    $(".changePwdBox").show();
 });
-$(".goLogin").click(function() {
+$(".goLogin").click(function () {
     $("input[type=text]").val("");
-   $("form").hide();
-   $(".pwdBox").show();
+    $("form").hide();
+    $(".pwdBox").show();
 });
+
 function ptp() {
     var flag;
-    var pwd1=$(".pwd1").val();
-    var pwd2=$(".pwd2").val();
-   if(pwd1==pwd2){
-flag=true;
-   }else{
-     flag = false;
+    var pwd1 = $(".pwd1").val();
+    var pwd2 = $(".pwd2").val();
+    if (pwd1 == pwd2) {
+        flag = true;
+    } else {
+        flag = false;
         layer.tips("两次输入不一致", ".pwd2", {
             tips: [1, "#4082D4"],
             tipsMore: true
         });
-   }
-   return flag;
+    }
+    return flag;
 }
+
 function changePwdFuc() {
-    
-    var phone= $(".phone3").val();
-   
+
+    var phone = $(".phone3").val();
+
     var vCode = $(".pwd_vCode").val();
-    var pwd=$(".pwd2").val();
+    var pwd = $(".pwd2").val();
     var form = new FormData();
-    form.append("time",time_token()[0]);
-    form.append("token",time_token()[0]);
+    form.append("time", time_token()[0]);
+    form.append("token", time_token()[0]);
     form.append("phone", phone);
-    form.append("password",pwd);
-     form.append("code",vCode);
-     var settings = {
-        "async":false,
+    form.append("password", pwd);
+    form.append("code", vCode);
+    var settings = {
+        "async": false,
         "crossDomain": true,
         "url": "https://www.8gps8.cn:8011/bikePublic/api/user/changePassword",
         "method": "POST",
@@ -348,11 +353,11 @@ function changePwdFuc() {
         "data": form
     }
 
-    $.ajax(settings).done(function(res) {
-      var res=JSON.parse(res);
+    $.ajax(settings).done(function (res) {
+        var res = JSON.parse(res);
         if (res.ret == 0) {
             layer.msg("设置成功");
-            
+
         } else {
             layer.msg("设置失败");
         }
@@ -361,7 +366,7 @@ function changePwdFuc() {
 
 };
 // $(".setPwd").click(function() {
-  
+
 //     if(check_phone(".phone3")&&ptp()) {
 //         changePwdFuc();
 //     } else {
